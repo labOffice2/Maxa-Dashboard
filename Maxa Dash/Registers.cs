@@ -6,17 +6,33 @@ namespace Maxa_Dash
 {
     public static class Registers
     {
-		public const int MachineSettings = 200;
-		
+        // Firmware info
+        public const int FirmwareVersionReg = 1;
+        public const int FirmwareReleaseReg = 2;
+        public const int FirmwareSubRelease_CreationDayReg = 3;
+        public const int FirmwareCreationMonth_YearReg = 4;
+
+        //Machine status
+        public const int MachineSettingsReg = 200;
+        public const int MachineStateReg = 240;
+
         // Temperatures
-        public const int HighPressureReg = 406;
-        public const int LowPressureReg = 414;
         public const int InputWaterTempReg = 400;
         public const int OutputWaterTempReg = 401;
         public const int DHWTempReg = 405;
         public const int OurdoorAirTempReg = 428;
         public const int CompDis1TempReg = 433;
         public const int CompDis2TempReg = 434;
+        public const int CompDis1TempCircuit2Reg = 20433;
+        public const int CompDis2TempCircuit2Reg = 20434;
+        public const int EvaporationReg = 234;
+        public const int CondesationReg = 235;
+
+        //Pressures
+        public const int HighPressureReg = 406;
+        public const int LowPressureReg = 414;
+        public const int HighPressureCircuit2Reg = 20406;
+        public const int LowPressureCircuit2Reg = 20414;
 
         // Setpoints
         public const int CoolSPReg = 1001;
@@ -25,11 +41,13 @@ namespace Maxa_Dash
         public const int SecondCoolSPReg = 1004;
         public const int SecondHeatSPReg = 1005;
 
+        // Digital inputs
         public const int DigitalInputsReg = 10;
 
         // Analog outputs
         public const int FanAnalogOutReg = 7000;
-        public const int PumpAnalogOutReg = 7000;
+        public const int FanCircuit2AnalogOutReg = 627;
+        public const int PumpAnalogOutReg = 7001;
 
         // Alarms
         public const int Alarm01_16Reg = 950;

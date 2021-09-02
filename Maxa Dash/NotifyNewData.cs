@@ -365,6 +365,7 @@ namespace Maxa_Dash
 
         public enum GeneralState
         {
+            NA,
             OFF,
             ON,
             ONLYSANITARY,
@@ -373,18 +374,21 @@ namespace Maxa_Dash
 
         public enum PlantMode
         {
+            NA,
             COOL,
             HEAT,
         }
 
         public enum SanitaryMode
         {
+            NA,
             OFF,
             RUNNING,
         }
 
         public enum DefrostState
         {
+            NA,
             INACTIVE,
             STARTING,
             ACTIVE,

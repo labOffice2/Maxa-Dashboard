@@ -35,6 +35,19 @@ namespace Maxa_Dash
         public MainWindow()
         {
             InitializeComponent();
+            ComboBoxItem ParityItemEven = new(), ParityItemOdd = new(), ParityItemMark = new(), ParityItemNone = new(), ParityItemSpace = new();
+            ParityItemEven.Content = System.IO.Ports.Parity.Even;
+            ParityItemEven.IsSelected = true;
+            ParityItemOdd.Content = System.IO.Ports.Parity.Odd;
+            ParityItemMark.Content = System.IO.Ports.Parity.Mark;
+            ParityItemNone.Content = System.IO.Ports.Parity.None;
+            ParityItemSpace.Content = System.IO.Ports.Parity.Space;
+            ParityBox.Items.Add(ParityItemEven);
+            ParityBox.Items.Add(ParityItemOdd);
+            ParityBox.Items.Add(ParityItemMark);
+            ParityBox.Items.Add(ParityItemNone);
+            ParityBox.Items.Add(ParityItemSpace);
+
             this.DataContext = notifyer;
             timer = new System.Timers.Timer();
             timer.AutoReset = true;
