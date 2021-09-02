@@ -68,6 +68,7 @@ namespace Maxa_Dash
                 
                 notifyer.waterInTemp = 100005;
                 notifyer.waterOutTemp = 100000;
+                
             }
 
         }
