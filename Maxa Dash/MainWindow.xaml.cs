@@ -25,9 +25,9 @@ namespace Maxa_Dash
     {
 
         ModbusClient modbusClient;
-        NotifyNewData notifyer = new NotifyNewData();
+        NotifyNewData notifier = new NotifyNewData();
 
-        System.Timers.Timer timer;
+        private Timer timer;
 
         bool isConnected = false;
 
@@ -38,10 +38,12 @@ namespace Maxa_Dash
             InitializeComponent();
             SetComboBoxes();
 
-            this.DataContext = notifyer;
-            timer = new System.Timers.Timer();
-            timer.AutoReset = true;
-            timer.Interval = 1000;
+            this.DataContext = notifier;
+            timer = new Timer
+            {
+                AutoReset = true,
+                Interval = 1000
+            };
             timer.Elapsed += elapsed;
             
         }
@@ -98,26 +100,25 @@ namespace Maxa_Dash
 
         void SetModbus()
         {
-            //int quantity = 1;
-
             try
             {
-                modbusClient = new ModbusClient("COM4");
-                //modbusClient.UnitIdentifier = 1; Not necessary since default slaveID = 1;
-                //modbusClient.Baudrate = 9600;	// Not necessary since default baudrate = 9600
-                modbusClient.Parity = System.IO.Ports.Parity.Even;
-                modbusClient.StopBits = System.IO.Ports.StopBits.One;
+                modbusClient = new ModbusClient((string)ComBox.SelectedItem);
+                modbusClient.UnitIdentifier = (byte)MachineIDBox.SelectedItem;  // Not necessary since default slaveID = 1;
+                modbusClient.Baudrate = (int)baudRateBox.SelectedItem;	        // Not necessary since default baudrate = 9600
+                modbusClient.Parity = (Parity)ParityBox.SelectedItem;
+                modbusClient.StopBits = (StopBits)StopBitBox.SelectedItem;
                 //modbusClient.ConnectionTimeout = 500;			
                 modbusClient.Connect();
                 isConnected = true;
+                Maxa.ReadManufacturingInfo(notifier, modbusClient);
                 timer.Start();
+                ConnectButton.IsEnabled = false;
             }catch
             {
-                
-                notifyer.waterInTemp = 100005;
-                notifyer.waterOutTemp = 100000;
-                
-                
+                notifier.E000 = GuiDataConverter.GetAlarmColor(true);
+                notifier.waterInTemp += 10;
+                notifier.waterOutTemp = 100000;
+  
             }
 
         }
@@ -129,19 +130,21 @@ namespace Maxa_Dash
             {
                 try
                 {
-
-                    int[] data = modbusClient.ReadHoldingRegisters(Registers.InputWaterTempReg, 1);
-                    notifyer.waterInTemp = data[0];
-                    data = modbusClient.ReadHoldingRegisters(Registers.OutputWaterTempReg, 1);
-                    notifyer.waterOutTemp = data[0];
-                    data = modbusClient.ReadHoldingRegisters(Registers.OurdoorAirTempReg, 1);
-                    notifyer.externalAirTemp = data[0];
+                    Maxa.UpdateOperationMode(notifier, modbusClient);
+                    Maxa.UpdateWaterSystemParameters(notifier, modbusClient);
+                    Maxa.UpdateRefrigirationSystemParameters(notifier, modbusClient);
+                    Maxa.ReadErrors(notifier, modbusClient);
                 }
                 catch
                 {
-                    notifyer.waterInTemp = 100005;
-                    notifyer.waterOutTemp = 100000;
+                    notifier.waterInTemp = 100005;
+                    notifier.waterOutTemp = 100000;
                 }
+            }
+            else
+            {
+                ConnectButton.IsEnabled = true;
+                SetModbus();
             } 
 
         }

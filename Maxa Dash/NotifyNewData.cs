@@ -292,7 +292,7 @@ namespace Maxa_Dash
         }
 
         // machine mode
-        private GeneralState _generalState;
+        private GeneralState _generalState = GeneralState.NA;
         public GeneralState generalState
         {
             get { return _generalState; }
@@ -306,7 +306,7 @@ namespace Maxa_Dash
             }
         }
 
-        private PlantMode _plantMode;
+        private PlantMode _plantMode = PlantMode.NA;
         public PlantMode plantMode
         {
             get { return _plantMode; }
@@ -320,7 +320,7 @@ namespace Maxa_Dash
             }
         }
 
-        private PlantMode _machineMode;
+        private PlantMode _machineMode = PlantMode.NA;
         public PlantMode machineMode
         {
             get { return _machineMode; }
@@ -334,7 +334,7 @@ namespace Maxa_Dash
             }
         }
 
-        private SanitaryMode _sanitaryMode;
+        private SanitaryMode _sanitaryMode = SanitaryMode.NA;
         public SanitaryMode sanitaryMode
         {
             get { return _sanitaryMode; }
@@ -348,7 +348,7 @@ namespace Maxa_Dash
             }
         }
 
-        private DefrostState _defrostState;
+        private DefrostState _defrostState = DefrostState.NA;
         public DefrostState defrostState
         {
             get { return _defrostState; }
@@ -408,6 +408,7 @@ namespace Maxa_Dash
 
 
         // error colors
+        #region Error codes colors
         private Brush _E000 = Brushes.Gray;
         public Brush E000
         {
@@ -446,6 +447,19 @@ namespace Maxa_Dash
                 {
                     _E002 = value;
                     INotifyPropertyChanged(nameof(E002));
+                }
+            }
+        }
+        private Brush _E003 = Brushes.Gray;
+        public Brush E003 
+        {
+            get { return _E003; }
+            set
+            {
+                if (_E003 != value)
+                {
+                    _E003 = value;
+                    INotifyPropertyChanged(nameof(E003));
                 }
             }
         }
@@ -936,16 +950,18 @@ namespace Maxa_Dash
             }
         }
 
+        
+        #endregion
 
 
 
         public enum GeneralState
         {
-            NA,
             OFF,
             ON,
             ONLYSANITARY,
             REMOTEONOFF,
+            NA,
         }
 
         public enum PlantMode

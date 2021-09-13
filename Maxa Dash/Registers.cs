@@ -12,9 +12,10 @@ namespace Maxa_Dash
         public const int FirmwareSubRelease_CreationDayReg = 3;
         public const int FirmwareCreationMonth_YearReg = 4;
 
-        //Machine status
-        public const int MachineSettingsReg = 200;
-        public const int MachineStateReg = 240;
+        //Machine state
+        public const int MachineStateWriteReg = 7200;
+        public const int MachineStateReadReg = 200;
+        public const int MachineStateBitMask = 7201;
 
         // Temperatures
         public const int InputWaterTempReg = 400;
@@ -23,6 +24,9 @@ namespace Maxa_Dash
         public const int OurdoorAirTempReg = 428;
         public const int CompDis1TempReg = 433;
         public const int CompDis2TempReg = 434;
+        public const int SolarCollectorReg = 437;
+        public const int SolarTankReg = 438;
+        public const int StoragePlantReg = 440;
         public const int CompDis1TempCircuit2Reg = 20433;
         public const int CompDis2TempCircuit2Reg = 20434;
         public const int EvaporationReg = 234;
