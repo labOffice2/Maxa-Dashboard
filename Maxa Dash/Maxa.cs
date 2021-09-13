@@ -58,19 +58,22 @@ namespace Maxa_Dash
             try
             {
                 int[] data = modbusClient.ReadHoldingRegisters(Registers.MachineStateReadReg, 1);
-                notifier.generalState = (NotifyNewData.GeneralState)data[0];
+                //notifier.generalState = (NotifyNewData.GeneralState)data[0];
             }
-            catch
+            catch (ArgumentException)
             {
+                notifier.generalState = NotifyNewData.GeneralState.NA;
                 // indicate problem in communication
             }
         }
 
         public static void ReadErrors(NotifyNewData notifier, ModbusClient modbusClient)
         {
+            // get errors from registers 950
             try
             {
                 int[] data = modbusClient.ReadHoldingRegisters(Registers.Alarm01_16Reg, 1);
+                if (data[0] == 0) return;
                 notifier.E001 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.HighPressure.bitMask) > 0);
                 notifier.E002 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.lowPressure.bitMask) > 0);
                 notifier.E003 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.DigBlockCom1.bitMask) > 0);
@@ -84,6 +87,134 @@ namespace Maxa_Dash
                 //notifier.E013 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.DigBlockCom2.bitMask) > 0);
                 //notifier.E014 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.DigBlockFan2.bitMask) > 0);
                 //notifier.E016 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.ThermalPump1.bitMask) > 0);
+            }
+            catch
+            {
+                // indicate problem in communication
+            }
+
+            // get errors from registers 951
+            try
+            {
+                int[] data = modbusClient.ReadHoldingRegisters(Registers.Alarm18_101Reg, 1);
+                if (data[0] == 0) return;
+                notifier.E018 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.HighTemp.bitMask) > 0);
+                //notifier.E019 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes..bitMask) > 0);
+                //notifier.E020 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes..bitMask) > 0);
+                //notifier.E023 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes..bitMask) > 0);
+                //notifier.E024 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes..bitMask) > 0);
+                //notifier.E026 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.Thermal2PumpUse.bitMask) > 0);
+                notifier.E041 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.WrongTemp.bitMask) > 0);
+                notifier.E042 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.InsufficientExchangeInSanitary.bitMask) > 0); // said to be irelevant by Maxa team member Davide Mocellin
+                notifier.E050 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.HighTempSanitary.bitMask) > 0);
+                notifier.E101 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.ModulGiDisconnected.bitMask) > 0);
+                //notifier.E102 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes..bitMask) > 0);
+               
+            }
+            catch
+            {
+                // indicate problem in communication
+            }
+
+            // get errors from registers 952
+            try
+            {
+                int[] data = modbusClient.ReadHoldingRegisters(Registers.Alarm611_652Reg, 1);
+                if (data[0] == 0) return;
+                notifier.E611 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.InputWaterProbe.bitMask) > 0);
+                //notifier.E621 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.OutputWaterProbe.bitMask) > 0);
+                notifier.E631 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.SuctionProbe.bitMask) > 0);
+                notifier.E641 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.DischargeProbe.bitMask) > 0);
+                notifier.E651 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.ExternProbe.bitMask) > 0);
+                notifier.E661 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.Probe6.bitMask) > 0);
+                notifier.E671 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.Probe7.bitMask) > 0);
+                //notifier.E681 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.Probe8.bitMask) > 0); 
+                notifier.E691 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.LowPressureTransducer.bitMask) > 0);
+                notifier.E701 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.HighPressureTransducer.bitMask) > 0);
+                notifier.E711 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.Probe11.bitMask) > 0);
+                notifier.E612 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.ModulGiProbe1.bitMask) > 0);
+                //notifier.E622 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.ModulGiProbe2.bitMask) > 0);
+                //notifier.E632 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.ModulGiProbe3.bitMask) > 0);
+                //notifier.E642 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.ModulGiProbe4.bitMask) > 0);
+                notifier.E652 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.ModulGiProbe5.bitMask) > 0);
+            }
+            catch
+            {
+                // indicate problem in communication
+            }
+
+            // get errors from registers 953
+            try
+            {
+                int[] data = modbusClient.ReadHoldingRegisters(Registers.Alarm662_712Reg, 1);
+                if (data[0] == 0) return;
+                notifier.E662 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.ModulGiProbe6.bitMask) > 0);
+                notifier.E672 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.ModulGiProbe7.bitMask) > 0);
+                //notifier.E682 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.ModulGiProbe8.bitMask) > 0);
+                //notifier.E692 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.ModulGiProbe9.bitMask) > 0);
+                //notifier.E702 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.ModulGiProbe10.bitMask) > 0);
+                //notifier.E712 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.ModulGiProbe11.bitMask) > 0);
+            }
+            catch
+            {
+                // indicate problem in communication
+            }
+
+            // get errors from registers 954
+            try
+            {
+                int[] data = modbusClient.ReadHoldingRegisters(Registers.Alarm801_882Reg, 1);
+                if (data[0] == 0) return;
+                notifier.E801 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.LinkInverter1.bitMask) > 0);
+                //notifier.E802 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.LinkInverter2.bitMask) > 0);
+                notifier.E851 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.HWFaultInverter1.bitMask) > 0);
+                //notifier.E852 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.HWFaultInverter2.bitMask) > 0);
+                notifier.E861 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.OverCurrentInverter1.bitMask) > 0);
+                //notifier.E862 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.OverCurrentInverter2.bitMask) > 0);
+                notifier.E871 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.HighTempInverter1.bitMask) > 0);
+                //notifier.E872 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.HighTempInverter2.bitMask) > 0); 
+                notifier.E881 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.BadVoltInverter1.bitMask) > 0);
+                //notifier.E882 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.BadVoltInverter2.bitMask) > 0);
+            }
+            catch
+            {
+                // indicate problem in communication
+            }
+
+            // get errors from registers 955
+            try
+            {
+                int[] data = modbusClient.ReadHoldingRegisters(Registers.Alarm891_941Reg, 1);
+                if (data[0] == 0) return;
+                notifier.E891 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.PhSequenceInverter1.bitMask) > 0);
+                //notifier.E892 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.PhSequenceInverter2.bitMask) > 0);
+                notifier.E901 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.ModelErrInverter1.bitMask) > 0);
+                //notifier.E902 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.ModelErrInverter2.bitMask) > 0);
+                notifier.E911 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.OLErrInverter1.bitMask) > 0);
+                //notifier.E912 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.OLErrInverter2.bitMask) > 0);
+                notifier.E921 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.OverCurrentPFCInverter1.bitMask) > 0);
+                //notifier.E922 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.OverCurrentPFCInverter2.bitMask) > 0);
+                notifier.E931 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.InternalComErrInverter1.bitMask) > 0);
+                //notifier.E932 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.InternalComErrInverter2.bitMask) > 0);
+                notifier.E941 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.FaultPFCInverter1.bitMask) > 0);
+            }
+            catch
+            {
+                // indicate problem in communication
+            }
+
+            // get errors from registers 956
+            try
+            {
+                int[] data = modbusClient.ReadHoldingRegisters(Registers.Alarm942_972Reg, 1);
+                if (data[0] == 0) return;
+                //notifier.E942 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.FaultPFCInverter2.bitMask) > 0);
+                notifier.E951 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.ProbeErrInverter1.bitMask) > 0);
+                //notifier.E952 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.ProbeErrInverter2.bitMask) > 0);
+                notifier.E961 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.AbnormalConditionInverter1.bitMask) > 0);
+                //notifier.E962 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.AbnormalConditionInverter2.bitMask) > 0);
+                notifier.E971 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.EEPROMInverter1.bitMask) > 0);
+                //notifier.E972 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.EEPROMInverter2.bitMask) > 0);
             }
             catch
             {

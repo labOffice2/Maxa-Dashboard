@@ -20,6 +20,21 @@ namespace Maxa_Dash
             }
         }
 
+        // communication settings
+        private string _comPortString;
+        public string comPortString
+        {
+            get { return _comPortString; }
+            set
+            {
+                if (_comPortString != value)
+                {
+                    _comPortString = value;
+                    INotifyPropertyChanged(nameof(comPortString));
+                }
+            }
+        }
+
 
         // temperatures
         private float _waterInTemp;

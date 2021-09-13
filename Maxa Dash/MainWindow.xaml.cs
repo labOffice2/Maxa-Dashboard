@@ -30,6 +30,7 @@ namespace Maxa_Dash
         private Timer timer;
 
         bool isConnected = false;
+        bool isUpdating = false;
 
         public float WaterInTemp;
         public float WaterOutTemp;
@@ -42,9 +43,9 @@ namespace Maxa_Dash
             timer = new Timer
             {
                 AutoReset = true,
-                Interval = 1000
+                Interval = 300
             };
-            timer.Elapsed += elapsed;
+            timer.Elapsed += Elapsed;
             
         }
 
@@ -66,6 +67,17 @@ namespace Maxa_Dash
                 if (i == 1) id.IsSelected = true;
                 MachineIDBox.Items.Add(id);
             }
+
+            ComboBoxItem br9600 = new(), br19200 = new(), br38400 = new(), br57600 = new(), br115200 = new();
+            br9600.Content = 9600;
+            br9600.IsSelected = true;
+            br19200.Content = 19200;
+            br38400.Content = 38400;
+            br57600.Content = 57600;
+            br115200.Content = 115200;
+            ComboBoxItem[] baudRateItems = { br9600, br19200, br38400, br57600, br115200 };
+            foreach (ComboBoxItem br in baudRateItems)
+                baudRateBox.Items.Add(br);
 
             ComboBoxItem ParityItemEven = new(), ParityItemOdd = new(), ParityItemMark = new(), ParityItemNone = new(), ParityItemSpace = new();
             ParityItemEven.Content = Parity.Even;
@@ -93,7 +105,7 @@ namespace Maxa_Dash
 
         }
 
-        private void elapsed(object sender, ElapsedEventArgs e)
+        private void Elapsed(object sender, ElapsedEventArgs e)
         {
             UpdateValues();
         }
@@ -102,35 +114,41 @@ namespace Maxa_Dash
         {
             try
             {
-                modbusClient = new ModbusClient((string)ComBox.SelectedItem);
-                modbusClient.UnitIdentifier = (byte)MachineIDBox.SelectedItem;  // Not necessary since default slaveID = 1;
-                modbusClient.Baudrate = (int)baudRateBox.SelectedItem;	        // Not necessary since default baudrate = 9600
-                modbusClient.Parity = (Parity)ParityBox.SelectedItem;
-                modbusClient.StopBits = (StopBits)StopBitBox.SelectedItem;
-                //modbusClient.ConnectionTimeout = 500;			
+                ComboBoxItem port = (ComboBoxItem)ComBox.SelectedItem;
+                notifier.firmwareVersion = $"com port {port.Content}";
+                modbusClient = new ModbusClient(port.Content.ToString());
+                //modbusClient.UnitIdentifier = (byte)MachineIDBox.SelectedItem;  // Not necessary since default slaveID = 1;
+                //modbusClient.Baudrate = (int)baudRateBox.SelectedItem;	        // Not necessary since default baudrate = 9600
+                ComboBoxItem par = (ComboBoxItem)ParityBox.SelectedItem;
+                modbusClient.Parity = (Parity)par.Content;
+                ComboBoxItem stopB = (ComboBoxItem)StopBitBox.SelectedItem;
+                modbusClient.StopBits = (StopBits)stopB.Content;
+                //modbusClient.ConnectionTimeout = 500;
                 modbusClient.Connect();
                 isConnected = true;
                 Maxa.ReadManufacturingInfo(notifier, modbusClient);
-                timer.Start();
                 ConnectButton.IsEnabled = false;
-            }catch
+                notifier.E000 = GuiDataConverter.GetAlarmColor(false);
+            }
+            catch
             {
                 notifier.E000 = GuiDataConverter.GetAlarmColor(true);
                 notifier.waterInTemp += 10;
                 notifier.waterOutTemp = 100000;
-  
+                isConnected = false;
             }
 
         }
 
         private void UpdateValues()
         {
-
+            if (isUpdating) return;
+            isUpdating = true;
             if (isConnected)
             {
                 try
                 {
-                    Maxa.UpdateOperationMode(notifier, modbusClient);
+                    //Maxa.UpdateOperationMode(notifier, modbusClient);
                     Maxa.UpdateWaterSystemParameters(notifier, modbusClient);
                     Maxa.UpdateRefrigirationSystemParameters(notifier, modbusClient);
                     Maxa.ReadErrors(notifier, modbusClient);
@@ -145,13 +163,15 @@ namespace Maxa_Dash
             {
                 ConnectButton.IsEnabled = true;
                 SetModbus();
-            } 
+            }
+            isUpdating = false;
 
         }
 
         private void OnClick_ConnectButton(object sender, RoutedEventArgs e)
         {
             SetModbus();
+            timer.Start();
         }
     }
 }

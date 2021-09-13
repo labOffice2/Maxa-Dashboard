@@ -311,19 +311,13 @@
                     <RowDefinition Height="10" />
                 </Grid.RowDefinitions>
                 <Border BorderBrush="Gray" BorderThickness="1" Grid.RowSpan="20" Grid.ColumnSpan="10"/>
-                <Label Content="Communication settings" Grid.Row="0" Grid.ColumnSpan="3" HorizontalAlignment="Center"/>
+                <Label Name="CommunicationSettingLabel" Content="Communication settings" Grid.Row="0" Grid.ColumnSpan="3" HorizontalAlignment="Center"/>
                 <Label Content="Com port:" Grid.Column="0" Grid.Row="1"/>
-                <ComboBox Name="ComBox" Grid.Column="1" Grid.Row="1" Margin="2"></ComboBox>
+                <ComboBox Name="ComBox" Grid.Column="1" Grid.Row="1" Margin="2" ItemStringFormat="{Binding comPortString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></ComboBox>
                 <Label Content="Machine ID:" Grid.Column="0" Grid.Row="2"/>
                 <ComboBox Name="MachineIDBox" Grid.Column="1" Grid.Row="2" Margin="2" ></ComboBox>
                 <Label Content="Baud rate:" Grid.Column="0" Grid.Row="3"/>
-                <ComboBox Name="baudRateBox" Grid.Column="1" Grid.Row="3" Margin="2">
-                    <ComboBoxItem Name="b9600" Content="9600" Tag="Item #1" IsSelected="True"/>
-                    <ComboBoxItem Name="b19200" Content="19200" Tag="Item #2"/>
-                    <ComboBoxItem Name="b38400" Content="38400" Tag="Item #3"/>
-                    <ComboBoxItem Name="b57600" Content="57600" Tag="Item #3"/>
-                    <ComboBoxItem Name="b115200" Content="115200" Tag="Item #3"/>
-                </ComboBox>
+                <ComboBox Name="baudRateBox" Grid.Column="1" Grid.Row="3" Margin="2"></ComboBox>
                 <Label Content="Parity:" Grid.Column="0" Grid.Row="4"/>
                 <ComboBox Name="ParityBox" Grid.Column="1" Grid.Row="4" Margin="2"></ComboBox>
                 <Label Content="Stop bit:" Grid.Column="0" Grid.Row="5"/>

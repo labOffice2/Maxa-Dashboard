@@ -40,8 +40,8 @@ namespace Maxa_Dash
         public static Err Probe6                        = new Err(952, 5, "Probe 6", 661);
         public static Err Probe7                        = new Err(952, 6, "Probe 7", 671);
         public static Err Probe8                        = new Err(952, 7, "Probe 8", 681);
-        public static Err LowPressureTrasducer          = new Err(952, 8, "Low pressure transducer", 691);
-        public static Err HighPressureTrasducer         = new Err(952, 9, "High pressure transducer", 701);
+        public static Err LowPressureTransducer          = new Err(952, 8, "Low pressure transducer", 691);
+        public static Err HighPressureTransducer         = new Err(952, 9, "High pressure transducer", 701);
         public static Err Probe11                       = new Err(952, 10, "Probe 11", 711);
         public static Err ModulGiProbe1                 = new Err(952, 11, "modul Gi - Probe 1", 612);
         public static Err ModulGiProbe2                 = new Err(952, 12, "modul Gi - Probe 2", 622);
@@ -96,7 +96,7 @@ namespace Maxa_Dash
         {
             HighPressure,lowPressure,DigBlockCom1,DigBlockCom2,DigBlockFan1,DigBlockFan2,IceError,Flow,LowTempDHWPreparer,LackOfLubrication,HighTempDischargeProtection,HighTempSolar,ThermalPump1,
             HighTemp,Thermal2PumpUse,WrongTemp,InsufficientExchangeInSanitary,HighTempSanitary,ModulGiDisconnected,
-            InputWaterProbe,OutputWaterProbe,SuctionProbe,DischargeProbe,ExternProbe,Probe6,Probe7,Probe8,LowPressureTrasducer,HighPressureTrasducer,Probe11,ModulGiProbe1,ModulGiProbe2,ModulGiProbe3,ModulGiProbe4,ModulGiProbe5,
+            InputWaterProbe,OutputWaterProbe,SuctionProbe,DischargeProbe,ExternProbe,Probe6,Probe7,Probe8,LowPressureTransducer,HighPressureTransducer,Probe11,ModulGiProbe1,ModulGiProbe2,ModulGiProbe3,ModulGiProbe4,ModulGiProbe5,
             ModulGiProbe6,ModulGiProbe7,ModulGiProbe8,ModulGiProbe9,ModulGiProbe10,ModulGiProbe11,
             LinkInverter1,LinkInverter2,HWFaultInverter1,HWFaultInverter2,OverCurrentInverter1,OverCurrentInverter2,HighTempInverter1,HighTempInverter2,BadVoltInverter1,BadVoltInverter2,
             PhSequenceInverter1,PhSequenceInverter2,ModelErrInverter1,ModelErrInverter2,OLErrInverter1,OLErrInverter2,OverCurrentPFCInverter1,OverCurrentPFCInverter2,InternalComErrInverter1,InternalComErrInverter2,FaultPFCInverter1,
@@ -115,7 +115,7 @@ namespace Maxa_Dash
 
         private static Err[] Register952Errs =
         {
-            InputWaterProbe,OutputWaterProbe,SuctionProbe,DischargeProbe,ExternProbe,Probe6,Probe7,Probe8,LowPressureTrasducer,HighPressureTrasducer,Probe11,ModulGiProbe1,ModulGiProbe2,ModulGiProbe3,ModulGiProbe4,ModulGiProbe5,
+            InputWaterProbe,OutputWaterProbe,SuctionProbe,DischargeProbe,ExternProbe,Probe6,Probe7,Probe8,LowPressureTransducer,HighPressureTransducer,Probe11,ModulGiProbe1,ModulGiProbe2,ModulGiProbe3,ModulGiProbe4,ModulGiProbe5,
         };
 
         private static Err[] Register953Errs =
