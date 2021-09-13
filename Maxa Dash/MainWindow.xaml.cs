@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO.Ports;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,18 +36,7 @@ namespace Maxa_Dash
         public MainWindow()
         {
             InitializeComponent();
-            ComboBoxItem ParityItemEven = new(), ParityItemOdd = new(), ParityItemMark = new(), ParityItemNone = new(), ParityItemSpace = new();
-            ParityItemEven.Content = System.IO.Ports.Parity.Even;
-            ParityItemEven.IsSelected = true;
-            ParityItemOdd.Content = System.IO.Ports.Parity.Odd;
-            ParityItemMark.Content = System.IO.Ports.Parity.Mark;
-            ParityItemNone.Content = System.IO.Ports.Parity.None;
-            ParityItemSpace.Content = System.IO.Ports.Parity.Space;
-            ParityBox.Items.Add(ParityItemEven);
-            ParityBox.Items.Add(ParityItemOdd);
-            ParityBox.Items.Add(ParityItemMark);
-            ParityBox.Items.Add(ParityItemNone);
-            ParityBox.Items.Add(ParityItemSpace);
+            SetComboBoxes();
 
             this.DataContext = notifyer;
             timer = new System.Timers.Timer();
@@ -54,6 +44,51 @@ namespace Maxa_Dash
             timer.Interval = 1000;
             timer.Elapsed += elapsed;
             
+        }
+
+        private void SetComboBoxes()
+        {
+            string[] availablePorts = SerialPort.GetPortNames();
+            foreach(string port in availablePorts)
+            {
+                ComboBoxItem portItem = new();
+                portItem.Content = port;
+                if (port == "COM1" || availablePorts.Length == 1) portItem.IsSelected = true;
+                ComBox.Items.Add(portItem);
+            }
+
+            for(int i = 1; i<256; i++)
+            {
+                ComboBoxItem id = new();
+                id.Content = i;
+                if (i == 1) id.IsSelected = true;
+                MachineIDBox.Items.Add(id);
+            }
+
+            ComboBoxItem ParityItemEven = new(), ParityItemOdd = new(), ParityItemMark = new(), ParityItemNone = new(), ParityItemSpace = new();
+            ParityItemEven.Content = Parity.Even;
+            ParityItemEven.IsSelected = true;
+            ParityItemOdd.Content = Parity.Odd;
+            ParityItemMark.Content = Parity.Mark;
+            ParityItemNone.Content = Parity.None;
+            ParityItemSpace.Content = Parity.Space;
+            ParityBox.Items.Add(ParityItemEven);
+            ParityBox.Items.Add(ParityItemOdd);
+            ParityBox.Items.Add(ParityItemMark);
+            ParityBox.Items.Add(ParityItemNone);
+            ParityBox.Items.Add(ParityItemSpace);
+
+            ComboBoxItem stopBitNone = new(), stopBitOne = new(), stopBitOneNHalf = new(), stopBitTwo = new();
+            stopBitNone.Content = StopBits.None;
+            stopBitOne.Content = StopBits.One;
+            stopBitOne.IsSelected = true;
+            stopBitOneNHalf.Content = StopBits.OnePointFive;
+            stopBitTwo.Content = StopBits.Two;
+            StopBitBox.Items.Add(stopBitNone);
+            StopBitBox.Items.Add(stopBitOne);
+            StopBitBox.Items.Add(stopBitOneNHalf);
+            StopBitBox.Items.Add(stopBitTwo);
+
         }
 
         private void elapsed(object sender, ElapsedEventArgs e)
@@ -81,6 +116,7 @@ namespace Maxa_Dash
                 
                 notifyer.waterInTemp = 100005;
                 notifyer.waterOutTemp = 100000;
+                
                 
             }
 

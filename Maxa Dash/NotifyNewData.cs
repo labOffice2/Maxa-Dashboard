@@ -10,6 +10,17 @@ namespace Maxa_Dash
 {
     public class NotifyNewData : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void INotifyPropertyChanged(string propertyName = "")
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+
         // temperatures
         private float _waterInTemp;
         public float waterInTemp
@@ -352,15 +363,580 @@ namespace Maxa_Dash
         }
 
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void INotifyPropertyChanged(string propertyName ="")
+        // manufacturing data
+        private string _firmwareVersion = "no data";
+        public string firmwareVersion
         {
-            if(PropertyChanged != null)
+            get { return _firmwareVersion; }
+            set
             {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+                if (_firmwareVersion != value)
+                {
+                    _firmwareVersion = value;
+                    INotifyPropertyChanged(nameof(firmwareVersion));
+                }
             }
         }
+        
+        private string _firmwareRelease = "no data";
+        public string firmwareRelease
+        {
+            get { return _firmwareRelease; }
+            set
+            {
+                if (_firmwareRelease != value)
+                {
+                    _firmwareRelease = value;
+                    INotifyPropertyChanged(nameof(firmwareRelease));
+                }
+            }
+        }
+
+        private string _firmwareCreationDate = "no data";
+        public string firmwareCreationDate
+        {
+            get { return _firmwareCreationDate; }
+            set
+            {
+                if (_firmwareCreationDate != value)
+                {
+                    _firmwareCreationDate = value;
+                    INotifyPropertyChanged(nameof(firmwareCreationDate));
+                }
+            }
+        }
+
+
+        // error colors
+        private Brush _E000 = Brushes.Gray;
+        public Brush E000
+        {
+            get { return _E000; }
+            set
+            {
+                if (_E000 != value)
+                {
+                    _E000 = value;
+                    INotifyPropertyChanged(nameof(E000));
+                }
+            }
+        }
+
+        private Brush _E001 = Brushes.Gray;
+        public Brush E001
+        {
+            get { return _E001; }
+            set
+            {
+                if (_E001 != value)
+                {
+                    _E001 = value;
+                    INotifyPropertyChanged(nameof(E001));
+                }
+            }
+        }
+        
+        private Brush _E002 = Brushes.Gray;
+        public Brush E002
+        {
+            get { return _E002; }
+            set
+            {
+                if (_E002 != value)
+                {
+                    _E002 = value;
+                    INotifyPropertyChanged(nameof(E002));
+                }
+            }
+        }
+
+        private Brush _E005 = Brushes.Gray;
+        public Brush E005
+        {
+            get { return _E005; }
+            set
+            {
+                if (_E005 != value)
+                {
+                    _E005 = value;
+                    INotifyPropertyChanged(nameof(E005));
+                }
+            }
+        }
+
+        private Brush _E006 = Brushes.Gray;
+        public Brush E006
+        {
+            get { return _E006; }
+            set
+            {
+                if (_E006 != value)
+                {
+                    _E006 = value;
+                    INotifyPropertyChanged(nameof(E006));
+                }
+            }
+        }
+
+        private Brush _E008 = Brushes.Gray;
+        public Brush E008
+        {
+            get { return _E008; }
+            set
+            {
+                if (_E008 != value)
+                {
+                    _E008 = value;
+                    INotifyPropertyChanged(nameof(E008));
+                }
+            }
+        }
+
+        private Brush _E009 = Brushes.Gray;
+        public Brush E009
+        {
+            get { return _E009; }
+            set
+            {
+                if (_E009 != value)
+                {
+                    _E009 = value;
+                    INotifyPropertyChanged(nameof(E009));
+                }
+            }
+        }
+
+        private Brush _E010 = Brushes.Gray;
+        public Brush E010
+        {
+            get { return _E010; }
+            set
+            {
+                if (_E010 != value)
+                {
+                    _E010 = value;
+                    INotifyPropertyChanged(nameof(E010));
+                }
+            }
+        }
+        private Brush _E018 = Brushes.Gray;
+        public Brush E018
+        {
+            get { return _E018; }
+            set
+            {
+                if (_E018 != value)
+                {
+                    _E018 = value;
+                    INotifyPropertyChanged(nameof(E018));
+                }
+            }
+        }
+        private Brush _E041 = Brushes.Gray;
+        public Brush E041
+        {
+            get { return _E041; }
+            set
+            {
+                if (_E041 != value)
+                {
+                    _E041 = value;
+                    INotifyPropertyChanged(nameof(E041));
+                }
+            }
+        }
+        private Brush _E042 = Brushes.Gray;
+        public Brush E042
+        {
+            get { return _E042; }
+            set
+            {
+                if (_E042 != value)
+                {
+                    _E042 = value;
+                    INotifyPropertyChanged(nameof(E042));
+                }
+            }
+        }
+        private Brush _E050 = Brushes.Gray;
+        public Brush E050
+        {
+            get { return _E050; }
+            set
+            {
+                if (_E050 != value)
+                {
+                    _E050 = value;
+                    INotifyPropertyChanged(nameof(E050));
+                }
+            }
+        }
+        private Brush _E101 = Brushes.Gray;
+        public Brush E101
+        {
+            get { return _E101; }
+            set
+            {
+                if (_E101 != value)
+                {
+                    _E101 = value;
+                    INotifyPropertyChanged(nameof(E101));
+                }
+            }
+        }
+        private Brush _E611 = Brushes.Gray;
+        public Brush E611
+        {
+            get { return _E611; }
+            set
+            {
+                if (_E611 != value)
+                {
+                    _E611 = value;
+                    INotifyPropertyChanged(nameof(E611));
+                }
+            }
+        }
+        private Brush _E612 = Brushes.Gray;
+        public Brush E612
+        {
+            get { return _E612; }
+            set
+            {
+                if (_E612 != value)
+                {
+                    _E612 = value;
+                    INotifyPropertyChanged(nameof(E612));
+                }
+            }
+        }
+        private Brush _E631 = Brushes.Gray;
+        public Brush E631
+        {
+            get { return _E631; }
+            set
+            {
+                if (_E631 != value)
+                {
+                    _E631 = value;
+                    INotifyPropertyChanged(nameof(E631));
+                }
+            }
+        }
+        private Brush _E641 = Brushes.Gray;
+        public Brush E641
+        {
+            get { return _E641; }
+            set
+            {
+                if (_E641 != value)
+                {
+                    _E641 = value;
+                    INotifyPropertyChanged(nameof(E641));
+                }
+            }
+        }
+        private Brush _E651 = Brushes.Gray;
+        public Brush E651
+        {
+            get { return _E651; }
+            set
+            {
+                if (_E651 != value)
+                {
+                    _E651 = value;
+                    INotifyPropertyChanged(nameof(E651));
+                }
+            }
+        }
+        private Brush _E652 = Brushes.Gray;
+        public Brush E652
+        {
+            get { return _E652; }
+            set
+            {
+                if (_E652 != value)
+                {
+                    _E652 = value;
+                    INotifyPropertyChanged(nameof(E652));
+                }
+            }
+        }
+        private Brush _E661 = Brushes.Gray;
+        public Brush E661
+        {
+            get { return _E661; }
+            set
+            {
+                if (_E661 != value)
+                {
+                    _E661 = value;
+                    INotifyPropertyChanged(nameof(E661));
+                }
+            }
+        }
+        private Brush _E662 = Brushes.Gray;
+        public Brush E662
+        {
+            get { return _E662; }
+            set
+            {
+                if (_E662 != value)
+                {
+                    _E662 = value;
+                    INotifyPropertyChanged(nameof(E662));
+                }
+            }
+        }
+        private Brush _E671 = Brushes.Gray;
+        public Brush E671
+        {
+            get { return _E671; }
+            set
+            {
+                if (_E671 != value)
+                {
+                    _E671 = value;
+                    INotifyPropertyChanged(nameof(E671));
+                }
+            }
+        }
+        private Brush _E672 = Brushes.Gray;
+        public Brush E672
+        {
+            get { return _E672; }
+            set
+            {
+                if (_E672 != value)
+                {
+                    _E672 = value;
+                    INotifyPropertyChanged(nameof(E672));
+                }
+            }
+        }
+        private Brush _E691 = Brushes.Gray;
+        public Brush E691
+        {
+            get { return _E691; }
+            set
+            {
+                if (_E691 != value)
+                {
+                    _E691 = value;
+                    INotifyPropertyChanged(nameof(E691));
+                }
+            }
+        }
+        private Brush _E701 = Brushes.Gray;
+        public Brush E701
+        {
+            get { return _E701; }
+            set
+            {
+                if (_E701 != value)
+                {
+                    _E701 = value;
+                    INotifyPropertyChanged(nameof(E701));
+                }
+            }
+        }
+        private Brush _E711 = Brushes.Gray;
+        public Brush E711
+        {
+            get { return _E711; }
+            set
+            {
+                if (_E711 != value)
+                {
+                    _E711 = value;
+                    INotifyPropertyChanged(nameof(E711));
+                }
+            }
+        }
+        private Brush _E801 = Brushes.Gray;
+        public Brush E801
+        {
+            get { return _E801; }
+            set
+            {
+                if (_E801 != value)
+                {
+                    _E801 = value;
+                    INotifyPropertyChanged(nameof(E801));
+                }
+            }
+        }
+        private Brush _E851 = Brushes.Gray;
+        public Brush E851
+        {
+            get { return _E851; }
+            set
+            {
+                if (_E851 != value)
+                {
+                    _E851 = value;
+                    INotifyPropertyChanged(nameof(E851));
+                }
+            }
+        }
+        private Brush _E861 = Brushes.Gray;
+        public Brush E861
+        {
+            get { return _E861; }
+            set
+            {
+                if (_E861 != value)
+                {
+                    _E861 = value;
+                    INotifyPropertyChanged(nameof(E861));
+                }
+            }
+        }
+        private Brush _E871 = Brushes.Gray;
+        public Brush E871
+        {
+            get { return _E871; }
+            set
+            {
+                if (_E871 != value)
+                {
+                    _E871 = value;
+                    INotifyPropertyChanged(nameof(E871));
+                }
+            }
+        }
+        private Brush _E881 = Brushes.Gray;
+        public Brush E881
+        {
+            get { return _E881; }
+            set
+            {
+                if (_E881 != value)
+                {
+                    _E881 = value;
+                    INotifyPropertyChanged(nameof(E881));
+                }
+            }
+        }
+        private Brush _E891 = Brushes.Gray;
+        public Brush E891
+        {
+            get { return _E891; }
+            set
+            {
+                if (_E891 != value)
+                {
+                    _E891 = value;
+                    INotifyPropertyChanged(nameof(E891));
+                }
+            }
+        }
+        private Brush _E901 = Brushes.Gray;
+        public Brush E901
+        {
+            get { return _E901; }
+            set
+            {
+                if (_E901 != value)
+                {
+                    _E901 = value;
+                    INotifyPropertyChanged(nameof(E901));
+                }
+            }
+        }
+        private Brush _E911 = Brushes.Gray;
+        public Brush E911
+        {
+            get { return _E911; }
+            set
+            {
+                if (_E911 != value)
+                {
+                    _E911 = value;
+                    INotifyPropertyChanged(nameof(E911));
+                }
+            }
+        }
+        private Brush _E921 = Brushes.Gray;
+        public Brush E921
+        {
+            get { return _E921; }
+            set
+            {
+                if (_E921 != value)
+                {
+                    _E921 = value;
+                    INotifyPropertyChanged(nameof(E921));
+                }
+            }
+        }
+        private Brush _E931 = Brushes.Gray;
+        public Brush E931
+        {
+            get { return _E931; }
+            set
+            {
+                if (_E931 != value)
+                {
+                    _E931 = value;
+                    INotifyPropertyChanged(nameof(E931));
+                }
+            }
+        }
+        private Brush _E941 = Brushes.Gray;
+        public Brush E941
+        {
+            get { return _E941; }
+            set
+            {
+                if (_E941 != value)
+                {
+                    _E941 = value;
+                    INotifyPropertyChanged(nameof(E941));
+                }
+            }
+        }
+        private Brush _E951 = Brushes.Gray;
+        public Brush E951
+        {
+            get { return _E951; }
+            set
+            {
+                if (_E951 != value)
+                {
+                    _E951 = value;
+                    INotifyPropertyChanged(nameof(E951));
+                }
+            }
+        }
+        private Brush _E961 = Brushes.Gray;
+        public Brush E961
+        {
+            get { return _E961; }
+            set
+            {
+                if (_E961 != value)
+                {
+                    _E961 = value;
+                    INotifyPropertyChanged(nameof(E961));
+                }
+            }
+        }
+        private Brush _E971 = Brushes.Gray;
+        public Brush E971
+        {
+            get { return _E971; }
+            set
+            {
+                if (_E971 != value)
+                {
+                    _E971 = value;
+                    INotifyPropertyChanged(nameof(E971));
+                }
+            }
+        }
+
+
 
 
         public enum GeneralState
