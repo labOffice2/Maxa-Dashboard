@@ -20,6 +20,8 @@ namespace Maxa_Dash
             }
         }
 
+        FileWriter FileWriter;
+
         // communication settings
         private string _comPortString;
         public string comPortString

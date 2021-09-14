@@ -32,10 +32,13 @@ namespace Maxa_Dash
 
         NotifyNewData notifier = new NotifyNewData();
 
+        FileWriter FileWriter;
+
         private Timer timer;
 
         bool isConnected = false;
         bool isUpdating = false;
+        bool isRecord = false;
 
         private float setpointMaxCool = 23.0f;
         private float setpointMinCool = 5.0f;
@@ -155,10 +158,20 @@ namespace Maxa_Dash
             {
                 try
                 {
-                    //Maxa.UpdateOperationMode(notifier, modbusClient);
-                    Maxa.UpdateWaterSystemParameters(notifier, modbusClient);
-                    Maxa.UpdateRefrigirationSystemParameters(notifier, modbusClient);
-                    Maxa.ReadErrors(notifier, modbusClient);
+                    if(isRecord)
+                    {
+                        Maxa.UpdateWaterSystemParametersNRecord(notifier, modbusClient, FileWriter);
+                        Maxa.UpdateRefrigirationSystemParametersNRecord(notifier, modbusClient, FileWriter);
+                        FileWriter.WriteToFile();
+                    }
+                    else
+                    {
+                        Maxa.UpdateOperationMode(notifier, modbusClient);
+                        Maxa.UpdateWaterSystemParameters(notifier, modbusClient);
+                        Maxa.UpdateRefrigirationSystemParameters(notifier, modbusClient);
+                        Maxa.ReadErrors(notifier, modbusClient);
+
+                    }
                 }
                 catch
                 {
@@ -191,6 +204,28 @@ namespace Maxa_Dash
             {
                 string path = commonFileDialog.FileName;
                 PathSelectionButton.Content = path;
+                FileWriter = new FileWriter(path);
+            }
+        }
+
+        private void StartRecordingButton_Click(object sender, RoutedEventArgs e)
+        {
+            if(FileWriter != null)
+            {
+                if(isRecord)
+                {
+                    isRecord = false;
+                    StartRecordingButton.Content = "Start Recording";
+                }
+                else
+                {
+                    isRecord = true;
+                    StartRecordingButton.Content = "Stop Recording";
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select a folder");
             }
         }
 
@@ -245,6 +280,7 @@ namespace Maxa_Dash
             { }
         }
         #endregion
+
 
     }
 }

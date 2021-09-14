@@ -328,7 +328,7 @@
                 <Button Name="PathSelectionButton" Content="set path" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="6" Margin="2" Click="PathSelectionButton_Click"/>
 
                 <Button Name="ConnectButton" Content="Connect" HorizontalAlignment="Center" Grid.Row="7" Grid.Column="0" Click="OnClick_ConnectButton"/>
-                <Button Name="StartRecordingButton" Content="Start recording" HorizontalAlignment="Center" Grid.Row="7" Grid.Column="1"/>
+                <Button Name="StartRecordingButton" Content="Start recording" HorizontalAlignment="Center" Grid.Row="7" Grid.Column="1" Click="StartRecordingButton_Click"/>
                 <Button Name="ResetButton" Content="Reset" HorizontalAlignment="Center" IsEnabled="False" Grid.Row="7" Grid.Column="2"/>
 
             </Grid> <!-- communication settings grid -->
