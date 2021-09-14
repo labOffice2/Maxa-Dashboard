@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows;
+
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
@@ -15,6 +16,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using EasyModbus;
+using Microsoft.Win32;
+using Microsoft.WindowsAPICodePack.Dialogs;
+
 
 namespace Maxa_Dash
 {
@@ -25,6 +29,7 @@ namespace Maxa_Dash
     {
 
         ModbusClient modbusClient;
+
         NotifyNewData notifier = new NotifyNewData();
 
         private Timer timer;
@@ -172,6 +177,18 @@ namespace Maxa_Dash
         {
             SetModbus();
             timer.Start();
+        }
+
+        private void PathSelectionButton_Click(object sender, RoutedEventArgs e)
+        {
+            CommonOpenFileDialog commonFileDialog = new CommonOpenFileDialog();
+            commonFileDialog.IsFolderPicker = true;
+            
+            if(commonFileDialog.ShowDialog() == CommonFileDialogResult.Ok)
+            {
+                string path = commonFileDialog.FileName;
+                PathSelectionButton.Content = path;
+            }
         }
     }
 }

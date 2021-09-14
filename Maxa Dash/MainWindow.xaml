@@ -308,6 +308,7 @@
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
                     <RowDefinition Height="10" />
                 </Grid.RowDefinitions>
                 <Border BorderBrush="Gray" BorderThickness="1" Grid.RowSpan="20" Grid.ColumnSpan="10"/>
@@ -323,9 +324,12 @@
                 <Label Content="Stop bit:" Grid.Column="0" Grid.Row="5"/>
                 <ComboBox Name="StopBitBox" Grid.Column="1" Grid.Row="5" Margin="2"></ComboBox>
 
-                <Button Name="ConnectButton" Content="Connect" HorizontalAlignment="Center" Grid.Row="6" Grid.Column="0" Click="OnClick_ConnectButton"/>
-                <Button Name="StartRecordingButton" Content="Start recording" HorizontalAlignment="Center" Grid.Row="6" Grid.Column="1"/>
-                <Button Name="ResetButton" Content="Reset" HorizontalAlignment="Center" IsEnabled="False" Grid.Row="6" Grid.Column="2"/>
+                <Label Content="record path:" Grid.Column="0" Grid.Row="6"/>
+                <Button Name="PathSelectionButton" Content="set path" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="6" Margin="2" Click="PathSelectionButton_Click"/>
+
+                <Button Name="ConnectButton" Content="Connect" HorizontalAlignment="Center" Grid.Row="7" Grid.Column="0" Click="OnClick_ConnectButton"/>
+                <Button Name="StartRecordingButton" Content="Start recording" HorizontalAlignment="Center" Grid.Row="7" Grid.Column="1"/>
+                <Button Name="ResetButton" Content="Reset" HorizontalAlignment="Center" IsEnabled="False" Grid.Row="7" Grid.Column="2"/>
 
             </Grid> <!-- communication settings grid -->
         </Grid>
