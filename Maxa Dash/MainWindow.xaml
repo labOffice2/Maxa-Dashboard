@@ -280,16 +280,16 @@
                     <ComboBoxItem Name="Heat" Content="Heat" Tag="Item #2"/>
                     <ComboBoxItem Name="Cool" Content="Cool" Tag="Item #3"/>
                 </ComboBox>
-                <Label Content="cool setpoint:" Grid.Column="1" Grid.Row="2" />
-                <TextBox x:Name="CoolSP1" Text="20" Grid.Column="2" Grid.Row="2" VerticalAlignment="Center" />
-                <Label Content="heat setpoint:" Grid.Column="1" Grid.Row="3" />
-                <TextBox x:Name="HeatSP1" Text="50" Grid.Column="2" Grid.Row="3" VerticalAlignment="Center" />
-                <Label Content="DHW setpoint:" Grid.Column="1" Grid.Row="4" />
-                <TextBox x:Name="DHWSP" Text="40" Grid.Column="2" Grid.Row="4" VerticalAlignment="Center" />
-                <Label Content="Second cool setpoint:" Grid.Column="1" Grid.Row="5" />
-                <TextBox x:Name="CoolSP2" Text="15" Grid.Column="2" Grid.Row="5" VerticalAlignment="Center" />
-                <Label Content="Second heat setpoint:" Grid.Column="1" Grid.Row="6" />
-                <TextBox x:Name="HeatSP2" Text="50" Grid.Column="2" Grid.Row="6" VerticalAlignment="Center" />
+                <Label Content="cool setpoint:" Grid.Column="1" Grid.Row="2" ToolTip="Range 5.0 ÷ 23.0"/>
+                <TextBox Name="CoolSP1" Text="20" Grid.Column="2" Grid.Row="2" VerticalAlignment="Center" LostFocus="CoolSP1_LostFocus"/>
+                <Label Content="heat setpoint:" Grid.Column="1" Grid.Row="3" ToolTip="Range 25.0 ÷ 55.0"/>
+                <TextBox Name="HeatSP1" Text="50" Grid.Column="2" Grid.Row="3" VerticalAlignment="Center" LostFocus="HeatSP1_LostFocus"/>
+                <Label Content="DHW setpoint:" Grid.Column="1" Grid.Row="4" ToolTip="Range 25.0 ÷ 55.0"/>
+                <TextBox Name="DHWSP" Text="40" Grid.Column="2" Grid.Row="4" VerticalAlignment="Center" LostFocus="DHWSP_LostFocus"/>
+                <Label Content="Second cool setpoint:" Grid.Column="1" Grid.Row="5" ToolTip="Range 5.0 ÷ 23.0"/>
+                <TextBox Name="CoolSP2" Text="15" Grid.Column="2" Grid.Row="5" VerticalAlignment="Center" LostFocus="CoolSP2_LostFocus"/>
+                <Label Content="Second heat setpoint:" Grid.Column="1" Grid.Row="6" ToolTip="Range 25.0 ÷ 55.0"/>
+                <TextBox Name="HeatSP2" Text="50" Grid.Column="2" Grid.Row="6" VerticalAlignment="Center" LostFocus="HeatSP2_LostFocus"/>
                 <Button Content="send new settings" Grid.Row="7" Grid.Column="2" Click="OnClick_ConnectButton"/>
             </Grid> <!-- setpoints and operation mode settings grid -->
 

@@ -37,8 +37,10 @@ namespace Maxa_Dash
         bool isConnected = false;
         bool isUpdating = false;
 
-        public float WaterInTemp;
-        public float WaterOutTemp;
+        private float setpointMaxCool = 23.0f;
+        private float setpointMinCool = 5.0f;
+        private float setpointMaxHeat = 55.0f;
+        private float setpointMinHeat = 25.0f;
         public MainWindow()
         {
             InitializeComponent();
@@ -179,6 +181,7 @@ namespace Maxa_Dash
             timer.Start();
         }
 
+        // Openning a file browser to select a folder for CSV output file
         private void PathSelectionButton_Click(object sender, RoutedEventArgs e)
         {
             CommonOpenFileDialog commonFileDialog = new CommonOpenFileDialog();
@@ -190,5 +193,58 @@ namespace Maxa_Dash
                 PathSelectionButton.Content = path;
             }
         }
+
+        // Handling setpoint settings ranges - auto fix
+        #region setpoint range handling
+        private void CoolSP1_LostFocus(object sender, RoutedEventArgs e)
+        {
+            VerifySetpoint(CoolSP1, true);
+        }
+
+        private void HeatSP1_LostFocus(object sender, RoutedEventArgs e)
+        {
+            VerifySetpoint(HeatSP1, false);
+        }
+
+        private void DHWSP_LostFocus(object sender, RoutedEventArgs e)
+        {
+            VerifySetpoint(DHWSP, false);
+        }
+
+        private void CoolSP2_LostFocus(object sender, RoutedEventArgs e)
+        {
+            VerifySetpoint(CoolSP2, true);
+        }
+
+        private void HeatSP2_LostFocus(object sender, RoutedEventArgs e)
+        {
+            VerifySetpoint(HeatSP2, false);
+
+        }
+
+        private void VerifySetpoint(TextBox textBox,bool isCoolSP)
+        {
+            float maxSP;
+            float minSP;
+            try
+            {
+                if(isCoolSP)
+                {
+                    maxSP = setpointMaxCool;
+                    minSP = setpointMinCool;
+                }
+                else
+                {
+                    maxSP = setpointMaxHeat;
+                    minSP = setpointMinHeat;
+                }
+                if(float.Parse(textBox.Text) > maxSP) textBox.Text = maxSP.ToString();
+                else if(float.Parse(textBox.Text) < minSP) textBox.Text = minSP.ToString();
+            }
+            catch
+            { }
+        }
+        #endregion
+
     }
 }
