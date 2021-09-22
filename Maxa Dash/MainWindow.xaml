@@ -298,6 +298,10 @@
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
                     <RowDefinition Height="1*"/>
                 </Grid.RowDefinitions>
                 <Border BorderBrush="Gray" BorderThickness="1" Grid.RowSpan="20" Grid.ColumnSpan="10"/>
@@ -318,7 +322,13 @@
                 <TextBox Name="CoolSP2" Text="15" Grid.Column="2" Grid.Row="5" VerticalAlignment="Center" LostFocus="CoolSP2_LostFocus"/>
                 <Label Content="Second heat setpoint:" Grid.Column="1" Grid.Row="6" ToolTip="Range 25.0 ÷ 55.0"/>
                 <TextBox Name="HeatSP2" Text="50" Grid.Column="2" Grid.Row="6" VerticalAlignment="Center" LostFocus="HeatSP2_LostFocus"/>
-                <Button Content="send new settings" Grid.Row="7" Grid.Column="2" Click="OnClick_ConnectButton"/>
+                <Label Content="DHW preparer setpoint:" Grid.Column="1" Grid.Row="7" ToolTip="Range 0.0 ÷ 80.0"/>
+                <TextBox Name="DHWPrepSP" Text="50" Grid.Column="2" Grid.Row="7" VerticalAlignment="Center" LostFocus="DHWPrepSP_LostFocus"/>
+                <Label Content="Actual thermoregulation setpoint:" Grid.Column="1" Grid.Row="8" />
+                <Label  Content="{Binding actualThermoragulationSP, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" Grid.Row="8" VerticalAlignment="Center" />
+                <Label Content="Actual reference temp for thermoregulation:" Grid.Column="1" Grid.Row="9" />
+                <Label  Content="{Binding actualRefTemp4ThermoragulationSP, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" Grid.Row="9" VerticalAlignment="Center" />
+                <Button Content="send new settings" Grid.Row="10" Grid.Column="2" Click="OnClick_ConnectButton"/>
             </Grid> <!-- setpoints and operation mode settings grid -->
 
             <!-- communication settings grid -->

@@ -20,8 +20,6 @@ namespace Maxa_Dash
             }
         }
 
-        FileWriter FileWriter;
-
         // communication settings
         private string _comPortString;
         public string comPortString
@@ -249,6 +247,37 @@ namespace Maxa_Dash
                 }
             }
         }
+
+        // Read-only setpoints
+        
+        private float _actualThermoragulationSP = 0f;
+        public float actualThermoragulationSP
+        {
+            get { return _actualThermoragulationSP; }
+            set
+            {
+                if (_actualThermoragulationSP != (((float)value) / 10))
+                {
+                    _actualThermoragulationSP = (((float)value) / 10);
+                    INotifyPropertyChanged(nameof(actualThermoragulationSP));
+                }
+            }
+        }
+
+        private float _actualRefTemp4ThermoragulationSP = 0f;
+        public float actualRefTemp4ThermoragulationSP
+        {
+            get { return _actualRefTemp4ThermoragulationSP; }
+            set
+            {
+                if (_actualRefTemp4ThermoragulationSP != (((float)value) / 10))
+                {
+                    _actualRefTemp4ThermoragulationSP = (((float)value) / 10);
+                    INotifyPropertyChanged(nameof(actualRefTemp4ThermoragulationSP));
+                }
+            }
+        }
+
 
         // analog outputs
         private float _fanAnalogOut;

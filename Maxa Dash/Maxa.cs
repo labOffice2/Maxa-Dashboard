@@ -132,6 +132,21 @@ namespace Maxa_Dash
             }
         }
 
+        public static void UpdateReadOnlySetpoints(NotifyNewData notifier, ModbusClient modbusClient)
+        {
+            try
+            {
+                int[] data = modbusClient.ReadHoldingRegisters(Registers.ActualThermoregulationSPReg, 1);
+                notifier.actualThermoragulationSP = data[0];
+                data = modbusClient.ReadHoldingRegisters(Registers.ActualRefTempForThermoregulationSPReg, 1);
+                notifier.actualRefTemp4ThermoragulationSP = data[0];
+            }
+            catch
+            {
+                // indicate problem in communication
+            }
+        }
+
         public static void UpdateOperationMode(NotifyNewData notifier, ModbusClient modbusClient)
         {
             try

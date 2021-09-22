@@ -72,7 +72,7 @@ namespace Maxa_Dash
 
         // Analog outputs
         public const int FanAnalogOutReg = 7000;
-        public const int FanCircuit2AnalogOutReg = 627;
+        public const int FanCircuit2AnalogOutReg = 628;
         public const int PumpAnalogOutReg = 7001;
 
         // Alarms

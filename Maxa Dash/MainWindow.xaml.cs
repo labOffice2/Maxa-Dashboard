@@ -257,6 +257,14 @@ namespace Maxa_Dash
 
         }
 
+        private void DHWPrepSP_LostFocus(object sender, RoutedEventArgs e)
+        {
+            float maxSP = 80f;
+            float minSP = 0f;
+            if (float.Parse(DHWPrepSP.Text) > maxSP) DHWPrepSP.Text = maxSP.ToString();
+            else if (float.Parse(DHWPrepSP.Text) < minSP) DHWPrepSP.Text = minSP.ToString();
+        }
+
         private void VerifySetpoint(TextBox textBox,bool isCoolSP)
         {
             float maxSP;
@@ -279,6 +287,7 @@ namespace Maxa_Dash
             catch
             { }
         }
+
         #endregion
 
 
