@@ -12,8 +12,9 @@ namespace Maxa_Dash
         public const int FirmwareSubRelease_CreationDayReg = 3;
         public const int FirmwareCreationMonth_YearReg = 4;
 
-        // Writing Bitmask Register
-        public const int WritingBitMaskReg = 7201;
+        // Writing Bitmask Registers
+        public const int EnableWritingBitMaskReg = 7201;
+        public const int ForcingBitMaskReg = 7202;
 
         //Machine state
         public const int MachineStateWriteReg = 7200;
@@ -83,5 +84,22 @@ namespace Maxa_Dash
         public const int Alarm801_882Reg = 954;
         public const int Alarm891_941Reg = 955;
         public const int Alarm942_972Reg = 956;
+
+        // Bit masks for register 7201
+        public const int EnableMachineStateWriting = 0b00000001;
+        public const int EnableSPWriting = 0b00000010;
+        public const int EnablePassagetoSecondSP = 0b00000100;
+        public const int EnableRemoteAmbientCall = 0b00001000;
+        public const int EnableRemoteDHWCall = 0b00010000;
+        public const int EnableAntiLegionellaCycle = 0b00100000;
+
+        // Bit masks for register 7202
+        public const int ActivateSecondSP = 0b00000001;
+        public const int ForceRemoteAmbientCall = 0b00000010;
+        public const int ForceRemoteDHWCalll = 0b00000100;
+        public const int ActivateAntiLegionellaCycle = 0b00001000;
+        public const int ForcePlantVenting = 0b00100000;            // only if the machine state is standby
+        public const int SanitaryDisabling = 0b01000000;
+        public const int ForceDefrost = 0b10000000;
     }
 }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Maxa_Dash"
         mc:Ignorable="d"
-        Title="Maxa Dashboard" Height="800" Width="1000">
+        Title="Maxa Dashboard" Height="700" Width="1200">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
@@ -233,6 +233,7 @@
                     <Label Content="General state:" Grid.Column="1" />
                     <Label Content="{Binding generalState, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" RenderTransformOrigin="-0.222,0.106"/>
                 </Grid>
+                <!-- from old version of register mapping - irrelevant
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="10"/>
@@ -250,8 +251,9 @@
                     </Grid.ColumnDefinitions>
                     <Label Content="Machine mode:" Grid.Column="1" />
                     <Label Content="{Binding machineMode, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" RenderTransformOrigin="-0.222,0.106"/>
-                </Grid>
+                </Grid> -->
             </StackPanel>
+            <!-- from old version of register mapping - irrelevant
             <StackPanel Grid.Column="1" Grid.Row="1">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -271,7 +273,7 @@
                     <Label Content="Defrost state:" Grid.Column="1" />
                     <Label Content="{Binding defrostState, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" RenderTransformOrigin="-0.222,0.106"/>
                 </Grid>
-            </StackPanel>
+            </StackPanel> -->
         </Grid> <!-- end  operation mode data-->
 
         
@@ -292,7 +294,6 @@
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30"/>
-                    <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>

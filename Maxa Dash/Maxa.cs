@@ -152,11 +152,11 @@ namespace Maxa_Dash
             try
             {
                 int[] data = modbusClient.ReadHoldingRegisters(Registers.MachineStateReadReg, 1);
-                //notifier.generalState = (NotifyNewData.GeneralState)data[0];
+                notifier.generalState = GuiDataConverter.GetMachineState(data[0]);
             }
             catch (ArgumentException)
             {
-                notifier.generalState = NotifyNewData.GeneralState.NA;
+                notifier.generalState = NotifyNewData.MachinelState.NA;
                 // indicate problem in communication
             }
         }

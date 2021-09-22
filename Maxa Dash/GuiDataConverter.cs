@@ -13,5 +13,17 @@ namespace Maxa_Dash
         {
             return status ? Brushes.Red : Brushes.Gray;
         }
+
+        public static NotifyNewData.MachinelState GetMachineState(int data)
+        {
+            if (data < 7)
+            {
+                return (NotifyNewData.MachinelState)data;
+            }
+            else
+            {
+                return GetMachineState(data & 0x07);
+            }
+        }
     }
 }

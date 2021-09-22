@@ -380,8 +380,8 @@ namespace Maxa_Dash
         }
 
         // machine mode
-        private GeneralState _generalState = GeneralState.NA;
-        public GeneralState generalState
+        private MachinelState _generalState = MachinelState.NA;
+        public MachinelState generalState
         {
             get { return _generalState; }
             set
@@ -394,6 +394,7 @@ namespace Maxa_Dash
             }
         }
 
+        /* from older version of register mapping - irrelevant
         private PlantMode _plantMode = PlantMode.NA;
         public PlantMode plantMode
         {
@@ -449,7 +450,7 @@ namespace Maxa_Dash
                 }
             }
         }
-
+        */
 
         // manufacturing data
         private string _firmwareVersion = "no data";
@@ -1043,12 +1044,14 @@ namespace Maxa_Dash
 
 
 
-        public enum GeneralState
+        public enum MachinelState
         {
-            OFF,
-            ON,
-            ONLYSANITARY,
-            REMOTEONOFF,
+            STANBY,
+            COOL,
+            HEAT,
+            ONLY_SANITARY = 4,
+            COOLnSANITARY = 5,
+            HEATnSANITARY = 6,
             NA,
         }
 
