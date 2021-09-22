@@ -80,17 +80,17 @@
                     <Label Content="DHW temperature:" Grid.Column="1" />
                     <Label Content="{Binding DHWTemp, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" RenderTransformOrigin="-0.222,0.106"/>
                 </Grid>
-
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="10"/>
                         <ColumnDefinition Width="AUTO"/>
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
-                    <Label Content="Storage plant temperature:" Grid.Column="1" />
-                    <Label Content="{Binding storagePlantTemp, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" RenderTransformOrigin="-0.222,0.106"/>
+                    <Label Content="DHW prep recirculation temperature:" Grid.Column="1" />
+                    <Label Content="{Binding DHWPrePRecirculationTemp, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" RenderTransformOrigin="-0.222,0.106"/>
                 </Grid>
             </StackPanel>
+            
             <StackPanel Grid.Column="1" Grid.Row="1">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -110,8 +110,26 @@
                     <Label Content="External air temperature:" Grid.Column="1" />
                     <Label Content="{Binding externalAirTemp, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" RenderTransformOrigin="-0.222,0.106"/>
                 </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="AUTO"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Storage plant temperature:" Grid.Column="1" />
+                    <Label Content="{Binding storagePlantTemp, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" RenderTransformOrigin="-0.222,0.106"/>
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="AUTO"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Radiant panel mix temperature:" Grid.Column="1" />
+                    <Label Content="{Binding RadiantPanelMixerTemp, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" RenderTransformOrigin="-0.222,0.106"/>
+                </Grid>
             </StackPanel>
-        </Grid>
+        </Grid> <!-- water system data-->
         
         <Grid Grid.Row="2">  <!-- refrigiration system data-->
             <Grid.ColumnDefinitions>
@@ -142,6 +160,16 @@
                     </Grid.ColumnDefinitions>
                     <Label Content="Low pressure:" Grid.Column="1" />
                     <Label Content="{Binding lowPressure, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" RenderTransformOrigin="-0.222,0.106"/>
+                </Grid>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="AUTO"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Compressor 1 suction temperature:" Grid.Column="1" />
+                    <Label Content="{Binding comp1SucTemp, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" RenderTransformOrigin="-0.222,0.106"/>
                 </Grid>
                 <Grid>
                     <Grid.ColumnDefinitions>

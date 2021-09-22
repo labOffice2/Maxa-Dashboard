@@ -110,6 +110,34 @@ namespace Maxa_Dash
             }
         }
 
+        private float _RadiantPanelMixerTemp;
+        public float RadiantPanelMixerTemp
+        {
+            get { return _RadiantPanelMixerTemp; }
+            set
+            {
+                if (_RadiantPanelMixerTemp != (((float)value) / 10))
+                {
+                    _RadiantPanelMixerTemp = (((float)value) / 10);
+                    INotifyPropertyChanged(nameof(RadiantPanelMixerTemp));
+                }
+            }
+        }
+
+        private float _DHWPrePRecirculationTemp;
+        public float DHWPrePRecirculationTemp
+        {
+            get { return _DHWPrePRecirculationTemp; }
+            set
+            {
+                if (_DHWPrePRecirculationTemp != (((float)value) / 10))
+                {
+                    _DHWPrePRecirculationTemp = (((float)value) / 10);
+                    INotifyPropertyChanged(nameof(DHWPrePRecirculationTemp));
+                }
+            }
+        }
+
         private float _comp1DisTemp;
         public float comp1DisTemp
         {
@@ -120,6 +148,20 @@ namespace Maxa_Dash
                 {
                     _comp1DisTemp = (((float)value) / 10);
                     INotifyPropertyChanged(nameof(comp1DisTemp));
+                }
+            }
+        }
+
+        private float _comp1SucTemp;
+        public float comp1SucTemp
+        {
+            get { return _comp1SucTemp; }
+            set
+            {
+                if (_comp1SucTemp != (((float)value) / 10))
+                {
+                    _comp1SucTemp = (((float)value) / 10);
+                    INotifyPropertyChanged(nameof(comp1SucTemp));
                 }
             }
         }

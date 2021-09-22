@@ -12,25 +12,33 @@ namespace Maxa_Dash
         public const int FirmwareSubRelease_CreationDayReg = 3;
         public const int FirmwareCreationMonth_YearReg = 4;
 
+        // Writing Bitmask Register
+        public const int WritingBitMaskReg = 7201;
+
         //Machine state
         public const int MachineStateWriteReg = 7200;
         public const int MachineStateReadReg = 200;
-        public const int MachineStateBitMask = 7201;
 
         // Temperatures
         public const int InputWaterTempReg = 400;
         public const int OutputWaterTempReg = 401;
         public const int DHWTempReg = 405;
+        public const int CompSuctionTempReg = 422;
         public const int OurdoorAirTempReg = 428;
         public const int CompDis1TempReg = 433;
         public const int CompDis2TempReg = 434;
+        public const int CompDis3TempReg = 435;
         public const int SolarCollectorReg = 437;
         public const int SolarTankReg = 438;
         public const int StoragePlantReg = 440;
+        public const int RadiantPanelMixerTempReg = 443;
+        public const int DHWPreparerRecirculationTempReg = 447;
+        public const int Comp2SuctionTempReg = 20422;
         public const int CompDis1TempCircuit2Reg = 20433;
         public const int CompDis2TempCircuit2Reg = 20434;
-        public const int EvaporationReg = 234;
-        public const int CondesationReg = 235;
+        public const int CompDis3TempCircuit2Reg = 20435;
+        public const int EvaporationReg = 253;
+        public const int CondesationReg = 254;
 
         //Pressures
         public const int HighPressureReg = 406;
@@ -38,6 +46,7 @@ namespace Maxa_Dash
         public const int HighPressureCircuit2Reg = 20406;
         public const int LowPressureCircuit2Reg = 20414;
 
+        /*
         // Setpoints
         public const int CoolSPReg = 1001;
         public const int HeatSPReg = 1002;
@@ -45,8 +54,21 @@ namespace Maxa_Dash
         public const int SecondCoolSPReg = 1004;
         public const int SecondHeatSPReg = 1005;
 
+        */
+
+        // Setpoints
+        public const int CoolSPReg = 7203;
+        public const int HeatSPReg = 7204;
+        public const int SanitarySPReg = 7205;
+        public const int SecondCoolSPReg = 7206;
+        public const int SecondHeatSPReg = 7207;
+        public const int DHWPreparerReg = 7208;
+
+        public const int ActualThermoregulationSPReg = 242;
+        public const int ActualRefTempForThermoregulationSPReg = 247;
+
         // Digital inputs
-        public const int DigitalInputsReg = 10;
+        public const int DigitalInputsReg = 10; // missing from version 07 of registor map
 
         // Analog outputs
         public const int FanAnalogOutReg = 7000;

@@ -15,7 +15,6 @@ namespace Maxa_Dash
             {
                 int[] data = modbusClient.ReadHoldingRegisters(Registers.OutputWaterTempReg, 1);
                 notifier.waterOutTemp = data[0];
-                //fileWriter.dataDictionary["water output temp"] = data[0].ToString();
                 data = modbusClient.ReadHoldingRegisters(Registers.InputWaterTempReg, 1);
                 notifier.waterInTemp = data[0];
                 data = modbusClient.ReadHoldingRegisters(Registers.DHWTempReg, 1);
@@ -26,7 +25,13 @@ namespace Maxa_Dash
                 notifier.pumpAnalogOut = data[0];
                 data = modbusClient.ReadHoldingRegisters(Registers.OurdoorAirTempReg, 1);
                 notifier.externalAirTemp = data[0];
-            }catch
+
+                data = modbusClient.ReadHoldingRegisters(Registers.RadiantPanelMixerTempReg, 1);
+                notifier.RadiantPanelMixerTemp = data[0];
+                data = modbusClient.ReadHoldingRegisters(Registers.DHWPreparerRecirculationTempReg, 1);
+                notifier.DHWPrePRecirculationTemp = data[0];
+            }
+            catch
             {
                 // indicate problem in communication
             }
@@ -38,22 +43,29 @@ namespace Maxa_Dash
             {
                 int[] data = modbusClient.ReadHoldingRegisters(Registers.OutputWaterTempReg, 1);
                 notifier.waterOutTemp = data[0];
-                fileWriter.dataDictionary["water output temp"] = notifier.waterOutTemp.ToString();
+                fileWriter.dataDictionary["water output temp (°C)"] = notifier.waterOutTemp.ToString();
                 data = modbusClient.ReadHoldingRegisters(Registers.InputWaterTempReg, 1);
                 notifier.waterInTemp = data[0];
-                fileWriter.dataDictionary["water input temp"] = notifier.waterInTemp.ToString();
+                fileWriter.dataDictionary["water input temp (°C)"] = notifier.waterInTemp.ToString();
                 data = modbusClient.ReadHoldingRegisters(Registers.DHWTempReg, 1);
                 notifier.DHWTemp = data[0];
-                fileWriter.dataDictionary["DHW temp"] = notifier.DHWTemp.ToString();
+                fileWriter.dataDictionary["DHW temp (°C)"] = notifier.DHWTemp.ToString();
                 data = modbusClient.ReadHoldingRegisters(Registers.StoragePlantReg, 1);
                 notifier.storagePlantTemp = data[0];
-                fileWriter.dataDictionary["storage plant temp"] = notifier.storagePlantTemp.ToString();
+                fileWriter.dataDictionary["storage plant temp (°C)"] = notifier.storagePlantTemp.ToString();
                 data = modbusClient.ReadHoldingRegisters(Registers.OurdoorAirTempReg, 1);
                 notifier.externalAirTemp = data[0];
-                fileWriter.dataDictionary["outdoor air temp"] = notifier.externalAirTemp.ToString();
+                fileWriter.dataDictionary["outdoor air temp (°C)"] = notifier.externalAirTemp.ToString();
                 data = modbusClient.ReadHoldingRegisters(Registers.PumpAnalogOutReg, 1);
                 notifier.pumpAnalogOut = data[0];
                 fileWriter.dataDictionary["pump analog out"] = notifier.pumpAnalogOut.ToString();
+
+                data = modbusClient.ReadHoldingRegisters(Registers.RadiantPanelMixerTempReg, 1);
+                notifier.RadiantPanelMixerTemp = data[0];
+                fileWriter.dataDictionary["radiant panel mixer temp (°C)"] = notifier.RadiantPanelMixerTemp.ToString();
+                data = modbusClient.ReadHoldingRegisters(Registers.DHWPreparerRecirculationTempReg, 1);
+                notifier.DHWPrePRecirculationTemp = data[0];
+                fileWriter.dataDictionary["DHW preparer recirculation temp (°C)"] = notifier.RadiantPanelMixerTemp.ToString();
             }
             catch
             {
@@ -77,6 +89,9 @@ namespace Maxa_Dash
                 notifier.evaporationTemp = data[0];
                 data = modbusClient.ReadHoldingRegisters(Registers.CondesationReg, 1);
                 notifier.condendsationTemp = data[0];
+
+                data = modbusClient.ReadHoldingRegisters(Registers.CompSuctionTempReg, 1);
+                notifier.comp1SucTemp = data[0];
             }
             catch
             {
@@ -90,22 +105,26 @@ namespace Maxa_Dash
             {
                 int[] data = modbusClient.ReadHoldingRegisters(Registers.HighPressureReg, 1);
                 notifier.highPressure = data[0];
-                fileWriter.dataDictionary["high pressure"] = notifier.highPressure.ToString();
+                fileWriter.dataDictionary["high pressure (bar)"] = notifier.highPressure.ToString();
                 data = modbusClient.ReadHoldingRegisters(Registers.LowPressureReg, 1);
                 notifier.lowPressure = data[0];
-                fileWriter.dataDictionary["low pressure"] = notifier.lowPressure.ToString();
+                fileWriter.dataDictionary["low pressure (bar)"] = notifier.lowPressure.ToString();
                 data = modbusClient.ReadHoldingRegisters(Registers.CompDis1TempReg, 1);
                 notifier.comp1DisTemp = data[0];
-                fileWriter.dataDictionary["compressor 1 discharge temp"] = notifier.comp1DisTemp.ToString();
+                fileWriter.dataDictionary["compressor 1 discharge temp (°C)"] = notifier.comp1DisTemp.ToString();
                 data = modbusClient.ReadHoldingRegisters(Registers.FanAnalogOutReg, 1);
                 notifier.fanAnalogOut = data[0];
                 fileWriter.dataDictionary["fan analog out"] = notifier.fanAnalogOut.ToString();
                 data = modbusClient.ReadHoldingRegisters(Registers.EvaporationReg, 1);
                 notifier.evaporationTemp = data[0];
-                fileWriter.dataDictionary["evaporation temp"] = notifier.evaporationTemp.ToString();
+                fileWriter.dataDictionary["evaporation temp (°C)"] = notifier.evaporationTemp.ToString();
                 data = modbusClient.ReadHoldingRegisters(Registers.CondesationReg, 1);
                 notifier.condendsationTemp = data[0];
-                fileWriter.dataDictionary["condensation temp"] = notifier.condendsationTemp.ToString();
+                fileWriter.dataDictionary["condensation temp (°C)"] = notifier.condendsationTemp.ToString();
+
+                data = modbusClient.ReadHoldingRegisters(Registers.CompSuctionTempReg, 1);
+                notifier.comp1SucTemp = data[0];
+                fileWriter.dataDictionary["compressor suction temp (°C)"] = notifier.comp1SucTemp.ToString();
             }
             catch
             {
