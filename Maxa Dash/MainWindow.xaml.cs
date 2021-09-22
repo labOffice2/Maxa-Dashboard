@@ -61,6 +61,7 @@ namespace Maxa_Dash
 
         private void SetComboBoxes()
         {
+            // fill communication port ComboBox
             string[] availablePorts = SerialPort.GetPortNames();
             foreach(string port in availablePorts)
             {
@@ -70,7 +71,8 @@ namespace Maxa_Dash
                 ComBox.Items.Add(portItem);
             }
 
-            for(int i = 1; i<256; i++)
+            // fill machine ID ComboBox
+            for (int i = 1; i<256; i++)
             {
                 ComboBoxItem id = new();
                 id.Content = i;
@@ -78,6 +80,7 @@ namespace Maxa_Dash
                 MachineIDBox.Items.Add(id);
             }
 
+            // fill baud rate ComboBox
             ComboBoxItem br9600 = new(), br19200 = new(), br38400 = new(), br57600 = new(), br115200 = new();
             br9600.Content = 9600;
             br9600.IsSelected = true;
@@ -89,6 +92,7 @@ namespace Maxa_Dash
             foreach (ComboBoxItem br in baudRateItems)
                 baudRateBox.Items.Add(br);
 
+            // fill parity ComboBox
             ComboBoxItem ParityItemEven = new(), ParityItemOdd = new(), ParityItemMark = new(), ParityItemNone = new(), ParityItemSpace = new();
             ParityItemEven.Content = Parity.Even;
             ParityItemEven.IsSelected = true;
@@ -102,6 +106,7 @@ namespace Maxa_Dash
             ParityBox.Items.Add(ParityItemNone);
             ParityBox.Items.Add(ParityItemSpace);
 
+            // fill stop bit ComboBox
             ComboBoxItem stopBitNone = new(), stopBitOne = new(), stopBitOneNHalf = new(), stopBitTwo = new();
             stopBitNone.Content = StopBits.None;
             stopBitOne.Content = StopBits.One;
@@ -112,6 +117,22 @@ namespace Maxa_Dash
             StopBitBox.Items.Add(stopBitOne);
             StopBitBox.Items.Add(stopBitOneNHalf);
             StopBitBox.Items.Add(stopBitTwo);
+
+            // fill operation mode ComboBox
+            ComboBoxItem modeStandBy = new(), modeCool = new(), modeHeat = new(), modeSanitary = new(), modeCoolNSanitary = new(), modeHeatNSanitary = new();
+            modeStandBy.IsSelected = true;
+            modeStandBy.Content = NotifyNewData.MachinelState.STANBY;
+            modeCool.Content = NotifyNewData.MachinelState.COOL;
+            modeHeat.Content = NotifyNewData.MachinelState.HEAT;
+            modeSanitary.Content = NotifyNewData.MachinelState.ONLY_SANITARY;
+            modeCoolNSanitary.Content = NotifyNewData.MachinelState.COOLnSANITARY;
+            modeHeatNSanitary.Content = NotifyNewData.MachinelState.HEATnSANITARY;
+            OpModeBox.Items.Add(modeStandBy);
+            OpModeBox.Items.Add(modeCool);
+            OpModeBox.Items.Add(modeHeat);
+            OpModeBox.Items.Add(modeSanitary);
+            OpModeBox.Items.Add(modeCoolNSanitary);
+            OpModeBox.Items.Add(modeHeatNSanitary);
 
         }
 

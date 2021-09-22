@@ -308,11 +308,7 @@
                 <Border BorderBrush="Gray" BorderThickness="1" Grid.RowSpan="20" Grid.ColumnSpan="10"/>
                 <Label Content="Operation mode settings" HorizontalAlignment="Center" Grid.ColumnSpan="10"/>
                 <Label Content="operation mode:" Grid.Column="1" Grid.Row="1" />
-                <ComboBox Name="OpMode" Grid.Column="2" Grid.Row="1">
-                    <ComboBoxItem Name="Standby" Content="Standby" Tag="Item #1" IsSelected="True"/>
-                    <ComboBoxItem Name="Heat" Content="Heat" Tag="Item #2"/>
-                    <ComboBoxItem Name="Cool" Content="Cool" Tag="Item #3"/>
-                </ComboBox>
+                <ComboBox Name="OpModeBox" Grid.Column="2" Grid.Row="1"/>
                 <Label Content="cool setpoint:" Grid.Column="1" Grid.Row="2" ToolTip="Range 5.0 ÷ 23.0"/>
                 <TextBox Name="CoolSP1" Text="20" Grid.Column="2" Grid.Row="2" VerticalAlignment="Center" LostFocus="CoolSP1_LostFocus"/>
                 <Label Content="heat setpoint:" Grid.Column="1" Grid.Row="3" ToolTip="Range 25.0 ÷ 55.0"/>
@@ -519,8 +515,32 @@
                                     <ColumnDefinition Width="auto"/>
                                     <ColumnDefinition Width="1*"/>
                                 </Grid.ColumnDefinitions>
+                                <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E004, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
+                                <Label Content="E004" Grid.Column="1" ToolTip="Thermal fan"/>
+                            </Grid>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
                                 <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E005, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
                                 <Label Content="E005" Grid.Column="1" ToolTip="Antifeeze alarm"/>
+                            </Grid>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+                                <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E014, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
+                                <Label Content="E014" Grid.Column="1" ToolTip="Thermal fan2"/>
+                            </Grid>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+                                <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E020, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
+                                <Label Content="E020" Grid.Column="1" ToolTip="Inverted pressures"/>
                             </Grid>
                             <Grid>
                                 <Grid.ColumnDefinitions>
@@ -581,6 +601,22 @@
                                     <ColumnDefinition Width="auto"/>
                                     <ColumnDefinition Width="1*"/>
                                 </Grid.ColumnDefinitions>
+                                <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E007, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
+                                <Label Content="E007" Grid.Column="1" ToolTip="Low temperature DHW preparer"/>
+                            </Grid>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+                                <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E016, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
+                                <Label Content="E016" Grid.Column="1" ToolTip="Thermal pump"/>
+                            </Grid>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
                                 <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E042, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
                                 <Label Content="E042" Grid.Column="1" ToolTip="Insufficient thermal exchange alarm"/>
                             </Grid>
@@ -591,6 +627,22 @@
                                 </Grid.ColumnDefinitions>
                                 <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E050, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
                                 <Label Content="E050" Grid.Column="1" ToolTip="DHW storage tank high temperature alarm "/>
+                            </Grid>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+                                <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E060, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
+                                <Label Content="E060" Grid.Column="1" ToolTip="Anti-Legionella done"/>
+                            </Grid>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+                                <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E061, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
+                                <Label Content="E061" Grid.Column="1" ToolTip="Anti-Legionella failure"/>
                             </Grid>
                             <Grid>
                                 <Grid.ColumnDefinitions>

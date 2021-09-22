@@ -25,9 +25,13 @@ namespace Maxa_Dash
 
         // Register 951 Errors
         public static Err HighTemp                      = new Err(951, 1, "High temperature", 18);
+        public static Err HighTempDischargeProtectionCp2= new Err(951, 2, "High temperature discharge protection Cp2", 19);
+        public static Err InvertedPressures             = new Err(951, 3, "Inverted pressures", 20);
+        public static Err ThermalCompressor3            = new Err(951, 6, "Thermal compressor 3", 23);
+        public static Err ThermalFan3                   = new Err(951, 7, "Thermal fan 3", 24);
         public static Err Thermal2PumpUse               = new Err(951, 9, "Thermal 2 pump use", 26);
         public static Err WrongTemp                     = new Err(951, 11, "Incongruous temperatures", 41);
-        public static Err InsufficientExchangeInSanitary= new Err(951, 12, "Incongruous temperatures", 42);
+        //public static Err InsufficientExchangeInSanitary= new Err(951, 12, "Incongruous temperatures", 42);
         public static Err HighTempSanitary              = new Err(951, 13, "High temperature sanitary", 50);
         public static Err ModulGiDisconnected           = new Err(951, 14, "Modul Gi disconnected", 101);
 
@@ -83,24 +87,27 @@ namespace Maxa_Dash
         public static Err FaultPFCInverter1             = new Err(955, 15, "Fault PFC inverter 1", 941);
 
         // Register 956 Errors
-        public static Err FaultPFCInverter2 = new Err(956, 0, "Fault PFC inverter 2", 942);
-        public static Err ProbeErrInverter1 = new Err(956, 2, "Probe error inverter 1", 951);
-        public static Err ProbeErrInverter2 = new Err(956, 3, "Probe error inverter 2", 952);
-        public static Err AbnormalConditionInverter1 = new Err(956, 5, "Abnormal condition inverter 1", 961);
-        public static Err AbnormalConditionInverter2 = new Err(956, 6, "Abnormal condition inverter 2", 962);
-        public static Err EEPROMInverter1 = new Err(956, 8, "EEPROM inverter 1", 971);
-        public static Err EEPROMInverter2 = new Err(956, 9, "EEPROM inverter 2", 972);
+        public static Err FaultPFCInverter2             = new Err(956, 0, "Fault PFC inverter 2", 942);
+        public static Err ProbeErrInverter1             = new Err(956, 2, "Probe error inverter 1", 951);
+        public static Err ProbeErrInverter2             = new Err(956, 3, "Probe error inverter 2", 952);
+        public static Err AbnormalConditionInverter1    = new Err(956, 5, "Abnormal condition inverter 1", 961);
+        public static Err AbnormalConditionInverter2    = new Err(956, 6, "Abnormal condition inverter 2", 962);
+        public static Err EEPROMInverter1               = new Err(956, 8, "EEPROM inverter 1", 971);
+        public static Err EEPROMInverter2               = new Err(956, 9, "EEPROM inverter 2", 972);
+        public static Err AntiLegionellaDone            = new Err(956, 12, "Anti-legionella done", 60);
+        public static Err AntiLegionellaFailure         = new Err(956, 13, "Anti-legionella failure", 61);
 
 
         private static Err[] AllErrs =
         {
             HighPressure,lowPressure,DigBlockCom1,DigBlockCom2,DigBlockFan1,DigBlockFan2,IceError,Flow,LowTempDHWPreparer,LackOfLubrication,HighTempDischargeProtection,HighTempSolar,ThermalPump1,
-            HighTemp,Thermal2PumpUse,WrongTemp,InsufficientExchangeInSanitary,HighTempSanitary,ModulGiDisconnected,
+            //HighTemp,Thermal2PumpUse,WrongTemp,InsufficientExchangeInSanitary,HighTempSanitary,ModulGiDisconnected,
+            HighTemp,Thermal2PumpUse,WrongTemp,HighTempSanitary,ModulGiDisconnected,
             InputWaterProbe,OutputWaterProbe,SuctionProbe,DischargeProbe,ExternProbe,Probe6,Probe7,Probe8,LowPressureTransducer,HighPressureTransducer,Probe11,ModulGiProbe1,ModulGiProbe2,ModulGiProbe3,ModulGiProbe4,ModulGiProbe5,
             ModulGiProbe6,ModulGiProbe7,ModulGiProbe8,ModulGiProbe9,ModulGiProbe10,ModulGiProbe11,
             LinkInverter1,LinkInverter2,HWFaultInverter1,HWFaultInverter2,OverCurrentInverter1,OverCurrentInverter2,HighTempInverter1,HighTempInverter2,BadVoltInverter1,BadVoltInverter2,
             PhSequenceInverter1,PhSequenceInverter2,ModelErrInverter1,ModelErrInverter2,OLErrInverter1,OLErrInverter2,OverCurrentPFCInverter1,OverCurrentPFCInverter2,InternalComErrInverter1,InternalComErrInverter2,FaultPFCInverter1,
-            FaultPFCInverter2,ProbeErrInverter1,ProbeErrInverter2,AbnormalConditionInverter1,AbnormalConditionInverter2,EEPROMInverter1,EEPROMInverter2
+            FaultPFCInverter2,ProbeErrInverter1,ProbeErrInverter2,AbnormalConditionInverter1,AbnormalConditionInverter2,EEPROMInverter1,EEPROMInverter2,AntiLegionellaDone,AntiLegionellaFailure,
         };
 
         private static Err[] Register950Errs =
@@ -110,7 +117,8 @@ namespace Maxa_Dash
 
         private static Err[] Register951Errs =
         {
-            HighTemp,Thermal2PumpUse,WrongTemp,InsufficientExchangeInSanitary,HighTempSanitary,ModulGiDisconnected,
+            //HighTemp,Thermal2PumpUse,WrongTemp,InsufficientExchangeInSanitary,HighTempSanitary,ModulGiDisconnected,
+            HighTemp,Thermal2PumpUse,WrongTemp,HighTempSanitary,ModulGiDisconnected,
         };
 
         private static Err[] Register952Errs =
@@ -135,7 +143,7 @@ namespace Maxa_Dash
 
         private static Err[] Register956Errs =
         {
-            FaultPFCInverter2,ProbeErrInverter1,ProbeErrInverter2,AbnormalConditionInverter1,AbnormalConditionInverter2,EEPROMInverter1,EEPROMInverter2
+            FaultPFCInverter2,ProbeErrInverter1,ProbeErrInverter2,AbnormalConditionInverter1,AbnormalConditionInverter2,EEPROMInverter1,EEPROMInverter2,AntiLegionellaDone,AntiLegionellaFailure,
         };
 
         public static Err[] GetErrors(int register, int value)

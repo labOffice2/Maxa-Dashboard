@@ -171,16 +171,16 @@ namespace Maxa_Dash
                 notifier.E001 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.HighPressure.bitMask) > 0);
                 notifier.E002 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.lowPressure.bitMask) > 0);
                 notifier.E003 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.DigBlockCom1.bitMask) > 0);
-                //notifier.E004 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.DigBlockFan1.bitMask) > 0);
+                notifier.E004 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.DigBlockFan1.bitMask) > 0);
                 notifier.E005 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.IceError.bitMask) > 0);
                 notifier.E006 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.Flow.bitMask) > 0);
-                //notifier.E007 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.LowTempDHWPreparer.bitMask) > 0);
+                notifier.E007 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.LowTempDHWPreparer.bitMask) > 0);
                 notifier.E008 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.LackOfLubrication.bitMask) > 0);
                 notifier.E009 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.HighTempDischargeProtection.bitMask) > 0);
                 notifier.E010 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.HighTempSolar.bitMask) > 0);
                 //notifier.E013 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.DigBlockCom2.bitMask) > 0);
-                //notifier.E014 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.DigBlockFan2.bitMask) > 0);
-                //notifier.E016 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.ThermalPump1.bitMask) > 0);
+                notifier.E014 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.DigBlockFan2.bitMask) > 0);
+                notifier.E016 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.ThermalPump1.bitMask) > 0);
             }
             catch
             {
@@ -194,12 +194,12 @@ namespace Maxa_Dash
                 if (data[0] == 0) return;
                 notifier.E018 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.HighTemp.bitMask) > 0);
                 //notifier.E019 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes..bitMask) > 0);
-                //notifier.E020 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes..bitMask) > 0);
+                notifier.E020 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.InvertedPressures.bitMask) > 0);
                 //notifier.E023 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes..bitMask) > 0);
                 //notifier.E024 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes..bitMask) > 0);
                 //notifier.E026 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.Thermal2PumpUse.bitMask) > 0);
                 notifier.E041 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.WrongTemp.bitMask) > 0);
-                notifier.E042 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.InsufficientExchangeInSanitary.bitMask) > 0); // said to be irelevant by Maxa team member Davide Mocellin
+                //notifier.E042 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.InsufficientExchangeInSanitary.bitMask) > 0); // said to be irrelevant by Maxa team member Davide Mocellin
                 notifier.E050 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.HighTempSanitary.bitMask) > 0);
                 notifier.E101 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.ModulGiDisconnected.bitMask) > 0);
                 //notifier.E102 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes..bitMask) > 0);
@@ -309,6 +309,8 @@ namespace Maxa_Dash
                 //notifier.E962 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.AbnormalConditionInverter2.bitMask) > 0);
                 notifier.E971 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.EEPROMInverter1.bitMask) > 0);
                 //notifier.E972 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.EEPROMInverter2.bitMask) > 0);
+                notifier.E060 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.AntiLegionellaDone.bitMask) > 0);
+                notifier.E061 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.AntiLegionellaFailure.bitMask) > 0);
             }
             catch
             {
