@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Media;
 
 namespace Maxa_Dash
@@ -31,6 +32,21 @@ namespace Maxa_Dash
                 {
                     _comPortString = value;
                     INotifyPropertyChanged(nameof(comPortString));
+                }
+            }
+        }
+
+        // Message stack panel
+        private StackPanel _stackPanel;
+        public StackPanel stackPanel
+        {
+            get { return _stackPanel; }
+            set
+            {
+                if (_stackPanel != value)
+                {
+                    _stackPanel = value;
+                    INotifyPropertyChanged(nameof(stackPanel));
                 }
             }
         }

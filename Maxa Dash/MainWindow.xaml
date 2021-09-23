@@ -328,6 +328,12 @@
                 <Button Content="send new settings" Grid.Row="10" Grid.Column="2" Click="OnClick_ConnectButton"/>
             </Grid> <!-- setpoints and operation mode settings grid -->
 
+            <Grid Grid.Row="1" >
+                <Border BorderBrush="Gray" BorderThickness="1" Grid.RowSpan="20" Grid.ColumnSpan="10"/>
+                <StackPanel Name="MessagePanel">
+                    <Label Content="Messages" HorizontalAlignment="Center" ></Label>
+                </StackPanel>
+            </Grid>
             <!-- communication settings grid -->
             <Grid Grid.Row="10">
                 <Grid.ColumnDefinitions>

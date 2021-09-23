@@ -36,6 +36,9 @@ namespace Maxa_Dash
 
         private Timer timer;
 
+        private UserMessages messagesPanel;
+        private List<UserMessages.MessageLabel> messageLabels = new List<UserMessages.MessageLabel>();
+
         bool isConnected = false;
         bool isUpdating = false;
         bool isRecord = false;
@@ -53,10 +56,28 @@ namespace Maxa_Dash
             timer = new Timer
             {
                 AutoReset = true,
-                Interval = 300
+                Interval = 2000,
             };
             timer.Elapsed += Elapsed;
-            
+
+            messagesPanel = new UserMessages(MessagePanel);
+        }
+
+        private void RemoveOldMessages()
+        {
+            foreach(var item in messageLabels.ToArray())
+            {
+                if (item == null) break;
+                TimeSpan displayDuration = DateTime.Now - item.startTime;
+                if(displayDuration > item.duration)
+                {
+                    if(MessagePanel.Children.Contains(item.Label))
+                    {
+                        MessagePanel.Children.Remove(item.Label);
+                    }
+                    messageLabels.Remove(item);
+                }
+            }
         }
 
         private void SetComboBoxes()
@@ -138,7 +159,12 @@ namespace Maxa_Dash
 
         private void Elapsed(object sender, ElapsedEventArgs e)
         {
-            UpdateValues();
+            Dispatcher.Invoke(() =>
+            {
+                UpdateValues();
+                RemoveOldMessages();
+            });
+            
         }
 
         void SetModbus()
@@ -146,20 +172,29 @@ namespace Maxa_Dash
             try
             {
                 ComboBoxItem port = (ComboBoxItem)ComBox.SelectedItem;
-                notifier.firmwareVersion = $"com port {port.Content}";
-                modbusClient = new ModbusClient(port.Content.ToString());
-                //modbusClient.UnitIdentifier = (byte)MachineIDBox.SelectedItem;  // Not necessary since default slaveID = 1;
-                //modbusClient.Baudrate = (int)baudRateBox.SelectedItem;	        // Not necessary since default baudrate = 9600
-                ComboBoxItem par = (ComboBoxItem)ParityBox.SelectedItem;
-                modbusClient.Parity = (Parity)par.Content;
-                ComboBoxItem stopB = (ComboBoxItem)StopBitBox.SelectedItem;
-                modbusClient.StopBits = (StopBits)stopB.Content;
-                //modbusClient.ConnectionTimeout = 500;
-                modbusClient.Connect();
-                isConnected = true;
-                Maxa.ReadManufacturingInfo(notifier, modbusClient);
-                ConnectButton.IsEnabled = false;
-                notifier.E000 = GuiDataConverter.GetAlarmColor(false);
+                if(port != null)
+                {
+
+                    //notifier.firmwareVersion = $"com port {port.Content}";
+                    modbusClient = new ModbusClient(port.Content.ToString());
+                    //modbusClient.UnitIdentifier = (byte)MachineIDBox.SelectedItem;  // Not necessary since default slaveID = 1;
+                    //modbusClient.Baudrate = (int)baudRateBox.SelectedItem;	        // Not necessary since default baudrate = 9600
+                    ComboBoxItem par = (ComboBoxItem)ParityBox.SelectedItem;
+                    modbusClient.Parity = (Parity)par.Content;
+                    ComboBoxItem stopB = (ComboBoxItem)StopBitBox.SelectedItem;
+                    modbusClient.StopBits = (StopBits)stopB.Content;
+                    //modbusClient.ConnectionTimeout = 500;
+                    modbusClient.Connect();
+                    isConnected = true;
+                    Maxa.ReadManufacturingInfo(notifier, modbusClient);
+                    ConnectButton.IsEnabled = false;
+                    notifier.E000 = GuiDataConverter.GetAlarmColor(false);
+                }
+                else
+                {
+                    notifier.E000 = GuiDataConverter.GetAlarmColor(true);
+                    messageLabels = messagesPanel.AddMessage(messageLabels,"couldn't connect", 0.1f, Brushes.Red);
+                }
             }
             catch
             {
@@ -181,8 +216,10 @@ namespace Maxa_Dash
                 {
                     if(isRecord)
                     {
+                        Maxa.UpdateOperationMode(notifier, modbusClient);
                         Maxa.UpdateWaterSystemParametersNRecord(notifier, modbusClient, FileWriter);
                         Maxa.UpdateRefrigirationSystemParametersNRecord(notifier, modbusClient, FileWriter);
+                        Maxa.ReadErrors(notifier, modbusClient);
                         FileWriter.WriteToFile();
                     }
                     else
@@ -202,7 +239,7 @@ namespace Maxa_Dash
             }
             else
             {
-                ConnectButton.IsEnabled = true;
+                //ConnectButton.IsEnabled = true;
                 SetModbus();
             }
             isUpdating = false;
@@ -211,6 +248,7 @@ namespace Maxa_Dash
 
         private void OnClick_ConnectButton(object sender, RoutedEventArgs e)
         {
+            messageLabels = messagesPanel.AddMessage(messageLabels, "pressed connect", 0.1f);
             SetModbus();
             timer.Start();
         }
@@ -246,6 +284,7 @@ namespace Maxa_Dash
             }
             else
             {
+                messageLabels = messagesPanel.AddMessage(messageLabels,"Select folder for scv file", 0.1f);
                 MessageBox.Show("Please select a folder");
             }
         }
