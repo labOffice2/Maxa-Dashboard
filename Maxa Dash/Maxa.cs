@@ -152,7 +152,7 @@ namespace Maxa_Dash
             try
             {
                 int[] data = modbusClient.ReadHoldingRegisters(Registers.MachineStateReadReg, 1);
-                notifier.generalState = GuiDataConverter.GetMachineState(data[0]);
+                notifier.generalState = DataConverter.GetMachineState(data[0]);
             }
             catch (ArgumentException)
             {
@@ -168,19 +168,19 @@ namespace Maxa_Dash
             {
                 int[] data = modbusClient.ReadHoldingRegisters(Registers.Alarm01_16Reg, 1);
                 if (data[0] == 0) return;
-                notifier.E001 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.HighPressure.bitMask) > 0);
-                notifier.E002 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.lowPressure.bitMask) > 0);
-                notifier.E003 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.DigBlockCom1.bitMask) > 0);
-                notifier.E004 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.DigBlockFan1.bitMask) > 0);
-                notifier.E005 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.IceError.bitMask) > 0);
-                notifier.E006 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.Flow.bitMask) > 0);
-                notifier.E007 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.LowTempDHWPreparer.bitMask) > 0);
-                notifier.E008 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.LackOfLubrication.bitMask) > 0);
-                notifier.E009 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.HighTempDischargeProtection.bitMask) > 0);
-                notifier.E010 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.HighTempSolar.bitMask) > 0);
+                notifier.E001 = DataConverter.GetAlarmColor((data[0] & ErrorCodes.HighPressure.bitMask) > 0);
+                notifier.E002 = DataConverter.GetAlarmColor((data[0] & ErrorCodes.lowPressure.bitMask) > 0);
+                notifier.E003 = DataConverter.GetAlarmColor((data[0] & ErrorCodes.DigBlockCom1.bitMask) > 0);
+                notifier.E004 = DataConverter.GetAlarmColor((data[0] & ErrorCodes.DigBlockFan1.bitMask) > 0);
+                notifier.E005 = DataConverter.GetAlarmColor((data[0] & ErrorCodes.IceError.bitMask) > 0);
+                notifier.E006 = DataConverter.GetAlarmColor((data[0] & ErrorCodes.Flow.bitMask) > 0);
+                notifier.E007 = DataConverter.GetAlarmColor((data[0] & ErrorCodes.LowTempDHWPreparer.bitMask) > 0);
+                notifier.E008 = DataConverter.GetAlarmColor((data[0] & ErrorCodes.LackOfLubrication.bitMask) > 0);
+                notifier.E009 = DataConverter.GetAlarmColor((data[0] & ErrorCodes.HighTempDischargeProtection.bitMask) > 0);
+                notifier.E010 = DataConverter.GetAlarmColor((data[0] & ErrorCodes.HighTempSolar.bitMask) > 0);
                 //notifier.E013 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.DigBlockCom2.bitMask) > 0);
                 //notifier.E014 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.DigBlockFan2.bitMask) > 0);
-                notifier.E016 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.ThermalPump1.bitMask) > 0);
+                notifier.E016 = DataConverter.GetAlarmColor((data[0] & ErrorCodes.ThermalPump1.bitMask) > 0);
             }
             catch
             {
@@ -192,15 +192,15 @@ namespace Maxa_Dash
             {
                 int[] data = modbusClient.ReadHoldingRegisters(Registers.Alarm18_101Reg, 1);
                 if (data[0] == 0) return;
-                notifier.E018 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.HighTemp.bitMask) > 0);
+                notifier.E018 = DataConverter.GetAlarmColor((data[0] & ErrorCodes.HighTemp.bitMask) > 0);
                 //notifier.E019 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes..bitMask) > 0);
-                notifier.E020 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.InvertedPressures.bitMask) > 0);
+                notifier.E020 = DataConverter.GetAlarmColor((data[0] & ErrorCodes.InvertedPressures.bitMask) > 0);
                 //notifier.E023 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes..bitMask) > 0);
                 //notifier.E024 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes..bitMask) > 0);
                 //notifier.E026 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.Thermal2PumpUse.bitMask) > 0);
-                notifier.E041 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.WrongTemp.bitMask) > 0);
+                notifier.E041 = DataConverter.GetAlarmColor((data[0] & ErrorCodes.WrongTemp.bitMask) > 0);
                 //notifier.E042 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.InsufficientExchangeInSanitary.bitMask) > 0); // said to be irrelevant by Maxa team member Davide Mocellin
-                notifier.E050 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.HighTempSanitary.bitMask) > 0);
+                notifier.E050 = DataConverter.GetAlarmColor((data[0] & ErrorCodes.HighTempSanitary.bitMask) > 0);
                 //notifier.E101 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.ModulGiDisconnected.bitMask) > 0);
                 //notifier.E102 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes..bitMask) > 0);
                
@@ -215,17 +215,17 @@ namespace Maxa_Dash
             {
                 int[] data = modbusClient.ReadHoldingRegisters(Registers.Alarm611_652Reg, 1);
                 if (data[0] == 0) return;
-                notifier.E611 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.InputWaterProbe.bitMask) > 0);
+                notifier.E611 = DataConverter.GetAlarmColor((data[0] & ErrorCodes.InputWaterProbe.bitMask) > 0);
                 //notifier.E621 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.OutputWaterProbe.bitMask) > 0);
-                notifier.E631 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.SuctionProbe.bitMask) > 0);
-                notifier.E641 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.DischargeProbe.bitMask) > 0);
-                notifier.E651 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.ExternProbe.bitMask) > 0);
-                notifier.E661 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.Probe6.bitMask) > 0);
-                notifier.E671 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.Probe7.bitMask) > 0);
+                notifier.E631 = DataConverter.GetAlarmColor((data[0] & ErrorCodes.SuctionProbe.bitMask) > 0);
+                notifier.E641 = DataConverter.GetAlarmColor((data[0] & ErrorCodes.DischargeProbe.bitMask) > 0);
+                notifier.E651 = DataConverter.GetAlarmColor((data[0] & ErrorCodes.ExternProbe.bitMask) > 0);
+                notifier.E661 = DataConverter.GetAlarmColor((data[0] & ErrorCodes.Probe6.bitMask) > 0);
+                notifier.E671 = DataConverter.GetAlarmColor((data[0] & ErrorCodes.Probe7.bitMask) > 0);
                 //notifier.E681 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.Probe8.bitMask) > 0); 
-                notifier.E691 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.LowPressureTransducer.bitMask) > 0);
-                notifier.E701 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.HighPressureTransducer.bitMask) > 0);
-                notifier.E711 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.Probe11.bitMask) > 0);
+                notifier.E691 = DataConverter.GetAlarmColor((data[0] & ErrorCodes.LowPressureTransducer.bitMask) > 0);
+                notifier.E701 = DataConverter.GetAlarmColor((data[0] & ErrorCodes.HighPressureTransducer.bitMask) > 0);
+                notifier.E711 = DataConverter.GetAlarmColor((data[0] & ErrorCodes.Probe11.bitMask) > 0);
                 //notifier.E612 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.ModulGiProbe1.bitMask) > 0);
                 //notifier.E622 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.ModulGiProbe2.bitMask) > 0);
                 //notifier.E632 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.ModulGiProbe3.bitMask) > 0);
@@ -259,15 +259,15 @@ namespace Maxa_Dash
             {
                 int[] data = modbusClient.ReadHoldingRegisters(Registers.Alarm801_882Reg, 1);
                 if (data[0] == 0) return;
-                notifier.E801 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.LinkInverter1.bitMask) > 0);
+                notifier.E801 = DataConverter.GetAlarmColor((data[0] & ErrorCodes.LinkInverter1.bitMask) > 0);
                 //notifier.E802 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.LinkInverter2.bitMask) > 0);
-                notifier.E851 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.HWFaultInverter1.bitMask) > 0);
+                notifier.E851 = DataConverter.GetAlarmColor((data[0] & ErrorCodes.HWFaultInverter1.bitMask) > 0);
                 //notifier.E852 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.HWFaultInverter2.bitMask) > 0);
-                notifier.E861 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.OverCurrentInverter1.bitMask) > 0);
+                notifier.E861 = DataConverter.GetAlarmColor((data[0] & ErrorCodes.OverCurrentInverter1.bitMask) > 0);
                 //notifier.E862 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.OverCurrentInverter2.bitMask) > 0);
-                notifier.E871 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.HighTempInverter1.bitMask) > 0);
+                notifier.E871 = DataConverter.GetAlarmColor((data[0] & ErrorCodes.HighTempInverter1.bitMask) > 0);
                 //notifier.E872 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.HighTempInverter2.bitMask) > 0); 
-                notifier.E881 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.BadVoltInverter1.bitMask) > 0);
+                notifier.E881 = DataConverter.GetAlarmColor((data[0] & ErrorCodes.BadVoltInverter1.bitMask) > 0);
                 //notifier.E882 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.BadVoltInverter2.bitMask) > 0);
             }
             catch
@@ -280,17 +280,17 @@ namespace Maxa_Dash
             {
                 int[] data = modbusClient.ReadHoldingRegisters(Registers.Alarm891_941Reg, 1);
                 if (data[0] == 0) return;
-                notifier.E891 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.PhSequenceInverter1.bitMask) > 0);
+                notifier.E891 = DataConverter.GetAlarmColor((data[0] & ErrorCodes.PhSequenceInverter1.bitMask) > 0);
                 //notifier.E892 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.PhSequenceInverter2.bitMask) > 0);
-                notifier.E901 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.ModelErrInverter1.bitMask) > 0);
+                notifier.E901 = DataConverter.GetAlarmColor((data[0] & ErrorCodes.ModelErrInverter1.bitMask) > 0);
                 //notifier.E902 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.ModelErrInverter2.bitMask) > 0);
-                notifier.E911 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.OLErrInverter1.bitMask) > 0);
+                notifier.E911 = DataConverter.GetAlarmColor((data[0] & ErrorCodes.OLErrInverter1.bitMask) > 0);
                 //notifier.E912 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.OLErrInverter2.bitMask) > 0);
-                notifier.E921 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.OverCurrentPFCInverter1.bitMask) > 0);
+                notifier.E921 = DataConverter.GetAlarmColor((data[0] & ErrorCodes.OverCurrentPFCInverter1.bitMask) > 0);
                 //notifier.E922 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.OverCurrentPFCInverter2.bitMask) > 0);
-                notifier.E931 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.InternalComErrInverter1.bitMask) > 0);
+                notifier.E931 = DataConverter.GetAlarmColor((data[0] & ErrorCodes.InternalComErrInverter1.bitMask) > 0);
                 //notifier.E932 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.InternalComErrInverter2.bitMask) > 0);
-                notifier.E941 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.FaultPFCInverter1.bitMask) > 0);
+                notifier.E941 = DataConverter.GetAlarmColor((data[0] & ErrorCodes.FaultPFCInverter1.bitMask) > 0);
             }
             catch
             {
@@ -303,14 +303,14 @@ namespace Maxa_Dash
                 int[] data = modbusClient.ReadHoldingRegisters(Registers.Alarm942_972Reg, 1);
                 if (data[0] == 0) return;
                 //notifier.E942 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.FaultPFCInverter2.bitMask) > 0);
-                notifier.E951 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.ProbeErrInverter1.bitMask) > 0);
+                notifier.E951 = DataConverter.GetAlarmColor((data[0] & ErrorCodes.ProbeErrInverter1.bitMask) > 0);
                 //notifier.E952 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.ProbeErrInverter2.bitMask) > 0);
-                notifier.E961 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.AbnormalConditionInverter1.bitMask) > 0);
+                notifier.E961 = DataConverter.GetAlarmColor((data[0] & ErrorCodes.AbnormalConditionInverter1.bitMask) > 0);
                 //notifier.E962 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.AbnormalConditionInverter2.bitMask) > 0);
-                notifier.E971 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.EEPROMInverter1.bitMask) > 0);
+                notifier.E971 = DataConverter.GetAlarmColor((data[0] & ErrorCodes.EEPROMInverter1.bitMask) > 0);
                 //notifier.E972 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.EEPROMInverter2.bitMask) > 0);
-                notifier.E060 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.AntiLegionellaDone.bitMask) > 0);
-                notifier.E061 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.AntiLegionellaFailure.bitMask) > 0);
+                notifier.E060 = DataConverter.GetAlarmColor((data[0] & ErrorCodes.AntiLegionellaDone.bitMask) > 0);
+                notifier.E061 = DataConverter.GetAlarmColor((data[0] & ErrorCodes.AntiLegionellaFailure.bitMask) > 0);
             }
             catch
             {
@@ -342,6 +342,67 @@ namespace Maxa_Dash
                 notifier.firmwareVersion = "couldn't receive data";
                 notifier.firmwareRelease = "couldn't receive data";
                 notifier.firmwareCreationDate = "couldn't receive data";
+            }
+        }
+
+        public static void WriteSetPoints(NotifyNewData notifier, ModbusClient modbusClient)
+        {
+            try
+            {
+                modbusClient.WriteSingleRegister(Registers.EnableWritingBitMaskReg, Registers.EnableSPWriting);
+
+                modbusClient.WriteSingleRegister(Registers.CoolSPReg, DataConverter.GetSetPointFromGui(notifier.coolSP));
+                modbusClient.WriteSingleRegister(Registers.HeatSPReg, DataConverter.GetSetPointFromGui(notifier.heatSP));
+                modbusClient.WriteSingleRegister(Registers.SanitarySPReg, DataConverter.GetSetPointFromGui(notifier.DHWSP));
+                modbusClient.WriteSingleRegister(Registers.SecondCoolSPReg, DataConverter.GetSetPointFromGui(notifier.coolSP2));
+                modbusClient.WriteSingleRegister(Registers.SecondHeatSPReg, DataConverter.GetSetPointFromGui(notifier.heatSP2));
+                modbusClient.WriteSingleRegister(Registers.DHWPreparerSPReg, DataConverter.GetSetPointFromGui(notifier.DHWPreparerSP));
+
+            }
+            catch
+            {
+                // indicate problem in communication
+            }
+        }
+
+        public static bool VerifySetpoints(NotifyNewData notifier, ModbusClient modbusClient)
+        {
+            try
+            {
+                int[] data = modbusClient.ReadHoldingRegisters(Registers.CoolSPReg, 1);
+                if (data[0] != DataConverter.GetSetPointFromGui(notifier.coolSP)) return false;
+                data = modbusClient.ReadHoldingRegisters(Registers.HeatSPReg, 1);
+                if (data[0] != DataConverter.GetSetPointFromGui(notifier.heatSP2)) return false;
+                data = modbusClient.ReadHoldingRegisters(Registers.SanitarySPReg, 1);
+                if (data[0] != DataConverter.GetSetPointFromGui(notifier.DHWSP)) return false;
+                data = modbusClient.ReadHoldingRegisters(Registers.SecondCoolSPReg, 1);
+                if (data[0] != DataConverter.GetSetPointFromGui(notifier.coolSP2)) return false;
+                data = modbusClient.ReadHoldingRegisters(Registers.SecondHeatSPReg, 1);
+                if (data[0] != DataConverter.GetSetPointFromGui(notifier.heatSP2)) return false;
+                data = modbusClient.ReadHoldingRegisters(Registers.DHWPreparerSPReg, 1);
+                if (data[0] != DataConverter.GetSetPointFromGui(notifier.DHWPreparerSP)) return false;
+
+            }
+            catch
+            {
+                return false;
+                // indicate problem in communication
+            }
+
+            return true; ;
+        }
+
+        public static void WriteOperatinMode(NotifyNewData notifier, ModbusClient modbusClient)
+        {
+            try
+            {
+                modbusClient.WriteSingleRegister(Registers.EnableWritingBitMaskReg, Registers.EnableMachineStateWriting);
+
+                modbusClient.WriteSingleRegister(Registers.MachineStateWriteReg, DataConverter.GetOpModeFromGui(notifier.generalState));
+            }
+            catch
+            {
+                // indicate problem in communication
             }
         }
 

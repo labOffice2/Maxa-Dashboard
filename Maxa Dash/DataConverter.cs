@@ -7,7 +7,7 @@ using System.Windows.Media;
 
 namespace Maxa_Dash
 {
-    public class GuiDataConverter
+    public class DataConverter
     {
         public static Brush GetAlarmColor(bool status)
         {
@@ -23,6 +23,21 @@ namespace Maxa_Dash
             else
             {
                 return GetMachineState(data & 0x07);
+            }
+        }
+
+        public static int GetSetPointFromGui(float value)
+        {
+            int data = (int)(value * 10);
+            return data;
+        }
+
+        public static int GetOpModeFromGui(NotifyNewData.MachinelState machinelState)
+        {
+            if (machinelState != NotifyNewData.MachinelState.NA) return (int)machinelState;
+            else
+            {
+                return (int)NotifyNewData.MachinelState.STANBY;
             }
         }
     }

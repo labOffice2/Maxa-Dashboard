@@ -188,17 +188,17 @@ namespace Maxa_Dash
                     isConnected = true;
                     Maxa.ReadManufacturingInfo(notifier, modbusClient);
                     ConnectButton.IsEnabled = false;
-                    notifier.E000 = GuiDataConverter.GetAlarmColor(false);
+                    notifier.E000 = DataConverter.GetAlarmColor(false);
                 }
                 else
                 {
-                    notifier.E000 = GuiDataConverter.GetAlarmColor(true);
+                    notifier.E000 = DataConverter.GetAlarmColor(true);
                     messageLabels = messagesPanel.AddMessage(messageLabels,"couldn't connect", 0.1f, Brushes.Red);
                 }
             }
             catch
             {
-                notifier.E000 = GuiDataConverter.GetAlarmColor(true);
+                notifier.E000 = DataConverter.GetAlarmColor(true);
                 notifier.waterInTemp += 10;
                 notifier.waterOutTemp = 100000;
                 isConnected = false;
@@ -219,6 +219,7 @@ namespace Maxa_Dash
                         Maxa.UpdateOperationMode(notifier, modbusClient);
                         Maxa.UpdateWaterSystemParametersNRecord(notifier, modbusClient, FileWriter);
                         Maxa.UpdateRefrigirationSystemParametersNRecord(notifier, modbusClient, FileWriter);
+                        Maxa.UpdateReadOnlySetpoints(notifier, modbusClient);
                         Maxa.ReadErrors(notifier, modbusClient);
                         FileWriter.WriteToFile();
                     }
@@ -227,8 +228,8 @@ namespace Maxa_Dash
                         Maxa.UpdateOperationMode(notifier, modbusClient);
                         Maxa.UpdateWaterSystemParameters(notifier, modbusClient);
                         Maxa.UpdateRefrigirationSystemParameters(notifier, modbusClient);
+                        Maxa.UpdateReadOnlySetpoints(notifier, modbusClient);
                         Maxa.ReadErrors(notifier, modbusClient);
-
                     }
                 }
                 catch
@@ -348,8 +349,23 @@ namespace Maxa_Dash
             { }
         }
 
+
         #endregion
 
-
+        private void ApplySetpoints_Click(object sender, RoutedEventArgs e)
+        {
+            if(modbusClient != null)
+            {
+                Maxa.WriteSetPoints(notifier, modbusClient);
+                bool isSPWritten = Maxa.VerifySetpoints(notifier, modbusClient);
+                if(!isSPWritten) messageLabels = messagesPanel.AddMessage(messageLabels, "new setpoint not applied", 0.1f, Brushes.Red);
+                else messageLabels = messagesPanel.AddMessage(messageLabels, "new setpoint successfully applied", 0.1f, Brushes.Green);
+                Maxa.WriteOperatinMode(notifier, modbusClient);
+            }
+            else
+            {
+                messageLabels = messagesPanel.AddMessage(messageLabels, "Connect to the maxa to set new setpoints", 0.2f);
+            }
+        }
     }
 }

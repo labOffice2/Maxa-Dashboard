@@ -310,22 +310,22 @@
                 <Label Content="operation mode:" Grid.Column="1" Grid.Row="1" />
                 <ComboBox Name="OpModeBox" Grid.Column="2" Grid.Row="1"/>
                 <Label Content="cool setpoint:" Grid.Column="1" Grid.Row="2" ToolTip="Range 5.0 ÷ 23.0"/>
-                <TextBox Name="CoolSP1" Text="20" Grid.Column="2" Grid.Row="2" VerticalAlignment="Center" LostFocus="CoolSP1_LostFocus"/>
+                <TextBox Name="CoolSP1" Text="{Binding coolSP, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" Grid.Row="2" VerticalAlignment="Center" LostFocus="CoolSP1_LostFocus"/>
                 <Label Content="heat setpoint:" Grid.Column="1" Grid.Row="3" ToolTip="Range 25.0 ÷ 55.0"/>
-                <TextBox Name="HeatSP1" Text="50" Grid.Column="2" Grid.Row="3" VerticalAlignment="Center" LostFocus="HeatSP1_LostFocus"/>
+                <TextBox Name="HeatSP1" Text="{Binding heatSP, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" Grid.Row="3" VerticalAlignment="Center" LostFocus="HeatSP1_LostFocus"/>
                 <Label Content="DHW setpoint:" Grid.Column="1" Grid.Row="4" ToolTip="Range 25.0 ÷ 55.0"/>
-                <TextBox Name="DHWSP" Text="40" Grid.Column="2" Grid.Row="4" VerticalAlignment="Center" LostFocus="DHWSP_LostFocus"/>
+                <TextBox Name="DHWSP" Text="{Binding DHWSP, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" Grid.Row="4" VerticalAlignment="Center" LostFocus="DHWSP_LostFocus"/>
                 <Label Content="Second cool setpoint:" Grid.Column="1" Grid.Row="5" ToolTip="Range 5.0 ÷ 23.0"/>
-                <TextBox Name="CoolSP2" Text="15" Grid.Column="2" Grid.Row="5" VerticalAlignment="Center" LostFocus="CoolSP2_LostFocus"/>
+                <TextBox Name="CoolSP2" Text="{Binding coolSP2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" Grid.Row="5" VerticalAlignment="Center" LostFocus="CoolSP2_LostFocus"/>
                 <Label Content="Second heat setpoint:" Grid.Column="1" Grid.Row="6" ToolTip="Range 25.0 ÷ 55.0"/>
-                <TextBox Name="HeatSP2" Text="50" Grid.Column="2" Grid.Row="6" VerticalAlignment="Center" LostFocus="HeatSP2_LostFocus"/>
+                <TextBox Name="HeatSP2" Text="{Binding heatSP2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" Grid.Row="6" VerticalAlignment="Center" LostFocus="HeatSP2_LostFocus"/>
                 <Label Content="DHW preparer setpoint:" Grid.Column="1" Grid.Row="7" ToolTip="Range 0.0 ÷ 80.0"/>
-                <TextBox Name="DHWPrepSP" Text="50" Grid.Column="2" Grid.Row="7" VerticalAlignment="Center" LostFocus="DHWPrepSP_LostFocus"/>
+                <TextBox Name="DHWPrepSP" Text="{Binding DHWPreparerSP, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" Grid.Row="7" VerticalAlignment="Center" LostFocus="DHWPrepSP_LostFocus"/>
                 <Label Content="Actual thermoregulation setpoint:" Grid.Column="1" Grid.Row="8" />
                 <Label  Content="{Binding actualThermoragulationSP, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" Grid.Row="8" VerticalAlignment="Center" />
                 <Label Content="Actual reference temp for thermoregulation:" Grid.Column="1" Grid.Row="9" />
                 <Label  Content="{Binding actualRefTemp4ThermoragulationSP, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" Grid.Row="9" VerticalAlignment="Center" />
-                <Button Content="send new settings" Grid.Row="10" Grid.Column="2" Click="OnClick_ConnectButton"/>
+                <Button Name="ApplySetpoints" Content="send new settings" Grid.Row="10" Grid.Column="2" Click="ApplySetpoints_Click"/>
             </Grid> <!-- setpoints and operation mode settings grid -->
 
             <Grid Grid.Row="1" >

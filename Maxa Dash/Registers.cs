@@ -63,7 +63,7 @@ namespace Maxa_Dash
         public const int SanitarySPReg = 7205;
         public const int SecondCoolSPReg = 7206;
         public const int SecondHeatSPReg = 7207;
-        public const int DHWPreparerReg = 7208;
+        public const int DHWPreparerSPReg = 7208;
 
         public const int ActualThermoregulationSPReg = 242;
         public const int ActualRefTempForThermoregulationSPReg = 247;

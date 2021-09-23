@@ -21,7 +21,7 @@ namespace Maxa_Dash
             }
         }
 
-        // communication settings
+        #region communication settings
         private string _comPortString;
         public string comPortString
         {
@@ -35,24 +35,98 @@ namespace Maxa_Dash
                 }
             }
         }
+        #endregion
 
-        // Message stack panel
-        private StackPanel _stackPanel;
-        public StackPanel stackPanel
+        #region set points
+
+        private float _coolSP = 20f;
+        public float coolSP
         {
-            get { return _stackPanel; }
+            get { return _coolSP; }
             set
             {
-                if (_stackPanel != value)
+                if (_coolSP != value)
                 {
-                    _stackPanel = value;
-                    INotifyPropertyChanged(nameof(stackPanel));
+                    _coolSP = value;
+                    INotifyPropertyChanged(nameof(coolSP));
                 }
             }
         }
 
+        private float _heatSP = 50f;
+        public float heatSP
+        {
+            get { return _heatSP; }
+            set
+            {
+                if (_heatSP != value)
+                {
+                    _heatSP = value;
+                    INotifyPropertyChanged(nameof(heatSP));
+                }
+            }
+        }
 
-        // temperatures
+        private float _DHWSP = 50f;
+        public float DHWSP
+        {
+            get { return _DHWSP; }
+            set
+            {
+                if (_DHWSP != value)
+                {
+                    _DHWSP = value;
+                    INotifyPropertyChanged(nameof(DHWSP));
+                }
+            }
+        }
+
+        private float _coolSP2 = 20f;
+        public float coolSP2
+        {
+            get { return _coolSP2; }
+            set
+            {
+                if (_coolSP2 != value)
+                {
+                    _coolSP2 = value;
+                    INotifyPropertyChanged(nameof(coolSP2));
+                }
+            }
+        }
+
+        private float _heatSP2 = 50f;
+        public float heatSP2
+        {
+            get { return _heatSP2; }
+            set
+            {
+                if (_heatSP2 != value)
+                {
+                    _heatSP2 = value;
+                    INotifyPropertyChanged(nameof(heatSP2));
+                }
+            }
+        }
+
+        private float _DHWPreparerSP = 50f;
+        public float DHWPreparerSP
+        {
+            get { return _DHWPreparerSP; }
+            set
+            {
+                if (_DHWPreparerSP != value)
+                {
+                    _DHWPreparerSP = value;
+                    INotifyPropertyChanged(nameof(DHWPreparerSP));
+                }
+            }
+        }
+
+        #endregion
+
+
+        #region temperatures
         private float _waterInTemp;
         public float waterInTemp
         {
@@ -264,8 +338,10 @@ namespace Maxa_Dash
             }
         }
 
+        #endregion
+
         // Read-only setpoints
-        
+
         private float _actualThermoragulationSP = 0f;
         public float actualThermoragulationSP
         {
