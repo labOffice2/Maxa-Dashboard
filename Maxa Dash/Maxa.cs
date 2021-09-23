@@ -179,7 +179,7 @@ namespace Maxa_Dash
                 notifier.E009 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.HighTempDischargeProtection.bitMask) > 0);
                 notifier.E010 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.HighTempSolar.bitMask) > 0);
                 //notifier.E013 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.DigBlockCom2.bitMask) > 0);
-                notifier.E014 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.DigBlockFan2.bitMask) > 0);
+                //notifier.E014 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.DigBlockFan2.bitMask) > 0);
                 notifier.E016 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.ThermalPump1.bitMask) > 0);
             }
             catch
@@ -201,7 +201,7 @@ namespace Maxa_Dash
                 notifier.E041 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.WrongTemp.bitMask) > 0);
                 //notifier.E042 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.InsufficientExchangeInSanitary.bitMask) > 0); // said to be irrelevant by Maxa team member Davide Mocellin
                 notifier.E050 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.HighTempSanitary.bitMask) > 0);
-                notifier.E101 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.ModulGiDisconnected.bitMask) > 0);
+                //notifier.E101 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.ModulGiDisconnected.bitMask) > 0);
                 //notifier.E102 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes..bitMask) > 0);
                
             }
@@ -226,11 +226,11 @@ namespace Maxa_Dash
                 notifier.E691 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.LowPressureTransducer.bitMask) > 0);
                 notifier.E701 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.HighPressureTransducer.bitMask) > 0);
                 notifier.E711 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.Probe11.bitMask) > 0);
-                notifier.E612 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.ModulGiProbe1.bitMask) > 0);
+                //notifier.E612 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.ModulGiProbe1.bitMask) > 0);
                 //notifier.E622 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.ModulGiProbe2.bitMask) > 0);
                 //notifier.E632 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.ModulGiProbe3.bitMask) > 0);
                 //notifier.E642 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.ModulGiProbe4.bitMask) > 0);
-                notifier.E652 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.ModulGiProbe5.bitMask) > 0);
+                //notifier.E652 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.ModulGiProbe5.bitMask) > 0);
             }
             catch
             {
@@ -240,10 +240,10 @@ namespace Maxa_Dash
             // get errors from registers 953
             try
             {
-                int[] data = modbusClient.ReadHoldingRegisters(Registers.Alarm662_712Reg, 1);
-                if (data[0] == 0) return;
-                notifier.E662 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.ModulGiProbe6.bitMask) > 0);
-                notifier.E672 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.ModulGiProbe7.bitMask) > 0);
+                //int[] data = modbusClient.ReadHoldingRegisters(Registers.Alarm662_712Reg, 1);
+                //if (data[0] == 0) return;
+                //notifier.E662 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.ModulGiProbe6.bitMask) > 0);
+                //notifier.E672 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.ModulGiProbe7.bitMask) > 0);
                 //notifier.E682 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.ModulGiProbe8.bitMask) > 0);
                 //notifier.E692 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.ModulGiProbe9.bitMask) > 0);
                 //notifier.E702 = GuiDataConverter.GetAlarmColor((data[0] & ErrorCodes.ModulGiProbe10.bitMask) > 0);

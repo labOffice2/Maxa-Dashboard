@@ -445,14 +445,14 @@
                                 <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E041, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
                                 <Label Content="E041" Grid.Column="1" ToolTip="Inconsistent temperature alarm "/>
                             </Grid>
-                            <Grid>
+                            <!--<Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="auto"/>
                                     <ColumnDefinition Width="1*"/>
                                 </Grid.ColumnDefinitions>
                                 <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E101, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
                                 <Label Content="E101" Grid.Column="1" ToolTip="Communication timeout with slave 1"/>
-                            </Grid>
+                            </Grid> -->
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="auto"/>
@@ -532,14 +532,14 @@
                                 <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E005, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
                                 <Label Content="E005" Grid.Column="1" ToolTip="Antifeeze alarm"/>
                             </Grid>
-                            <Grid>
+                            <!--<Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="auto"/>
                                     <ColumnDefinition Width="1*"/>
                                 </Grid.ColumnDefinitions>
                                 <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E014, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
                                 <Label Content="E014" Grid.Column="1" ToolTip="Thermal fan2"/>
-                            </Grid>
+                            </Grid> -->
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="auto"/>
@@ -618,14 +618,14 @@
                                 <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E016, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
                                 <Label Content="E016" Grid.Column="1" ToolTip="Thermal pump"/>
                             </Grid>
-                            <Grid>
+                            <!--<Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="auto"/>
                                     <ColumnDefinition Width="1*"/>
                                 </Grid.ColumnDefinitions>
                                 <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E042, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
                                 <Label Content="E042" Grid.Column="1" ToolTip="Insufficient thermal exchange alarm"/>
-                            </Grid>
+                            </Grid> -->
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="auto"/>
@@ -658,22 +658,22 @@
                                 <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E611, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
                                 <Label Content="E611" Grid.Column="1" ToolTip="Water inlet probe failure "/>
                             </Grid>
-                            <Grid>
+                            <!--<Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="auto"/>
                                     <ColumnDefinition Width="1*"/>
                                 </Grid.ColumnDefinitions>
                                 <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E612, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
                                 <Label Content="E612" Grid.Column="1" ToolTip="Water outlet probe failure "/>
-                            </Grid>
-                            <Grid>
+                            </Grid> -->
+                            <!--<Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="auto"/>
                                     <ColumnDefinition Width="1*"/>
                                 </Grid.ColumnDefinitions>
                                 <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E652, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
                                 <Label Content="E652" Grid.Column="1" ToolTip="Mixer probe failure "/>
-                            </Grid>
+                            </Grid> -->
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="auto"/>
@@ -682,14 +682,14 @@
                                 <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E661, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
                                 <Label Content="E661" Grid.Column="1" ToolTip="DHW  probe failure "/>
                             </Grid>
-                            <Grid>
+                            <!--<Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="auto"/>
                                     <ColumnDefinition Width="1*"/>
                                 </Grid.ColumnDefinitions>
                                 <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E662, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
                                 <Label Content="E662" Grid.Column="1" ToolTip="Solar storage tank probe failure "/>
-                            </Grid>
+                            </Grid> -->
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="auto"/>
@@ -698,14 +698,14 @@
                                 <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E671, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
                                 <Label Content="E671" Grid.Column="1" ToolTip="Plant remote probe failure "/>
                             </Grid>
-                            <Grid>
+                           <!-- <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="auto"/>
                                     <ColumnDefinition Width="1*"/>
                                 </Grid.ColumnDefinitions>
                                 <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E672, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
                                 <Label Content="E672" Grid.Column="1" ToolTip="Solar Collector probe failure "/>
-                            </Grid>
+                            </Grid> -->
                         </StackPanel>
                     </Border> <!-- water system errors -->
 

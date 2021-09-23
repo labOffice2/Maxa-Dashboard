@@ -310,19 +310,19 @@ namespace Maxa_Dash
             }
         }
 
-        private float _fanAnalogOut2;
-        public float fanAnalogOut2
-        {
-            get { return _fanAnalogOut2; }
-            set
-            {
-                if (_fanAnalogOut2 != (((float)value) / 10))
-                {
-                    _fanAnalogOut2 = (((float)value) / 10);
-                    INotifyPropertyChanged(nameof(fanAnalogOut2));
-                }
-            }
-        }
+        //private float _fanAnalogOut2;
+        //public float fanAnalogOut2
+        //{
+        //    get { return _fanAnalogOut2; }
+        //    set
+        //    {
+        //        if (_fanAnalogOut2 != (((float)value) / 10))
+        //        {
+        //            _fanAnalogOut2 = (((float)value) / 10);
+        //            INotifyPropertyChanged(nameof(fanAnalogOut2));
+        //        }
+        //    }
+        //}
 
         private float _pumpAnalogOut;
         public float pumpAnalogOut
@@ -667,19 +667,19 @@ namespace Maxa_Dash
             }
         }
 
-        private Brush _E014 = Brushes.Gray;
-        public Brush E014
-        {
-            get { return _E014; }
-            set
-            {
-                if (_E014 != value)
-                {
-                    _E014 = value;
-                    INotifyPropertyChanged(nameof(E014));
-                }
-            }
-        }
+        //private Brush _E014 = Brushes.Gray;
+        //public Brush E014
+        //{
+        //    get { return _E014; }
+        //    set
+        //    {
+        //        if (_E014 != value)
+        //        {
+        //            _E014 = value;
+        //            INotifyPropertyChanged(nameof(E014));
+        //        }
+        //    }
+        //}
 
         private Brush _E016 = Brushes.Gray;
         public Brush E016
@@ -789,19 +789,20 @@ namespace Maxa_Dash
                 }
             }
         }
-        private Brush _E101 = Brushes.Gray;
-        public Brush E101
-        {
-            get { return _E101; }
-            set
-            {
-                if (_E101 != value)
-                {
-                    _E101 = value;
-                    INotifyPropertyChanged(nameof(E101));
-                }
-            }
-        }
+        //private Brush _E101 = Brushes.Gray;
+        //public Brush E101
+        //{
+        //    get { return _E101; }
+        //    set
+        //    {
+        //        if (_E101 != value)
+        //        {
+        //            _E101 = value;
+        //            INotifyPropertyChanged(nameof(E101));
+        //        }
+        //    }
+        //}
+
         private Brush _E611 = Brushes.Gray;
         public Brush E611
         {
@@ -815,19 +816,20 @@ namespace Maxa_Dash
                 }
             }
         }
-        private Brush _E612 = Brushes.Gray;
-        public Brush E612
-        {
-            get { return _E612; }
-            set
-            {
-                if (_E612 != value)
-                {
-                    _E612 = value;
-                    INotifyPropertyChanged(nameof(E612));
-                }
-            }
-        }
+        //private Brush _E612 = Brushes.Gray;
+        //public Brush E612
+        //{
+        //    get { return _E612; }
+        //    set
+        //    {
+        //        if (_E612 != value)
+        //        {
+        //            _E612 = value;
+        //            INotifyPropertyChanged(nameof(E612));
+        //        }
+        //    }
+        //}
+
         private Brush _E631 = Brushes.Gray;
         public Brush E631
         {
@@ -867,20 +869,22 @@ namespace Maxa_Dash
                 }
             }
         }
-        private Brush _E652 = Brushes.Gray;
-        public Brush E652
-        {
-            get { return _E652; }
-            set
-            {
-                if (_E652 != value)
-                {
-                    _E652 = value;
-                    INotifyPropertyChanged(nameof(E652));
-                }
-            }
-        }
+        //private Brush _E652 = Brushes.Gray;
+        //public Brush E652
+        //{
+        //    get { return _E652; }
+        //    set
+        //    {
+        //        if (_E652 != value)
+        //        {
+        //            _E652 = value;
+        //            INotifyPropertyChanged(nameof(E652));
+        //        }
+        //    }
+        //}
+        
         private Brush _E661 = Brushes.Gray;
+        
         public Brush E661
         {
             get { return _E661; }
@@ -893,19 +897,20 @@ namespace Maxa_Dash
                 }
             }
         }
-        private Brush _E662 = Brushes.Gray;
-        public Brush E662
-        {
-            get { return _E662; }
-            set
-            {
-                if (_E662 != value)
-                {
-                    _E662 = value;
-                    INotifyPropertyChanged(nameof(E662));
-                }
-            }
-        }
+        //private Brush _E662 = Brushes.Gray;
+        //public Brush E662
+        //{
+        //    get { return _E662; }
+        //    set
+        //    {
+        //        if (_E662 != value)
+        //        {
+        //            _E662 = value;
+        //            INotifyPropertyChanged(nameof(E662));
+        //        }
+        //    }
+        //}
+
         private Brush _E671 = Brushes.Gray;
         public Brush E671
         {
@@ -919,19 +924,21 @@ namespace Maxa_Dash
                 }
             }
         }
-        private Brush _E672 = Brushes.Gray;
-        public Brush E672
-        {
-            get { return _E672; }
-            set
-            {
-                if (_E672 != value)
-                {
-                    _E672 = value;
-                    INotifyPropertyChanged(nameof(E672));
-                }
-            }
-        }
+        
+        //private Brush _E672 = Brushes.Gray;
+        //public Brush E672
+        //{
+        //    get { return _E672; }
+        //    set
+        //    {
+        //        if (_E672 != value)
+        //        {
+        //            _E672 = value;
+        //            INotifyPropertyChanged(nameof(E672));
+        //        }
+        //    }
+        //}
+        
         private Brush _E691 = Brushes.Gray;
         public Brush E691
         {
