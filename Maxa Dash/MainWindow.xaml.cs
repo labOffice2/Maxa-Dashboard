@@ -42,11 +42,14 @@ namespace Maxa_Dash
         bool isConnected = false;
         bool isUpdating = false;
         bool isRecord = false;
+        private bool isNewSetpointAvailable = false;
 
         private float setpointMaxCool = 23.0f;
         private float setpointMinCool = 5.0f;
         private float setpointMaxHeat = 55.0f;
         private float setpointMinHeat = 25.0f;
+        private int opMode;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -231,6 +234,16 @@ namespace Maxa_Dash
                         Maxa.UpdateReadOnlySetpoints(notifier, modbusClient);
                         Maxa.ReadErrors(notifier, modbusClient);
                     }
+
+                    if(isNewSetpointAvailable)
+                    {
+                        Maxa.WriteSetPoints(notifier, modbusClient);
+                        bool isSPWritten = Maxa.VerifySetpoints(notifier, modbusClient);
+                        if (!isSPWritten) messagesPanel.AddMessage(ref messageLabelsList, "new setpoint not applied", 0.1f, Brushes.Red);
+                        else messagesPanel.AddMessage(ref messageLabelsList, "new setpoint successfully applied", 0.1f, Brushes.Green);
+                        Maxa.WriteOperatinMode(notifier, modbusClient, opMode);
+                        isNewSetpointAvailable = false;
+                    }
                 }
                 catch
                 {
@@ -355,11 +368,11 @@ namespace Maxa_Dash
         {
             if(modbusClient != null)
             {
-                Maxa.WriteSetPoints(notifier, modbusClient);
-                bool isSPWritten = Maxa.VerifySetpoints(notifier, modbusClient);
-                if(!isSPWritten) messagesPanel.AddMessage(ref messageLabelsList , "new setpoint not applied", 0.1f, Brushes.Red);
-                else messagesPanel.AddMessage(ref messageLabelsList , "new setpoint successfully applied", 0.1f, Brushes.Green);
-                Maxa.WriteOperatinMode(notifier, modbusClient);
+                isNewSetpointAvailable = true;
+
+                ComboBoxItem opModeItem = (ComboBoxItem)OpModeBox.SelectedItem;
+                NotifyNewData.MachinelState machinelState = (NotifyNewData.MachinelState)opModeItem.Content;
+                opMode = (int)machinelState;
             }
             else
             {

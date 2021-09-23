@@ -389,16 +389,16 @@ namespace Maxa_Dash
                 // indicate problem in communication
             }
 
-            return true; ;
+            return true; 
         }
 
-        public static void WriteOperatinMode(NotifyNewData notifier, ModbusClient modbusClient)
+        public static void WriteOperatinMode(NotifyNewData notifier, ModbusClient modbusClient, int opMode)
         {
             try
             {
                 modbusClient.WriteSingleRegister(Registers.EnableWritingBitMaskReg, Registers.EnableMachineStateWriting);
 
-                modbusClient.WriteSingleRegister(Registers.MachineStateWriteReg, DataConverter.GetOpModeFromGui(notifier.generalState));
+                modbusClient.WriteSingleRegister(Registers.MachineStateWriteReg, opMode);
             }
             catch
             {
