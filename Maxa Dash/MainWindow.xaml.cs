@@ -37,7 +37,7 @@ namespace Maxa_Dash
         private Timer timer;
 
         private UserMessages messagesPanel;
-        private List<UserMessages.MessageLabel> messageLabels = new List<UserMessages.MessageLabel>();
+        private List<UserMessages.MessageLabel> messageLabelsList = new List<UserMessages.MessageLabel>();
 
         bool isConnected = false;
         bool isUpdating = false;
@@ -65,7 +65,7 @@ namespace Maxa_Dash
 
         private void RemoveOldMessages()
         {
-            foreach(var item in messageLabels.ToArray())
+            foreach(var item in messageLabelsList.ToArray())
             {
                 if (item == null) break;
                 TimeSpan displayDuration = DateTime.Now - item.startTime;
@@ -75,7 +75,7 @@ namespace Maxa_Dash
                     {
                         MessagePanel.Children.Remove(item.Label);
                     }
-                    messageLabels.Remove(item);
+                    messageLabelsList.Remove(item);
                 }
             }
         }
@@ -193,7 +193,7 @@ namespace Maxa_Dash
                 else
                 {
                     notifier.E000 = DataConverter.GetAlarmColor(true);
-                    messageLabels = messagesPanel.AddMessage(messageLabels,"couldn't connect", 0.1f, Brushes.Red);
+                    messagesPanel.AddMessage(ref messageLabelsList,"couldn't connect", 0.1f, Brushes.Red);
                 }
             }
             catch
@@ -249,7 +249,6 @@ namespace Maxa_Dash
 
         private void OnClick_ConnectButton(object sender, RoutedEventArgs e)
         {
-            messageLabels = messagesPanel.AddMessage(messageLabels, "pressed connect", 0.1f);
             SetModbus();
             timer.Start();
         }
@@ -285,7 +284,7 @@ namespace Maxa_Dash
             }
             else
             {
-                messageLabels = messagesPanel.AddMessage(messageLabels,"Select folder for scv file", 0.1f);
+                messagesPanel.AddMessage(ref messageLabelsList, "Select folder for scv file", 0.1f);
                 MessageBox.Show("Please select a folder");
             }
         }
@@ -358,13 +357,13 @@ namespace Maxa_Dash
             {
                 Maxa.WriteSetPoints(notifier, modbusClient);
                 bool isSPWritten = Maxa.VerifySetpoints(notifier, modbusClient);
-                if(!isSPWritten) messageLabels = messagesPanel.AddMessage(messageLabels, "new setpoint not applied", 0.1f, Brushes.Red);
-                else messageLabels = messagesPanel.AddMessage(messageLabels, "new setpoint successfully applied", 0.1f, Brushes.Green);
+                if(!isSPWritten) messagesPanel.AddMessage(ref messageLabelsList , "new setpoint not applied", 0.1f, Brushes.Red);
+                else messagesPanel.AddMessage(ref messageLabelsList , "new setpoint successfully applied", 0.1f, Brushes.Green);
                 Maxa.WriteOperatinMode(notifier, modbusClient);
             }
             else
             {
-                messageLabels = messagesPanel.AddMessage(messageLabels, "Connect to the maxa to set new setpoints", 0.2f);
+                messagesPanel.AddMessage(ref messageLabelsList, "Connect to the maxa to set new setpoints", 0.1f);
             }
         }
     }

@@ -18,14 +18,14 @@ namespace Maxa_Dash
 
         private StackPanel stackPanel;
 
-        public List<MessageLabel> AddMessage(List<MessageLabel> labelslist,string message,float duration = 1f, Brush textColor = null)
+        public void AddMessage(ref List<MessageLabel> labelslist,string message,float duration = 1f, Brush textColor = null)
         {
             foreach(var item in stackPanel.Children)
             {
                 Label label = (Label)item;
                 if((string)label.Content == message)
                 {
-                    return labelslist;
+                    return;
                 }
             }
 
@@ -36,8 +36,6 @@ namespace Maxa_Dash
 
             stackPanel.Children.Add(newMessage);
             labelslist.Add(new MessageLabel(newMessage, duration));
-            return labelslist;
-   
         }
 
 
