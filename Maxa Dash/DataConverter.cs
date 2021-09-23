@@ -37,7 +37,7 @@ namespace Maxa_Dash
             if (machinelState != NotifyNewData.MachinelState.NA) return (int)machinelState;
             else
             {
-                return (int)NotifyNewData.MachinelState.STANBY;
+                return (int)NotifyNewData.MachinelState.STANDBY;
             }
         }
     }

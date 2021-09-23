@@ -1244,7 +1244,7 @@ namespace Maxa_Dash
 
         public enum MachinelState
         {
-            STANBY,
+            STANDBY,
             COOL,
             HEAT,
             ONLY_SANITARY = 4,

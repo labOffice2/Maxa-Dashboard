@@ -383,7 +383,8 @@
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
-                <RowDefinition/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
             <Border BorderBrush="Gray" BorderThickness="1" Grid.ColumnSpan="2">
                 <Label Content="Error status" HorizontalAlignment="Center"/>
@@ -489,7 +490,7 @@
                     </Border>  <!-- electric system errors -->
 
                     <!-- refrigiration system errors -->
-                    <Border BorderBrush="Gray" BorderThickness="1" Height="auto" Grid.Column="1">
+                    <Border BorderBrush="Gray" BorderThickness="1" Height="auto">
                         <StackPanel Height="auto" Grid.Column="1">
                             <Label Content="Refrigiration system"/>
                             <Grid>
@@ -813,6 +814,9 @@
                     </Border>  <!-- VFD system errors -->
                 </StackPanel>
             </Border>
+
+            <Button Name="ResetErrorsButton" Content="Reset active errors" IsEnabled="False" Grid.ColumnSpan="2" Grid.Row="2" Padding="10" Click="ResetErrorsButton_Click"/>
+
         </Grid>
     </Grid>
 </Window>

@@ -39,9 +39,9 @@ namespace Maxa_Dash
         private UserMessages messagesPanel;
         private List<UserMessages.MessageLabel> messageLabelsList = new List<UserMessages.MessageLabel>();
 
-        bool isConnected = false;
-        bool isUpdating = false;
-        bool isRecord = false;
+        private bool isConnected = false;
+        private bool isUpdating = false;
+        private bool isRecord = false;
         private bool isNewSetpointAvailable = false;
 
         private float setpointMaxCool = 23.0f;
@@ -49,6 +49,9 @@ namespace Maxa_Dash
         private float setpointMaxHeat = 55.0f;
         private float setpointMinHeat = 25.0f;
         private int opMode;
+
+        private int[] activeErrors;
+        private bool isResetErrors;
 
         public MainWindow()
         {
@@ -145,7 +148,7 @@ namespace Maxa_Dash
             // fill operation mode ComboBox
             ComboBoxItem modeStandBy = new(), modeCool = new(), modeHeat = new(), modeSanitary = new(), modeCoolNSanitary = new(), modeHeatNSanitary = new();
             modeStandBy.IsSelected = true;
-            modeStandBy.Content = NotifyNewData.MachinelState.STANBY;
+            modeStandBy.Content = NotifyNewData.MachinelState.STANDBY;
             modeCool.Content = NotifyNewData.MachinelState.COOL;
             modeHeat.Content = NotifyNewData.MachinelState.HEAT;
             modeSanitary.Content = NotifyNewData.MachinelState.ONLY_SANITARY;
@@ -217,25 +220,12 @@ namespace Maxa_Dash
             {
                 try
                 {
-                    if(isRecord)
+                    if(isResetErrors)
                     {
-                        Maxa.UpdateOperationMode(notifier, modbusClient);
-                        Maxa.UpdateWaterSystemParametersNRecord(notifier, modbusClient, FileWriter);
-                        Maxa.UpdateRefrigirationSystemParametersNRecord(notifier, modbusClient, FileWriter);
-                        Maxa.UpdateReadOnlySetpoints(notifier, modbusClient);
-                        Maxa.ReadErrors(notifier, modbusClient);
-                        FileWriter.WriteToFile();
-                    }
-                    else
-                    {
-                        Maxa.UpdateOperationMode(notifier, modbusClient);
-                        Maxa.UpdateWaterSystemParameters(notifier, modbusClient);
-                        Maxa.UpdateRefrigirationSystemParameters(notifier, modbusClient);
-                        Maxa.UpdateReadOnlySetpoints(notifier, modbusClient);
-                        Maxa.ReadErrors(notifier, modbusClient);
+                        Maxa.ResetErrors(modbusClient, activeErrors);
                     }
 
-                    if(isNewSetpointAvailable)
+                    if (isNewSetpointAvailable)
                     {
                         Maxa.WriteSetPoints(notifier, modbusClient);
                         bool isSPWritten = Maxa.VerifySetpoints(notifier, modbusClient);
@@ -244,6 +234,27 @@ namespace Maxa_Dash
                         Maxa.WriteOperatinMode(notifier, modbusClient, opMode);
                         isNewSetpointAvailable = false;
                     }
+
+                    if (isRecord)
+                    {
+                        Maxa.UpdateOperationMode(notifier, modbusClient);
+                        Maxa.UpdateWaterSystemParametersNRecord(notifier, modbusClient, FileWriter);
+                        Maxa.UpdateRefrigirationSystemParametersNRecord(notifier, modbusClient, FileWriter);
+                        Maxa.UpdateReadOnlySetpoints(notifier, modbusClient);
+                        activeErrors = Maxa.ReadErrors(notifier, modbusClient);
+                        FileWriter.WriteToFile();
+                    }
+                    else
+                    {
+                        Maxa.UpdateOperationMode(notifier, modbusClient);
+                        Maxa.UpdateWaterSystemParameters(notifier, modbusClient);
+                        Maxa.UpdateRefrigirationSystemParameters(notifier, modbusClient);
+                        Maxa.UpdateReadOnlySetpoints(notifier, modbusClient);
+                        activeErrors = Maxa.ReadErrors(notifier, modbusClient);
+                    }
+
+                    ResetErrorsButton.IsEnabled = (activeErrors.Length > 0) ? true : false;
+
                 }
                 catch
                 {
@@ -377,6 +388,14 @@ namespace Maxa_Dash
             else
             {
                 messagesPanel.AddMessage(ref messageLabelsList, "Connect to the maxa to set new setpoints", 0.1f);
+            }
+        }
+
+        private void ResetErrorsButton_Click(object sender, RoutedEventArgs e)
+        {
+            if(activeErrors.Length > 0)
+            {
+                isResetErrors = true;
             }
         }
     }
