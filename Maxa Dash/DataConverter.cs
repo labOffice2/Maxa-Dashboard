@@ -32,13 +32,5 @@ namespace Maxa_Dash
             return data;
         }
 
-        public static int GetOpModeFromGui(NotifyNewData.MachinelState machinelState)
-        {
-            if (machinelState != NotifyNewData.MachinelState.NA) return (int)machinelState;
-            else
-            {
-                return (int)NotifyNewData.MachinelState.STANDBY;
-            }
-        }
     }
 }

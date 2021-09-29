@@ -230,7 +230,7 @@
                         <ColumnDefinition Width="AUTO"/>
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
-                    <Label Content="General state:" Grid.Column="1" />
+                    <Label Content="Machine state:" Grid.Column="1" />
                     <Label Content="{Binding generalState, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" RenderTransformOrigin="-0.222,0.106"/>
                 </Grid>
                 <!-- from old version of register mapping - irrelevant

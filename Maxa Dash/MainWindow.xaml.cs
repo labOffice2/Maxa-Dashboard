@@ -231,7 +231,7 @@ namespace Maxa_Dash
                         bool isSPWritten = Maxa.VerifySetpoints(notifier, modbusClient);
                         if (!isSPWritten) messagesPanel.AddMessage(ref messageLabelsList, "new setpoint not applied", 0.1f, Brushes.Red);
                         else messagesPanel.AddMessage(ref messageLabelsList, "new setpoint successfully applied", 0.1f, Brushes.Green);
-                        Maxa.WriteOperatinMode(notifier, modbusClient, opMode);
+                        Maxa.WriteOperatinMode(modbusClient, opMode);
                         isNewSetpointAvailable = false;
                     }
 
