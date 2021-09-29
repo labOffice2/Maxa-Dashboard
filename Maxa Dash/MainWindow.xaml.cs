@@ -43,15 +43,18 @@ namespace Maxa_Dash
         private bool isUpdating = false;
         private bool isRecord = false;
         private bool isNewSetpointAvailable = false;
+        private bool isResetErrors;
 
         private float setpointMaxCool = 23.0f;
         private float setpointMinCool = 5.0f;
         private float setpointMaxHeat = 55.0f;
         private float setpointMinHeat = 25.0f;
-        private int opMode;
 
+        private int opMode;
         private int[] activeErrors;
-        private bool isResetErrors;
+
+        private DateTime lastSuccesfullCommunication;
+        private readonly double miscommunicationMinDuration = 0.5; // minimum duration of miscommunication to indicate an error (in minutes)
 
         public MainWindow()
         {
@@ -195,6 +198,7 @@ namespace Maxa_Dash
                     Maxa.ReadManufacturingInfo(notifier, modbusClient);
                     ConnectButton.IsEnabled = false;
                     notifier.E000 = DataConverter.GetAlarmColor(false);
+                    lastSuccesfullCommunication = DateTime.Now;
                 }
                 else
                 {
@@ -255,11 +259,16 @@ namespace Maxa_Dash
 
                     ResetErrorsButton.IsEnabled = (activeErrors.Length > 0) ? true : false;
 
+                    lastSuccesfullCommunication = DateTime.Now;
+                    notifier.E000 = DataConverter.GetAlarmColor(false);
                 }
                 catch
                 {
-                    notifier.waterInTemp = 100005;
-                    notifier.waterOutTemp = 100000;
+                    if (DateTime.Now - lastSuccesfullCommunication > TimeSpan.FromMinutes(miscommunicationMinDuration))
+                    {
+                        notifier.E000 = DataConverter.GetAlarmColor(true);
+                        messagesPanel.AddMessage(ref messageLabelsList, "Communication error", 0.1f, Brushes.Red);
+                    }
                 }
             }
             else

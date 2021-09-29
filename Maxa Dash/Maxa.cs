@@ -39,6 +39,7 @@ namespace Maxa_Dash
             catch
             {
                 // indicate problem in communication
+                throw;
             }
         }
 
@@ -81,6 +82,7 @@ namespace Maxa_Dash
             catch
             {
                 // indicate problem in communication
+                throw;
             }
         }
 
@@ -113,6 +115,7 @@ namespace Maxa_Dash
             catch
             {
                 // indicate problem in communication
+                throw;
             }
         }
 
@@ -153,6 +156,7 @@ namespace Maxa_Dash
             catch
             {
                 // indicate problem in communication
+                throw;
             }
         }
 
@@ -174,6 +178,7 @@ namespace Maxa_Dash
             catch
             {
                 // indicate problem in communication
+                throw;
             }
         }
 
@@ -190,10 +195,11 @@ namespace Maxa_Dash
                 int[] data = modbusClient.ReadHoldingRegisters(Registers.MachineStateReadReg, 1);
                 notifier.generalState = DataConverter.GetMachineState(data[0]);
             }
-            catch (ArgumentException)
+            catch
             {
                 notifier.generalState = NotifyNewData.MachinelState.NA;
                 // indicate problem in communication
+                throw;
             }
         }
 
@@ -349,6 +355,7 @@ namespace Maxa_Dash
             catch
             {
                 // indicate problem in communication
+                throw;
             }
 
             return ErrorContainingRegistorsList.ToArray();
@@ -384,6 +391,7 @@ namespace Maxa_Dash
                 notifier.firmwareVersion = "couldn't receive data";
                 notifier.firmwareRelease = "couldn't receive data";
                 notifier.firmwareCreationDate = "couldn't receive data";
+                throw;
             }
         }
 
@@ -416,6 +424,7 @@ namespace Maxa_Dash
             catch
             {
                 // indicate problem in communication
+                throw;
             }
         }
 
@@ -445,8 +454,8 @@ namespace Maxa_Dash
             }
             catch
             {
-                return false;
                 // indicate problem in communication
+                throw;
             }
 
             return true; 
@@ -469,6 +478,7 @@ namespace Maxa_Dash
             catch
             {
                 // indicate problem in communication
+                throw;
             }
         }
 
@@ -480,9 +490,16 @@ namespace Maxa_Dash
         /// <returns>no return value</returns>
         public static void ResetErrors(ModbusClient modbusClient, int[] errorsRegistersArray)
         {
-            foreach(int register in errorsRegistersArray)
+            try
             {
-                modbusClient.WriteSingleRegister(register, 0);
+                foreach(int register in errorsRegistersArray)
+                {
+                    modbusClient.WriteSingleRegister(register, 0);
+                }
+            }
+            catch
+            {
+                throw;
             }
         }
     }
