@@ -246,7 +246,7 @@ namespace Maxa_Dash
                         Maxa.UpdateWaterSystemParameters(notifier, modbusClient, FileWriter);
                         Maxa.UpdateRefrigirationSystemParameters(notifier, modbusClient, FileWriter);
                         Maxa.UpdateReadOnlySetpoints(notifier, modbusClient, FileWriter);
-                        activeErrors = Maxa.ReadErrors(notifier, modbusClient);
+                        activeErrors = Maxa.ReadErrors(notifier, modbusClient, FileWriter);
                         FileWriter.WriteToFile();
                     }
                     else
