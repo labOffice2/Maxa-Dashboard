@@ -232,7 +232,7 @@ namespace Maxa_Dash
                     if (isNewSetpointAvailable)
                     {
                         Maxa.WriteSetPoints(notifier, modbusClient);
-                        bool isSPWritten = Maxa.VerifySetpoints(notifier, modbusClient);
+                        bool isSPWritten = isRecord? Maxa.VerifySetpoints(notifier, modbusClient,FileWriter) : Maxa.VerifySetpoints(notifier, modbusClient);
                         if (!isSPWritten) messagesPanel.AddMessage(ref messageLabelsList, "new setpoint not applied", 0.1f, Brushes.Red);
                         else messagesPanel.AddMessage(ref messageLabelsList, "new setpoint successfully applied", 0.1f, Brushes.Green);
                         Maxa.WriteOperatinMode(modbusClient, opMode);
@@ -241,10 +241,11 @@ namespace Maxa_Dash
 
                     if (isRecord)
                     {
-                        Maxa.UpdateOperationMode(notifier, modbusClient);
-                        Maxa.UpdateWaterSystemParametersNRecord(notifier, modbusClient, FileWriter);
-                        Maxa.UpdateRefrigirationSystemParametersNRecord(notifier, modbusClient, FileWriter);
-                        Maxa.UpdateReadOnlySetpoints(notifier, modbusClient);
+                        Maxa.VerifySetpoints(notifier, modbusClient, FileWriter);
+                        Maxa.UpdateOperationMode(notifier, modbusClient,FileWriter);
+                        Maxa.UpdateWaterSystemParameters(notifier, modbusClient, FileWriter);
+                        Maxa.UpdateRefrigirationSystemParameters(notifier, modbusClient, FileWriter);
+                        Maxa.UpdateReadOnlySetpoints(notifier, modbusClient, FileWriter);
                         activeErrors = Maxa.ReadErrors(notifier, modbusClient);
                         FileWriter.WriteToFile();
                     }
