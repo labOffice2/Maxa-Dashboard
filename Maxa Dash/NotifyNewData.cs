@@ -7,12 +7,22 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Media;
 
+/// <summary>
+/// This class is the data binding class for the UI.
+/// It contains all varibales and values diplayed on the UI.
+/// The variables in this class are updated by different class.
+/// </summary>
 namespace Maxa_Dash
 {
     public class NotifyNewData : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
+        /// <summary>
+        /// This event is triggered every time a varible value changes.
+        /// I notifies the relevant UI element to update its value.
+        /// </summary>
+        /// <param name="propertyName">The name of the property that changed</param>
         private void INotifyPropertyChanged(string propertyName = "")
         {
             if (PropertyChanged != null)
@@ -1241,7 +1251,7 @@ namespace Maxa_Dash
         #endregion
 
 
-
+        // This enum is used to display machine state (operation mode)
         public enum MachinelState
         {
             STANDBY,
@@ -1253,6 +1263,7 @@ namespace Maxa_Dash
             NA,
         }
 
+        /* from older version
         public enum PlantMode
         {
             NA,
@@ -1266,7 +1277,9 @@ namespace Maxa_Dash
             OFF,
             RUNNING,
         }
+        */
 
+        // This enum is used to display defrost mode
         public enum DefrostState
         {
             NA,

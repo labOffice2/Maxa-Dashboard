@@ -37,7 +37,7 @@ namespace Maxa_Dash
         private Timer timer;
 
         private UserMessages messagesPanel;
-        private List<UserMessages.MessageLabel> messageLabelsList = new List<UserMessages.MessageLabel>();
+        //private List<UserMessages.MessageLabel> messageLabelsList = new List<UserMessages.MessageLabel>();
 
         private bool isConnected = false;
         private bool isUpdating = false;
@@ -72,6 +72,7 @@ namespace Maxa_Dash
             messagesPanel = new UserMessages(MessagePanel);
         }
 
+        /* moved to UserMessages class
         private void RemoveOldMessages()
         {
             foreach(var item in messageLabelsList.ToArray())
@@ -88,7 +89,11 @@ namespace Maxa_Dash
                 }
             }
         }
+        */
 
+        /// <summary>
+        /// This function fills the ComboBoxes in the UI with optios (ComboBoxItems).
+        /// </summary>
         private void SetComboBoxes()
         {
             // fill communication port ComboBox
@@ -166,16 +171,28 @@ namespace Maxa_Dash
 
         }
 
+        /// <summary>
+        /// This function is called by the timer whenever it elapses
+        /// It calls UpdateValues and RemoveOldMessages functions
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Elapsed(object sender, ElapsedEventArgs e)
         {
             Dispatcher.Invoke(() =>
             {
                 UpdateValues();
-                RemoveOldMessages();
+                //RemoveOldMessages();
+                messagesPanel.RemoveOldMessages();
             });
             
         }
 
+        /// <summary>
+        /// This function handles the communication connection to the Maxa 
+        /// It attempts to gets the communication setting from the gui and then establish connection.
+        /// If connection cannot be established it will notify the user
+        /// </summary>
         void SetModbus()
         {
             try
@@ -203,12 +220,13 @@ namespace Maxa_Dash
                 else
                 {
                     notifier.E000 = DataConverter.GetAlarmColor(true);
-                    messagesPanel.AddMessage(ref messageLabelsList,"couldn't connect", 0.1f, Brushes.Red);
+                    messagesPanel.AddMessage("couldn't connect", 0.1f, Brushes.Red);
                 }
             }
             catch
             {
                 notifier.E000 = DataConverter.GetAlarmColor(true);
+                messagesPanel.AddMessage("couldn't connect", 0.1f, Brushes.Red);
                 notifier.waterInTemp += 10;
                 notifier.waterOutTemp = 100000;
                 isConnected = false;
@@ -216,6 +234,20 @@ namespace Maxa_Dash
 
         }
 
+
+        /// <summary>
+        /// This function is called periodically by the elapsed (every time the timer of 2 seconds elapses)
+        /// This hanldes the communication with the Maxa machine according to flags set by used input.
+        /// Fisrt It verifies that the last update proccess finished, otherwise it returns from the function.
+        /// If the Maxa is connected it does the following tasks:
+        ///     Resets error - if flag is set
+        ///     sets new operation mode and setpoint - if flag is set
+        ///     reads all relevant registers from Maxa and updates UI
+        ///     records the data received to csv file - if flag is set
+        ///     updates time of last successful communication
+        /// 
+        /// if there is a communication problem it checks when was the last successful communication and triggers an error after 30 seconds
+        /// </summary>
         private void UpdateValues()
         {
             if (isUpdating) return;
@@ -233,8 +265,8 @@ namespace Maxa_Dash
                     {
                         Maxa.WriteSetPoints(notifier, modbusClient);
                         bool isSPWritten = isRecord? Maxa.VerifySetpoints(notifier, modbusClient,FileWriter) : Maxa.VerifySetpoints(notifier, modbusClient);
-                        if (!isSPWritten) messagesPanel.AddMessage(ref messageLabelsList, "new setpoint not applied", 0.1f, Brushes.Red);
-                        else messagesPanel.AddMessage(ref messageLabelsList, "new setpoint successfully applied", 0.1f, Brushes.Green);
+                        if (!isSPWritten) messagesPanel.AddMessage("new setpoint not applied", 0.1f, Brushes.Red);
+                        else messagesPanel.AddMessage("new setpoint successfully applied", 0.1f, Brushes.Green);
                         Maxa.WriteOperatinMode(modbusClient, opMode);
                         isNewSetpointAvailable = false;
                     }
@@ -265,10 +297,11 @@ namespace Maxa_Dash
                 }
                 catch
                 {
+                    // Verify continuous communication with the Maxa
                     if (DateTime.Now - lastSuccesfullCommunication > TimeSpan.FromMinutes(miscommunicationMinDuration))
                     {
                         notifier.E000 = DataConverter.GetAlarmColor(true);
-                        messagesPanel.AddMessage(ref messageLabelsList, "Communication error", 0.1f, Brushes.Red);
+                        messagesPanel.AddMessage("Communication error", 0.1f, Brushes.Red);
                     }
                 }
             }
@@ -281,13 +314,26 @@ namespace Maxa_Dash
 
         }
 
+        /// <summary>
+        /// This function is called when the user presses the "connect" button
+        /// It calls the SetModbus() function to attempt to connect to the Maxa.
+        /// It also starts the timer responsible to periodically sample the Maxa.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OnClick_ConnectButton(object sender, RoutedEventArgs e)
         {
             SetModbus();
             timer.Start();
         }
 
-        // Openning a file browser to select a folder for CSV output file
+        /// <summary>
+        /// This function is triggered when the "set path" button is pressed.
+        /// It opens a file browser to select a folder for CSV output file.
+        /// It generates a FileWriter object with the path set by the user.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void PathSelectionButton_Click(object sender, RoutedEventArgs e)
         {
             CommonOpenFileDialog commonFileDialog = new CommonOpenFileDialog();
@@ -301,6 +347,13 @@ namespace Maxa_Dash
             }
         }
 
+        /// <summary>
+        /// This function is triggered when the used presses the "start recording" button
+        /// It verifies that the user set a path for the file, if not - it notifies the user to do so.
+        /// Otherwise it sets the isRecord flag to true to signal the program to start recording.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void StartRecordingButton_Click(object sender, RoutedEventArgs e)
         {
             if(FileWriter != null)
@@ -318,13 +371,13 @@ namespace Maxa_Dash
             }
             else
             {
-                messagesPanel.AddMessage(ref messageLabelsList, "Select folder for scv file", 0.1f);
+                messagesPanel.AddMessage("Select folder for scv file", 0.1f);
                 MessageBox.Show("Please select a folder");
             }
         }
 
         // Handling setpoint settings ranges - auto fix
-        #region setpoint range handling
+        #region setpoint range handling and auto fixing
         private void CoolSP1_LostFocus(object sender, RoutedEventArgs e)
         {
             VerifySetpoint(CoolSP1, true);
@@ -359,6 +412,12 @@ namespace Maxa_Dash
             else if (float.Parse(DHWPrepSP.Text) < minSP) DHWPrepSP.Text = minSP.ToString();
         }
 
+        /// <summary>
+        /// This function checks that a given setpoint (in the form for a testBox) set by the user is within the accepted range.
+        /// If the setpoint in the TextBox is out of range - resets the TextBox value to the nearest setpoint limit.
+        /// </summary>
+        /// <param name="textBox">The TextBox that needs to be checked</param>
+        /// <param name="isCoolSP">This flag is used to signal if the TextBox contains a cooling or heating setpoint (true for cool setpoint)</param>
         private void VerifySetpoint(TextBox textBox,bool isCoolSP)
         {
             float maxSP;
@@ -385,22 +444,35 @@ namespace Maxa_Dash
 
         #endregion
 
+        /// <summary>
+        /// This function is called when the user presses the "send new settings" button
+        /// It gets the selected operation mode from the comboBox and sets true the isNewSetpointsAvailable.
+        /// If communication is not established yet - a message is displayed to the user
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ApplySetpoints_Click(object sender, RoutedEventArgs e)
         {
             if(modbusClient != null)
             {
-                isNewSetpointAvailable = true;
-
                 ComboBoxItem opModeItem = (ComboBoxItem)OpModeBox.SelectedItem;
                 NotifyNewData.MachinelState machinelState = (NotifyNewData.MachinelState)opModeItem.Content;
                 opMode = (int)machinelState;
+
+                isNewSetpointAvailable = true;
             }
             else
             {
-                messagesPanel.AddMessage(ref messageLabelsList, "Connect to the maxa to set new setpoints", 0.1f);
+                messagesPanel.AddMessage("Connect to the maxa to set new setpoints", 0.1f);
             }
         }
 
+        /// <summary>
+        /// This function is called when the user presses the "reset active errors" button
+        /// If there are any active errors it sets true the isResetErrors flag
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ResetErrorsButton_Click(object sender, RoutedEventArgs e)
         {
             if(activeErrors.Length > 0)

@@ -4,6 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
+/// <summary>
+/// This class is based on the Err class (see botton of class)
+/// This class defines an Err object for each possible/relevnat error code.
+/// The Err object contains:
+///                         1) The address of the register of this error
+///                         2) The bit representing the error
+///                         3) Bit mask to get the specific error (calculated)
+///                         4) A description of the error (currently not used)
+///                         5) The error code
+/// </summary>
 namespace Maxa_Dash
 {
     public static class ErrorCodes

@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 
+
+/// <summary>
+/// This class contains the addresses of the registers in the Maxa machine
+/// </summary>
 namespace Maxa_Dash
 {
     public static class Registers

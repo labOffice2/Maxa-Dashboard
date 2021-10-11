@@ -5,6 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+/// <summary>
+/// This static class is responsible for the communication with the Maxa machine - reading and writing.
+/// It updates the UI variables in NotifyNewData, and the data to be writen in the csv file if relevant.
+/// </summary>
 namespace Maxa_Dash
 {
     public static class Maxa
