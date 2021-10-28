@@ -71,5 +71,10 @@ namespace Maxa_Dash
             return state;
         }
 
+        public static NotifyNewData.PlantVentingState GetPlantVentingState(int regiterData)
+        {
+            return (regiterData & Registers.ForcePlantVenting) > 0 ? NotifyNewData.PlantVentingState.ACTIVE : NotifyNewData.PlantVentingState.INACTIVE;
+        }
+
     }
 }

@@ -524,6 +524,20 @@ namespace Maxa_Dash
             }
         }
 
+        private PlantVentingState _plantVentingState = PlantVentingState.NA;
+        public PlantVentingState plantVentingState
+        {
+            get { return _plantVentingState; }
+            set
+            {
+                if (_plantVentingState != value)
+                {
+                    _plantVentingState = value;
+                    INotifyPropertyChanged(nameof(plantVentingState));
+                }
+            }
+        }
+
 
         /* from older version of register mapping - irrelevant
         private PlantMode _plantMode = PlantMode.NA;
@@ -1325,6 +1339,14 @@ namespace Maxa_Dash
             IN_PROGRESS,
             FAILED,
             DONE,
+        }
+
+        public enum PlantVentingState
+        {
+            NA,
+            INACTIVE,
+            DEACTIVATING,
+            ACTIVE,
         }
     }
 }

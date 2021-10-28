@@ -226,7 +226,8 @@ namespace Maxa_Dash
             {
                 int[] data = modbusClient.ReadHoldingRegisters(Registers.MachineStateReadReg, 1);
                 notifier.generalState = DataConverter.GetMachineState(data[0]);
-
+                data = modbusClient.ReadHoldingRegisters(Registers.ForcingBitMaskReg, 1);
+                notifier.plantVentingState = DataConverter.GetPlantVentingState(data[0]);
             }
             catch
             {
@@ -249,9 +250,12 @@ namespace Maxa_Dash
             {
                 int[] data = modbusClient.ReadHoldingRegisters(Registers.MachineStateReadReg, 1);
                 notifier.generalState = DataConverter.GetMachineState(data[0]);
+                data = modbusClient.ReadHoldingRegisters(Registers.ForcingBitMaskReg, 1);
+                notifier.plantVentingState = DataConverter.GetPlantVentingState(data[0]);
                 fileWriter.dataDictionary["Machine state"] = notifier.generalState.ToString();
                 fileWriter.dataDictionary["Defrost state"] = notifier.defrostState.ToString();
                 fileWriter.dataDictionary["Anti-legionella state"] = notifier.antiLegionellaState.ToString();
+                fileWriter.dataDictionary["Plant venting state"] = notifier.plantVentingState.ToString();
             }
             catch
             {
@@ -810,8 +814,30 @@ namespace Maxa_Dash
         {
             try
             {
-
                 modbusClient.WriteSingleRegister(Registers.ForcingBitMaskReg, Registers.ForceDefrost);
+            }
+            catch
+            {
+                // indicate problem in communication
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Force a plant venting
+        /// </summary>
+        /// <param name="modbusClient">Modbus client object currently connected to a Maxa unit</param>
+        /// <param name="activate">true to activate, false to stop plant venting</param>
+        /// <returns>no return value</returns>
+        public static void ForcePlantVenting(ModbusClient modbusClient, bool activate)
+        {
+            try
+            {
+                if(activate)
+                    modbusClient.WriteSingleRegister(Registers.ForcingBitMaskReg, Registers.ForcePlantVenting);
+
+                else
+                    modbusClient.WriteSingleRegister(Registers.ForcingBitMaskReg, 0);
             }
             catch
             {

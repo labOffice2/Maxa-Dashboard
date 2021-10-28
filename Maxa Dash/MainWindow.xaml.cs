@@ -47,6 +47,7 @@ namespace Maxa_Dash
         private bool isResetErrors;
         private bool forceDefrostFlag;
         private bool antiLegionellaFlag;
+        private bool plantVentingflag;
 
         private float setpointMaxCool = 23.0f;
         private float setpointMinCool = 5.0f;
@@ -282,6 +283,14 @@ namespace Maxa_Dash
                     if (forceDefrostFlag)
                     {
                         Maxa.ForceDefrost(modbusClient);
+                    }
+
+                    if(plantVentingflag || notifier.plantVentingState == NotifyNewData.PlantVentingState.DEACTIVATING)
+                    {
+                        if (plantVentingflag)
+                            Maxa.ForcePlantVenting(modbusClient, true); // activate plant venting
+                        else
+                            Maxa.ForcePlantVenting(modbusClient, false); // deactivate plant venting
                     }
 
                     if (isRecord)
@@ -543,6 +552,28 @@ namespace Maxa_Dash
                     notifier.PropertyChanged -= AntilegionellaEnded;
                     ActivateAntiLegionellaButton.IsEnabled = true;
                     messagesPanel.AddMessage("Defrost cycle ended", 0.2f);
+                }
+            }
+        }
+
+        private void PlantVentingButton_Click(object sender, RoutedEventArgs e)
+        {
+            if(opMode == 0)     // only available on standby mode
+            {
+                switch(notifier.plantVentingState)
+                {
+                    case NotifyNewData.PlantVentingState.NA:
+                    case NotifyNewData.PlantVentingState.INACTIVE:
+                        PlantVentingButton.IsEnabled = false;
+                        plantVentingflag = true;
+                        messagesPanel.AddMessage("Activating plant venting", 0.2f);
+                        break;
+
+                    case NotifyNewData.PlantVentingState.ACTIVE:
+                        plantVentingflag = false;
+                        notifier.plantVentingState = NotifyNewData.PlantVentingState.DEACTIVATING;
+                        messagesPanel.AddMessage("Deactivating plant venting", 0.2f);
+                        break;
                 }
             }
         }

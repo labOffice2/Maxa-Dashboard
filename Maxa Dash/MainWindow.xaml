@@ -258,6 +258,7 @@
                     <Label Content="Anti-legionella state:" Grid.Column="1" />
                     <Label Content="{Binding antiLegionellaState, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" />
                 </Grid>
+                
                 <!-- from old version of register mapping - irrelevant
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -277,6 +278,17 @@
                     <Label Content="Machine mode:" Grid.Column="1" />
                     <Label Content="{Binding machineMode, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" RenderTransformOrigin="-0.222,0.106"/>
                 </Grid> -->
+            </StackPanel>
+            <StackPanel Grid.Column="1" Grid.Row="1">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="AUTO"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Plant venting state:" Grid.Column="1" />
+                    <Label Content="{Binding plantVentingState, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" />
+                </Grid>
             </StackPanel>
             <!-- from old version of register mapping - irrelevant
             <StackPanel Grid.Column="1" Grid.Row="1">
@@ -316,6 +328,7 @@
             <StackPanel Grid.Row="1">
                 <Button Name="ForceDefrostButton" Content="Force defrost" Margin="5" Click="ForceDefrost_Click"/>
                 <Button Name="ActivateAntiLegionellaButton" Content="Activate anti-legionella" Margin="5" Click="ActivateAntiLegionella_Click"/>
+                <Button Name="PlantVentingButton" Content="Activate plant venting" Margin="5" Click="PlantVentingButton_Click"/>
             </StackPanel>
             <StackPanel Grid.Row="1" Grid.Column="2">
                 
