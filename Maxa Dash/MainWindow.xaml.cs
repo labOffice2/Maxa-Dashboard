@@ -246,6 +246,7 @@ namespace Maxa_Dash
         /// If the Maxa is connected it does the following tasks:
         ///     Resets error - if flag is set
         ///     sets new operation mode and setpoint - if flag is set
+        ///     handles the special functions if needed
         ///     reads all relevant registers from Maxa and updates UI
         ///     records the data received to csv file - if flag is set
         ///     updates time of last successful communication
@@ -362,7 +363,7 @@ namespace Maxa_Dash
         private void PathSelectionButton_Click(object sender, RoutedEventArgs e)
         {
             CommonOpenFileDialog commonFileDialog = new CommonOpenFileDialog();
-            commonFileDialog.IsFolderPicker = true;
+            commonFileDialog.IsFolderPicker = false;
             
             if(commonFileDialog.ShowDialog() == CommonFileDialogResult.Ok)
             {
@@ -381,7 +382,14 @@ namespace Maxa_Dash
         /// <param name="e"></param>
         private void StartRecordingButton_Click(object sender, RoutedEventArgs e)
         {
-            if(FileWriter != null)
+            
+            if(!isConnected)
+            {
+                messagesPanel.AddMessage("First connect to the Maxa", 0.1f);
+                return;
+            }
+
+            else if(FileWriter != null)
             {
                 if(isRecord)
                 {

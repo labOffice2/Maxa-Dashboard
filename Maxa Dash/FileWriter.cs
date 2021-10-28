@@ -18,7 +18,7 @@ namespace Maxa_Dash
     public class FileWriter
     {
         private string filePath;
-        private string fileName = "\\Maxa recorded data" + DateTime.Now.ToLongDateString() + ".csv";
+        //private string fileName = "\\Maxa recorded data" + DateTime.Now.ToLongDateString() + ".csv";
         private bool isHeadersInitililzed = false;
         public Dictionary<string, string> dataDictionary = new Dictionary<string, string>();
 
@@ -29,7 +29,7 @@ namespace Maxa_Dash
         /// <param name="filePath">This string specifies the location to save the csv file</param>
         public FileWriter(string filePath)
         {
-            this.filePath = filePath + fileName;
+            this.filePath = filePath + ".csv";
             dataDictionary["Time"] = DateTime.Now.ToString();
         }
 
