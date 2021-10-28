@@ -23,6 +23,8 @@ namespace Maxa_Dash
         //Machine state
         public const int MachineStateWriteReg = 7200;
         public const int MachineStateReadReg = 200;
+        public const int DefrostState = 7214;
+        public const int AntiLegionellaState = 7216;
 
         // Temperatures
         public const int InputWaterTempReg = 400;
@@ -105,5 +107,13 @@ namespace Maxa_Dash
         public const int ForcePlantVenting = 0b00100000;            // only if the machine state is standby
         public const int SanitaryDisabling = 0b01000000;
         public const int ForceDefrost = 0b10000000;
+
+        // Bit masks for register 7214 (Defrost status)
+        public const int DefrostCall = 0b0010000000000000; // bit 13
+        public const int DefrostInProgress = 0b0100000000000000; // bit 14
+
+        // Bit masks for register 7216 (anti-legionella status)
+        public const int AntilegionellaInProgress = 0b00100000;
+        public const int AntilegionellaFailed = 0b01000000;
     }
 }

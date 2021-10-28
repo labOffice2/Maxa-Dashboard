@@ -115,6 +115,9 @@ namespace Maxa_Dash
 
                 data = modbusClient.ReadHoldingRegisters(Registers.CompSuctionTempReg, 1);
                 notifier.comp1SucTemp = data[0];
+
+                data = modbusClient.ReadHoldingRegisters(Registers.DefrostState, 1);
+                notifier.defrostState = DataConverter.GetDefrostState(data[0]);
             }
             catch
             {
@@ -247,12 +250,35 @@ namespace Maxa_Dash
                 int[] data = modbusClient.ReadHoldingRegisters(Registers.MachineStateReadReg, 1);
                 notifier.generalState = DataConverter.GetMachineState(data[0]);
                 fileWriter.dataDictionary["Machine state"] = notifier.generalState.ToString();
+                fileWriter.dataDictionary["Defrost state"] = notifier.defrostState.ToString();
+                fileWriter.dataDictionary["Anti-legionella state"] = notifier.antiLegionellaState.ToString();
             }
             catch
             {
                 notifier.generalState = NotifyNewData.MachinelState.NA;
                 fileWriter.dataDictionary["Machine state"] = notifier.generalState.ToString();
                 // indicate problem in communication
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Reads anti-legionella status and updates gui
+        /// </summary>
+        /// <param name="notifier">Object holding all variables for data biniding</param>
+        /// <param name="modbusClient">Modbus client object currently connected to a Maxa unit</param>
+        /// <returns>No return value</returns>
+        public static void UpdateAntiLegionellaState(NotifyNewData notifier, ModbusClient modbusClient)
+        {
+            try
+            {
+                int[] data = modbusClient.ReadHoldingRegisters(Registers.AntiLegionellaState, 1);
+                int[] alarmData = modbusClient.ReadHoldingRegisters(Registers.Alarm942_972Reg, 1);
+                notifier.antiLegionellaState = DataConverter.GetAntiLegionellaState(data[0], alarmData[0]);
+
+            }
+            catch
+            {
                 throw;
             }
         }
@@ -747,6 +773,45 @@ namespace Maxa_Dash
                 modbusClient.WriteSingleRegister(Registers.EnableWritingBitMaskReg, Registers.EnableMachineStateWriting);
 
                 modbusClient.WriteSingleRegister(Registers.MachineStateWriteReg, opMode);
+            }
+            catch
+            {
+                // indicate problem in communication
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Send a request to start anti-legionella cycle
+        /// </summary>
+        /// <param name="modbusClient">Modbus client object currently connected to a Maxa unit</param>
+        /// <returns>no return value</returns>
+        public static void RequestAntiLegionellaCycle(ModbusClient modbusClient)
+        {
+            try
+            {
+                modbusClient.WriteSingleRegister(Registers.EnableWritingBitMaskReg, Registers.EnableAntiLegionellaCycle);
+
+                modbusClient.WriteSingleRegister(Registers.ForcingBitMaskReg, Registers.ActivateAntiLegionellaCycle);
+            }
+            catch
+            {
+                // indicate problem in communication
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Force a defrost cycle
+        /// </summary>
+        /// <param name="modbusClient">Modbus client object currently connected to a Maxa unit</param>
+        /// <returns>no return value</returns>
+        public static void ForceDefrost(ModbusClient modbusClient)
+        {
+            try
+            {
+
+                modbusClient.WriteSingleRegister(Registers.ForcingBitMaskReg, Registers.ForceDefrost);
             }
             catch
             {

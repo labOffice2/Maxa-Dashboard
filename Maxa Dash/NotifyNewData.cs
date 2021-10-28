@@ -496,6 +496,35 @@ namespace Maxa_Dash
             }
         }
 
+        private DefrostState _defrostState = DefrostState.NA;
+        public DefrostState defrostState
+        {
+            get { return _defrostState; }
+            set
+            {
+                if (_defrostState != value)
+                {
+                    _defrostState = value;
+                    INotifyPropertyChanged(nameof(defrostState));
+                }
+            }
+        }
+
+        private AntilegionellaState _antiLegionellaState = AntilegionellaState.NA;
+        public AntilegionellaState antiLegionellaState
+        {
+            get { return _antiLegionellaState; }
+            set
+            {
+                if (_antiLegionellaState != value)
+                {
+                    _antiLegionellaState = value;
+                    INotifyPropertyChanged(nameof(antiLegionellaState));
+                }
+            }
+        }
+
+
         /* from older version of register mapping - irrelevant
         private PlantMode _plantMode = PlantMode.NA;
         public PlantMode plantMode
@@ -1284,11 +1313,18 @@ namespace Maxa_Dash
         {
             NA,
             INACTIVE,
-            STARTING,
-            ACTIVE,
-            DRIPPING,
-            FINISHING,
+            CALL_ACTIVE,
+            IN_PROGRESS,
         }
 
+        // This enum is used to display anti-legionella cycle state
+        public enum AntilegionellaState
+        {
+            NA,
+            INACTIVE,
+            IN_PROGRESS,
+            FAILED,
+            DONE,
+        }
     }
 }

@@ -14,12 +14,14 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="1*"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
 
-        <Grid> <!--manufacturing data grid-->
+        <Grid>
+            <!--manufacturing data grid-->
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="10"/>
                 <ColumnDefinition Width="AUTO"/>
@@ -41,7 +43,8 @@
             <Label Content="{Binding firmwareCreationDate, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" Grid.Column="2"/>
         </Grid>
 
-        <Grid Grid.Row="1"> <!-- water system data-->
+        <Grid Grid.Row="1">
+            <!-- water system data-->
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
@@ -90,7 +93,7 @@
                     <Label Content="{Binding DHWPrePRecirculationTemp, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" RenderTransformOrigin="-0.222,0.106"/>
                 </Grid>
             </StackPanel>
-            
+
             <StackPanel Grid.Column="1" Grid.Row="1">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -129,9 +132,11 @@
                     <Label Content="{Binding RadiantPanelMixerTemp, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" RenderTransformOrigin="-0.222,0.106"/>
                 </Grid>
             </StackPanel>
-        </Grid> <!-- water system data-->
-        
-        <Grid Grid.Row="2">  <!-- refrigiration system data-->
+        </Grid>
+        <!-- water system data-->
+
+        <Grid Grid.Row="2">
+            <!-- refrigiration system data-->
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
@@ -210,9 +215,11 @@
                     <Label Content="{Binding condendsationTemp, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" RenderTransformOrigin="-0.222,0.106"/>
                 </Grid>
             </StackPanel>
-        </Grid> <!-- end refrigiration system data-->
+        </Grid>
+        <!-- end refrigiration system data-->
 
-        <Grid Grid.Row="3"> <!-- operation mode data-->
+        <Grid Grid.Row="3">
+            <!-- operation mode data-->
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
@@ -231,7 +238,25 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
                     <Label Content="Machine state:" Grid.Column="1" />
-                    <Label Content="{Binding generalState, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" RenderTransformOrigin="-0.222,0.106"/>
+                    <Label Content="{Binding generalState, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" />
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="AUTO"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Defrost state:" Grid.Column="1" />
+                    <Label Content="{Binding defrostState, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" />
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="AUTO"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Anti-legionella state:" Grid.Column="1" />
+                    <Label Content="{Binding antiLegionellaState, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" />
                 </Grid>
                 <!-- from old version of register mapping - irrelevant
                 <Grid>
@@ -274,9 +299,33 @@
                     <Label Content="{Binding defrostState, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" RenderTransformOrigin="-0.222,0.106"/>
                 </Grid>
             </StackPanel> -->
-        </Grid> <!-- end  operation mode data-->
+        </Grid>
+        <!-- end  operation mode data-->
 
-        
+        <Grid Grid.Row="4"> <!-- Special function buttons-->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Border BorderBrush="Gray" BorderThickness="1" Grid.RowSpan="20" Grid.ColumnSpan="10"/>
+            <Label Content="Special function buttons" Grid.ColumnSpan="10" HorizontalAlignment="Center"/>
+            <StackPanel Grid.Row="1">
+                <Button Name="ForceDefrostButton" Content="Force defrost" Margin="5" Click="ForceDefrost_Click"/>
+                <Button Name="ActivateAntiLegionellaButton" Content="Activate anti-legionella" Margin="5" Click="ActivateAntiLegionella_Click"/>
+            </StackPanel>
+            <StackPanel Grid.Row="1" Grid.Column="2">
+                
+            </StackPanel>
+
+        </Grid>
+        <!-- End special function buttons-->
+
+
+
         <Grid Grid.Column="1" Grid.RowSpan="10">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>

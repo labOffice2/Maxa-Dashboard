@@ -53,5 +53,23 @@ namespace Maxa_Dash
             return data;
         }
 
+        public static NotifyNewData.DefrostState GetDefrostState(int registerData)
+        {
+            NotifyNewData.DefrostState state = NotifyNewData.DefrostState.INACTIVE;
+            state = (registerData & Registers.DefrostCall) > 0 ? NotifyNewData.DefrostState.CALL_ACTIVE : state;
+            state = (registerData & Registers.DefrostInProgress) > 0 ? NotifyNewData.DefrostState.IN_PROGRESS : state;
+            return state;
+        }
+
+        public static NotifyNewData.AntilegionellaState GetAntiLegionellaState(int registerData, int alarmRegister)
+        {
+            NotifyNewData.AntilegionellaState state = NotifyNewData.AntilegionellaState.INACTIVE;
+            state = (registerData & Registers.AntilegionellaFailed) > 0 ? NotifyNewData.AntilegionellaState.FAILED : state;
+            state = (registerData & Registers.AntilegionellaInProgress) > 0 ? NotifyNewData.AntilegionellaState.IN_PROGRESS : state;
+            state = (alarmRegister & ErrorCodes.AntiLegionellaDone.bitMask) > 0 ? NotifyNewData.AntilegionellaState.DONE : state;
+            state = (alarmRegister & ErrorCodes.AntiLegionellaFailure.bitMask) > 0 ? NotifyNewData.AntilegionellaState.FAILED : state;
+            return state;
+        }
+
     }
 }

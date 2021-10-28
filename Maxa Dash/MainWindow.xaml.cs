@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO.Ports;
 using System.Linq;
 using System.Text;
@@ -44,6 +45,8 @@ namespace Maxa_Dash
         private bool isRecord = false;
         private bool isNewSetpointAvailable = false;
         private bool isResetErrors;
+        private bool forceDefrostFlag;
+        private bool antiLegionellaFlag;
 
         private float setpointMaxCool = 23.0f;
         private float setpointMinCool = 5.0f;
@@ -271,6 +274,16 @@ namespace Maxa_Dash
                         isNewSetpointAvailable = false;
                     }
 
+                    if (antiLegionellaFlag)
+                    {
+                        Maxa.RequestAntiLegionellaCycle(modbusClient);
+                    }
+
+                    if (forceDefrostFlag)
+                    {
+                        Maxa.ForceDefrost(modbusClient);
+                    }
+
                     if (isRecord)
                     {
                         Maxa.VerifySetpoints(notifier, modbusClient, FileWriter);
@@ -302,6 +315,7 @@ namespace Maxa_Dash
                     {
                         notifier.E000 = DataConverter.GetAlarmColor(true);
                         messagesPanel.AddMessage("Communication error", 0.1f, Brushes.Red);
+                        ConnectButton.IsEnabled = true;
                     }
                 }
             }
@@ -478,6 +492,58 @@ namespace Maxa_Dash
             if(activeErrors.Length > 0)
             {
                 isResetErrors = true;
+            }
+        }
+
+        private void ForceDefrost_Click(object sender, RoutedEventArgs e)
+        {
+            if(opMode == 2 || opMode == 6) // must be on heating mode to activate defrost 
+            {
+                forceDefrostFlag = true;
+                ForceDefrostButton.IsEnabled = false;
+                notifier.PropertyChanged += DefrostEnded;
+            }
+            else
+                messagesPanel.AddMessage("Must be on heating mode to activate defrost", 0.2f);
+
+        }
+
+        private void DefrostEnded(object sender, PropertyChangedEventArgs e)
+        {
+            if(e.PropertyName == nameof(notifier.defrostState))
+            {
+                if (notifier.defrostState == NotifyNewData.DefrostState.CALL_ACTIVE)
+                    forceDefrostFlag = false;
+
+                if (notifier.defrostState == NotifyNewData.DefrostState.INACTIVE && forceDefrostFlag == false)
+                {
+                    notifier.PropertyChanged -= DefrostEnded;
+                    ForceDefrostButton.IsEnabled = true;
+                    messagesPanel.AddMessage("Defrost cycle ended", 0.2f);
+                }
+            }
+        }
+
+        private void ActivateAntiLegionella_Click(object sender, RoutedEventArgs e)
+        {
+            antiLegionellaFlag = true;
+            ActivateAntiLegionellaButton.IsEnabled = false;
+            notifier.PropertyChanged += AntilegionellaEnded;
+        }
+
+        private void AntilegionellaEnded(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(notifier.antiLegionellaState))
+            {
+                if (notifier.antiLegionellaState == NotifyNewData.AntilegionellaState.IN_PROGRESS)
+                    antiLegionellaFlag = false;
+
+                else if (antiLegionellaFlag == false)
+                {
+                    notifier.PropertyChanged -= AntilegionellaEnded;
+                    ActivateAntiLegionellaButton.IsEnabled = true;
+                    messagesPanel.AddMessage("Defrost cycle ended", 0.2f);
+                }
             }
         }
     }
