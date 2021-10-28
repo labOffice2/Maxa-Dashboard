@@ -3,882 +3,901 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         xmlns:local="clr-namespace:Maxa_Dash"
         mc:Ignorable="d"
         Title="Maxa Dashboard" Height="700" Width="1200">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="auto"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-        </Grid.RowDefinitions>
+        <TabControl>
+            <TabItem Header="General">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
 
-        <Grid>
-            <!--manufacturing data grid-->
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="10"/>
-                <ColumnDefinition Width="AUTO"/>
-                <ColumnDefinition Width="1*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-            </Grid.RowDefinitions>
-            <Border BorderBrush="Gray" BorderThickness="1" Grid.RowSpan="20" Grid.ColumnSpan="10"/>
-            <Label Content="Manufacturing Data" Grid.Row="0" Grid.ColumnSpan="10" HorizontalAlignment="Center"/>
-            <Label Content="Firmware version:" Grid.Row="1" Grid.Column="1"/>
-            <Label Content="{Binding firmwareVersion, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="2"/>
-            <Label Content="Firmware release:" Grid.Row="2" Grid.Column="1"/>
-            <Label Content="{Binding firmwareRelease, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="2"/>
-            <Label Content="Firware Creation:" Grid.Row="3" Grid.Column="1"/>
-            <Label Content="{Binding firmwareCreationDate, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" Grid.Column="2"/>
-        </Grid>
+                    <Grid>
+                        <!--manufacturing data grid-->
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="10"/>
+                            <ColumnDefinition Width="AUTO"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <Border BorderBrush="Gray" BorderThickness="1" Grid.RowSpan="20" Grid.ColumnSpan="10"/>
+                        <Label Content="Manufacturing Data" Grid.Row="0" Grid.ColumnSpan="10" HorizontalAlignment="Center"/>
+                        <Label Content="Firmware version:" Grid.Row="1" Grid.Column="1"/>
+                        <Label Content="{Binding firmwareVersion, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="2"/>
+                        <Label Content="Firmware release:" Grid.Row="2" Grid.Column="1"/>
+                        <Label Content="{Binding firmwareRelease, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="2"/>
+                        <Label Content="Firware Creation:" Grid.Row="3" Grid.Column="1"/>
+                        <Label Content="{Binding firmwareCreationDate, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" Grid.Column="2"/>
+                    </Grid>
 
-        <Grid Grid.Row="1">
-            <!-- water system data-->
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="1*"/>
-            </Grid.RowDefinitions>
-            <Border BorderBrush="Gray" BorderThickness="1" Grid.RowSpan="20" Grid.ColumnSpan="10"/>
-            <Label Content="Water system" Grid.ColumnSpan="10" HorizontalAlignment="Center"/>
-            <StackPanel Grid.Column="0" Grid.Row="1">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="10"/>
-                        <ColumnDefinition Width="AUTO"/>
-                        <ColumnDefinition Width="1*"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Content="Water output temperature:" Grid.Column="1" />
-                    <Label Content="{Binding waterOutTemp, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" RenderTransformOrigin="-0.222,0.106"/>
-                </Grid>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="10"/>
-                        <ColumnDefinition Width="AUTO"/>
-                        <ColumnDefinition Width="1*"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Content="Water input temperature:" Grid.Column="1" />
-                    <Label Content="{Binding waterInTemp, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" RenderTransformOrigin="-0.222,0.106"/>
-                </Grid>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="10"/>
-                        <ColumnDefinition Width="AUTO"/>
-                        <ColumnDefinition Width="1*"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Content="DHW temperature:" Grid.Column="1" />
-                    <Label Content="{Binding DHWTemp, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" RenderTransformOrigin="-0.222,0.106"/>
-                </Grid>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="10"/>
-                        <ColumnDefinition Width="AUTO"/>
-                        <ColumnDefinition Width="1*"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Content="DHW prep recirculation temperature:" Grid.Column="1" />
-                    <Label Content="{Binding DHWPrePRecirculationTemp, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" RenderTransformOrigin="-0.222,0.106"/>
-                </Grid>
-            </StackPanel>
+                    <Grid Grid.Row="1">
+                        <!-- water system data-->
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+                        <Border BorderBrush="Gray" BorderThickness="1" Grid.RowSpan="20" Grid.ColumnSpan="10"/>
+                        <Label Content="Water system" Grid.ColumnSpan="10" HorizontalAlignment="Center"/>
+                        <StackPanel Grid.Column="0" Grid.Row="1">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="10"/>
+                                    <ColumnDefinition Width="AUTO"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Content="Water output temperature:" Grid.Column="1" />
+                                <Label Content="{Binding waterOutTemp, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" RenderTransformOrigin="-0.222,0.106"/>
+                            </Grid>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="10"/>
+                                    <ColumnDefinition Width="AUTO"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Content="Water input temperature:" Grid.Column="1" />
+                                <Label Content="{Binding waterInTemp, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" RenderTransformOrigin="-0.222,0.106"/>
+                            </Grid>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="10"/>
+                                    <ColumnDefinition Width="AUTO"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Content="DHW temperature:" Grid.Column="1" />
+                                <Label Content="{Binding DHWTemp, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" RenderTransformOrigin="-0.222,0.106"/>
+                            </Grid>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="10"/>
+                                    <ColumnDefinition Width="AUTO"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Content="DHW prep recirculation temperature:" Grid.Column="1" />
+                                <Label Content="{Binding DHWPrePRecirculationTemp, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" RenderTransformOrigin="-0.222,0.106"/>
+                            </Grid>
+                        </StackPanel>
 
-            <StackPanel Grid.Column="1" Grid.Row="1">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="10"/>
-                        <ColumnDefinition Width="AUTO"/>
-                        <ColumnDefinition Width="1*"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Content="Pump analog output:" Grid.Column="1" />
-                    <Label Content="{Binding pumpAnalogOut, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" RenderTransformOrigin="-0.222,0.106"/>
-                </Grid>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="10"/>
-                        <ColumnDefinition Width="AUTO"/>
-                        <ColumnDefinition Width="1*"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Content="External air temperature:" Grid.Column="1" />
-                    <Label Content="{Binding externalAirTemp, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" RenderTransformOrigin="-0.222,0.106"/>
-                </Grid>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="10"/>
-                        <ColumnDefinition Width="AUTO"/>
-                        <ColumnDefinition Width="1*"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Content="Storage plant temperature:" Grid.Column="1" />
-                    <Label Content="{Binding storagePlantTemp, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" RenderTransformOrigin="-0.222,0.106"/>
-                </Grid>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="10"/>
-                        <ColumnDefinition Width="AUTO"/>
-                        <ColumnDefinition Width="1*"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Content="Radiant panel mix temperature:" Grid.Column="1" />
-                    <Label Content="{Binding RadiantPanelMixerTemp, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" RenderTransformOrigin="-0.222,0.106"/>
-                </Grid>
-            </StackPanel>
-        </Grid>
-        <!-- water system data-->
+                        <StackPanel Grid.Column="1" Grid.Row="1">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="10"/>
+                                    <ColumnDefinition Width="AUTO"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Content="Pump analog output:" Grid.Column="1" />
+                                <Label Content="{Binding pumpAnalogOut, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" RenderTransformOrigin="-0.222,0.106"/>
+                            </Grid>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="10"/>
+                                    <ColumnDefinition Width="AUTO"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Content="External air temperature:" Grid.Column="1" />
+                                <Label Content="{Binding externalAirTemp, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" RenderTransformOrigin="-0.222,0.106"/>
+                            </Grid>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="10"/>
+                                    <ColumnDefinition Width="AUTO"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Content="Storage plant temperature:" Grid.Column="1" />
+                                <Label Content="{Binding storagePlantTemp, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" RenderTransformOrigin="-0.222,0.106"/>
+                            </Grid>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="10"/>
+                                    <ColumnDefinition Width="AUTO"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Content="Radiant panel mix temperature:" Grid.Column="1" />
+                                <Label Content="{Binding RadiantPanelMixerTemp, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" RenderTransformOrigin="-0.222,0.106"/>
+                            </Grid>
+                        </StackPanel>
+                    </Grid>
+                    <!-- water system data-->
 
-        <Grid Grid.Row="2">
-            <!-- refrigiration system data-->
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="1*"/>
-            </Grid.RowDefinitions>
-            <Border BorderBrush="Gray" BorderThickness="1" Grid.RowSpan="20" Grid.ColumnSpan="10"/>
-            <Label Content="Refrigiration system" Grid.ColumnSpan="10" HorizontalAlignment="Center"/>
-            <StackPanel Grid.Column="0" Grid.Row="1">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="10"/>
-                        <ColumnDefinition Width="AUTO"/>
-                        <ColumnDefinition Width="1*"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Content="High pressure:" Grid.Column="1" />
-                    <Label Content="{Binding highPressure, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" RenderTransformOrigin="-0.222,0.106"/>
-                </Grid>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="10"/>
-                        <ColumnDefinition Width="AUTO"/>
-                        <ColumnDefinition Width="1*"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Content="Low pressure:" Grid.Column="1" />
-                    <Label Content="{Binding lowPressure, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" RenderTransformOrigin="-0.222,0.106"/>
-                </Grid>
+                    <Grid Grid.Row="2">
+                        <!-- refrigiration system data-->
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+                        <Border BorderBrush="Gray" BorderThickness="1" Grid.RowSpan="20" Grid.ColumnSpan="10"/>
+                        <Label Content="Refrigiration system" Grid.ColumnSpan="10" HorizontalAlignment="Center"/>
+                        <StackPanel Grid.Column="0" Grid.Row="1">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="10"/>
+                                    <ColumnDefinition Width="AUTO"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Content="High pressure:" Grid.Column="1" />
+                                <Label Content="{Binding highPressure, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" RenderTransformOrigin="-0.222,0.106"/>
+                            </Grid>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="10"/>
+                                    <ColumnDefinition Width="AUTO"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Content="Low pressure:" Grid.Column="1" />
+                                <Label Content="{Binding lowPressure, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" RenderTransformOrigin="-0.222,0.106"/>
+                            </Grid>
 
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="10"/>
-                        <ColumnDefinition Width="AUTO"/>
-                        <ColumnDefinition Width="1*"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Content="Compressor 1 suction temperature:" Grid.Column="1" />
-                    <Label Content="{Binding comp1SucTemp, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" RenderTransformOrigin="-0.222,0.106"/>
-                </Grid>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="10"/>
-                        <ColumnDefinition Width="AUTO"/>
-                        <ColumnDefinition Width="1*"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Content="Compressor 1 discharge temperature:" Grid.Column="1" />
-                    <Label Content="{Binding comp1DisTemp, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" RenderTransformOrigin="-0.222,0.106"/>
-                </Grid>
-            </StackPanel>
-            <StackPanel Grid.Column="1" Grid.Row="1">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="10"/>
-                        <ColumnDefinition Width="AUTO"/>
-                        <ColumnDefinition Width="1*"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Content="Fan analog output:" Grid.Column="1" />
-                    <Label Content="{Binding fanAnalogOut, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" RenderTransformOrigin="-0.222,0.106"/>
-                </Grid>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="10"/>
-                        <ColumnDefinition Width="AUTO"/>
-                        <ColumnDefinition Width="1*"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Content="Evaporation temperature:" Grid.Column="1" />
-                    <Label Content="{Binding evaporationTemp, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" RenderTransformOrigin="-0.222,0.106"/>
-                </Grid>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="10"/>
-                        <ColumnDefinition Width="AUTO"/>
-                        <ColumnDefinition Width="1*"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Content="Condensation temperature:" Grid.Column="1" />
-                    <Label Content="{Binding condendsationTemp, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" RenderTransformOrigin="-0.222,0.106"/>
-                </Grid>
-            </StackPanel>
-        </Grid>
-        <!-- end refrigiration system data-->
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="10"/>
+                                    <ColumnDefinition Width="AUTO"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Content="Compressor 1 suction temperature:" Grid.Column="1" />
+                                <Label Content="{Binding comp1SucTemp, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" RenderTransformOrigin="-0.222,0.106"/>
+                            </Grid>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="10"/>
+                                    <ColumnDefinition Width="AUTO"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Content="Compressor 1 discharge temperature:" Grid.Column="1" />
+                                <Label Content="{Binding comp1DisTemp, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" RenderTransformOrigin="-0.222,0.106"/>
+                            </Grid>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Grid.Row="1">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="10"/>
+                                    <ColumnDefinition Width="AUTO"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Content="Fan analog output:" Grid.Column="1" />
+                                <Label Content="{Binding fanAnalogOut, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" RenderTransformOrigin="-0.222,0.106"/>
+                            </Grid>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="10"/>
+                                    <ColumnDefinition Width="AUTO"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Content="Evaporation temperature:" Grid.Column="1" />
+                                <Label Content="{Binding evaporationTemp, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" RenderTransformOrigin="-0.222,0.106"/>
+                            </Grid>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="10"/>
+                                    <ColumnDefinition Width="AUTO"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Content="Condensation temperature:" Grid.Column="1" />
+                                <Label Content="{Binding condendsationTemp, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" RenderTransformOrigin="-0.222,0.106"/>
+                            </Grid>
+                        </StackPanel>
+                    </Grid>
+                    <!-- end refrigiration system data-->
 
-        <Grid Grid.Row="3">
-            <!-- operation mode data-->
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="1*"/>
-            </Grid.RowDefinitions>
-            <Border BorderBrush="Gray" BorderThickness="1" Grid.RowSpan="20" Grid.ColumnSpan="10"/>
-            <Label Content="Operation mode" Grid.ColumnSpan="10" HorizontalAlignment="Center"/>
-            <StackPanel Grid.Column="0" Grid.Row="1">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="10"/>
-                        <ColumnDefinition Width="AUTO"/>
-                        <ColumnDefinition Width="1*"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Content="Machine state:" Grid.Column="1" />
-                    <Label Content="{Binding generalState, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" />
-                </Grid>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="10"/>
-                        <ColumnDefinition Width="AUTO"/>
-                        <ColumnDefinition Width="1*"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Content="Defrost state:" Grid.Column="1" />
-                    <Label Content="{Binding defrostState, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" />
-                </Grid>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="10"/>
-                        <ColumnDefinition Width="AUTO"/>
-                        <ColumnDefinition Width="1*"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Content="Anti-legionella state:" Grid.Column="1" />
-                    <Label Content="{Binding antiLegionellaState, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" />
-                </Grid>
+                    <Grid Grid.Row="3">
+                        <!-- operation mode data-->
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+                        <Border BorderBrush="Gray" BorderThickness="1" Grid.RowSpan="20" Grid.ColumnSpan="10"/>
+                        <Label Content="Operation mode" Grid.ColumnSpan="10" HorizontalAlignment="Center"/>
+                        <StackPanel Grid.Column="0" Grid.Row="1">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="10"/>
+                                    <ColumnDefinition Width="AUTO"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Content="Machine state:" Grid.Column="1" />
+                                <Label Content="{Binding generalState, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" />
+                            </Grid>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="10"/>
+                                    <ColumnDefinition Width="AUTO"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Content="Defrost state:" Grid.Column="1" />
+                                <Label Content="{Binding defrostState, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" />
+                            </Grid>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="10"/>
+                                    <ColumnDefinition Width="AUTO"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Content="Anti-legionella state:" Grid.Column="1" />
+                                <Label Content="{Binding antiLegionellaState, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" />
+                            </Grid>
                 
-                <!-- from old version of register mapping - irrelevant
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="10"/>
-                        <ColumnDefinition Width="AUTO"/>
-                        <ColumnDefinition Width="1*"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Content="Plant mode:" Grid.Column="1" />
-                    <Label Content="{Binding plantMode, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" RenderTransformOrigin="-0.222,0.106"/>
-                </Grid>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="10"/>
-                        <ColumnDefinition Width="AUTO"/>
-                        <ColumnDefinition Width="1*"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Content="Machine mode:" Grid.Column="1" />
-                    <Label Content="{Binding machineMode, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" RenderTransformOrigin="-0.222,0.106"/>
-                </Grid> -->
-            </StackPanel>
-            <StackPanel Grid.Column="1" Grid.Row="1">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="10"/>
-                        <ColumnDefinition Width="AUTO"/>
-                        <ColumnDefinition Width="1*"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Content="Plant venting state:" Grid.Column="1" />
-                    <Label Content="{Binding plantVentingState, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" />
-                </Grid>
-            </StackPanel>
-            <!-- from old version of register mapping - irrelevant
-            <StackPanel Grid.Column="1" Grid.Row="1">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="10"/>
-                        <ColumnDefinition Width="AUTO"/>
-                        <ColumnDefinition Width="1*"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Content="Sanitary mode:" Grid.Column="1" />
-                    <Label Content="{Binding sanitaryMode, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" RenderTransformOrigin="-0.222,0.106"/>
-                </Grid>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="10"/>
-                        <ColumnDefinition Width="AUTO"/>
-                        <ColumnDefinition Width="1*"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Content="Defrost state:" Grid.Column="1" />
-                    <Label Content="{Binding defrostState, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" RenderTransformOrigin="-0.222,0.106"/>
-                </Grid>
-            </StackPanel> -->
-        </Grid>
-        <!-- end  operation mode data-->
+                            <!-- from old version of register mapping - irrelevant
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="10"/>
+                                    <ColumnDefinition Width="AUTO"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Content="Plant mode:" Grid.Column="1" />
+                                <Label Content="{Binding plantMode, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" RenderTransformOrigin="-0.222,0.106"/>
+                            </Grid>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="10"/>
+                                    <ColumnDefinition Width="AUTO"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Content="Machine mode:" Grid.Column="1" />
+                                <Label Content="{Binding machineMode, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" RenderTransformOrigin="-0.222,0.106"/>
+                            </Grid> -->
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Grid.Row="1">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="10"/>
+                                    <ColumnDefinition Width="AUTO"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Content="Plant venting state:" Grid.Column="1" />
+                                <Label Content="{Binding plantVentingState, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" />
+                            </Grid>
+                        </StackPanel>
+                        <!-- from old version of register mapping - irrelevant
+                        <StackPanel Grid.Column="1" Grid.Row="1">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="10"/>
+                                    <ColumnDefinition Width="AUTO"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Content="Sanitary mode:" Grid.Column="1" />
+                                <Label Content="{Binding sanitaryMode, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" RenderTransformOrigin="-0.222,0.106"/>
+                            </Grid>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="10"/>
+                                    <ColumnDefinition Width="AUTO"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Content="Defrost state:" Grid.Column="1" />
+                                <Label Content="{Binding defrostState, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" RenderTransformOrigin="-0.222,0.106"/>
+                            </Grid>
+                        </StackPanel> -->
+                    </Grid>
+                    <!-- end  operation mode data-->
 
-        <Grid Grid.Row="4"> <!-- Special function buttons-->
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="1*"/>
-            </Grid.RowDefinitions>
-            <Border BorderBrush="Gray" BorderThickness="1" Grid.RowSpan="20" Grid.ColumnSpan="10"/>
-            <Label Content="Special function buttons" Grid.ColumnSpan="10" HorizontalAlignment="Center"/>
-            <StackPanel Grid.Row="1">
-                <Button Name="ForceDefrostButton" Content="Force defrost" Margin="5" Click="ForceDefrost_Click"/>
-                <Button Name="ActivateAntiLegionellaButton" Content="Activate anti-legionella" Margin="5" Click="ActivateAntiLegionella_Click"/>
-                <Button Name="PlantVentingButton" Content="Activate plant venting" Margin="5" Click="PlantVentingButton_Click"/>
-            </StackPanel>
-            <StackPanel Grid.Row="1" Grid.Column="2">
+                    <Grid Grid.Row="4"> <!-- Special function buttons-->
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+                        <Border BorderBrush="Gray" BorderThickness="1" Grid.RowSpan="20" Grid.ColumnSpan="10"/>
+                        <Label Content="Special function buttons" Grid.ColumnSpan="10" HorizontalAlignment="Center"/>
+                        <StackPanel Grid.Row="1">
+                            <Button Name="ForceDefrostButton" Content="Force defrost" Margin="5" Click="ForceDefrost_Click"/>
+                            <Button Name="ActivateAntiLegionellaButton" Content="Activate anti-legionella" Margin="5" Click="ActivateAntiLegionella_Click"/>
+                            <Button Name="PlantVentingButton" Content="Activate plant venting" Margin="5" Click="PlantVentingButton_Click"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="1" Grid.Column="2">
                 
-            </StackPanel>
+                        </StackPanel>
 
-        </Grid>
-        <!-- End special function buttons-->
+                    </Grid>
+                    <!-- End special function buttons-->
 
 
 
-        <Grid Grid.Column="1" Grid.RowSpan="10">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="auto"/>
-            </Grid.RowDefinitions>
+                    <Grid Grid.Column="1" Grid.RowSpan="10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
 
-            <!-- setpoints and operation mode settings grid -->
-            <Grid Grid.Row="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="10"/>
-                    <ColumnDefinition Width="AUTO"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="10"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="30"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="1*"/>
-                </Grid.RowDefinitions>
-                <Border BorderBrush="Gray" BorderThickness="1" Grid.RowSpan="20" Grid.ColumnSpan="10"/>
-                <Label Content="Operation mode settings" HorizontalAlignment="Center" Grid.ColumnSpan="10"/>
-                <Label Content="operation mode:" Grid.Column="1" Grid.Row="1" />
-                <ComboBox Name="OpModeBox" Grid.Column="2" Grid.Row="1"/>
-                <Label Content="cool setpoint:" Grid.Column="1" Grid.Row="2" ToolTip="Range 5.0 ÷ 23.0"/>
-                <TextBox Name="CoolSP1" Text="{Binding coolSP, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" Grid.Row="2" VerticalAlignment="Center" LostFocus="CoolSP1_LostFocus"/>
-                <Label Content="heat setpoint:" Grid.Column="1" Grid.Row="3" ToolTip="Range 25.0 ÷ 55.0"/>
-                <TextBox Name="HeatSP1" Text="{Binding heatSP, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" Grid.Row="3" VerticalAlignment="Center" LostFocus="HeatSP1_LostFocus"/>
-                <Label Content="DHW setpoint:" Grid.Column="1" Grid.Row="4" ToolTip="Range 25.0 ÷ 55.0"/>
-                <TextBox Name="DHWSP" Text="{Binding DHWSP, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" Grid.Row="4" VerticalAlignment="Center" LostFocus="DHWSP_LostFocus"/>
-                <Label Content="Second cool setpoint:" Grid.Column="1" Grid.Row="5" ToolTip="Range 5.0 ÷ 23.0"/>
-                <TextBox Name="CoolSP2" Text="{Binding coolSP2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" Grid.Row="5" VerticalAlignment="Center" LostFocus="CoolSP2_LostFocus"/>
-                <Label Content="Second heat setpoint:" Grid.Column="1" Grid.Row="6" ToolTip="Range 25.0 ÷ 55.0"/>
-                <TextBox Name="HeatSP2" Text="{Binding heatSP2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" Grid.Row="6" VerticalAlignment="Center" LostFocus="HeatSP2_LostFocus"/>
-                <Label Content="DHW preparer setpoint:" Grid.Column="1" Grid.Row="7" ToolTip="Range 0.0 ÷ 80.0"/>
-                <TextBox Name="DHWPrepSP" Text="{Binding DHWPreparerSP, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" Grid.Row="7" VerticalAlignment="Center" LostFocus="DHWPrepSP_LostFocus"/>
-                <Label Content="Actual thermoregulation setpoint:" Grid.Column="1" Grid.Row="8" />
-                <Label  Content="{Binding actualThermoragulationSP, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" Grid.Row="8" VerticalAlignment="Center" />
-                <Label Content="Actual reference temp for thermoregulation:" Grid.Column="1" Grid.Row="9" />
-                <Label  Content="{Binding actualRefTemp4ThermoragulationSP, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" Grid.Row="9" VerticalAlignment="Center" />
-                <Button Name="ApplySetpoints" Content="send new settings" Grid.Row="10" Grid.Column="2" Click="ApplySetpoints_Click"/>
-            </Grid> <!-- setpoints and operation mode settings grid -->
+                        <!-- setpoints and operation mode settings grid -->
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="10"/>
+                                <ColumnDefinition Width="AUTO"/>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="10"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="1*"/>
+                            </Grid.RowDefinitions>
+                            <Border BorderBrush="Gray" BorderThickness="1" Grid.RowSpan="20" Grid.ColumnSpan="10"/>
+                            <Label Content="Operation mode settings" HorizontalAlignment="Center" Grid.ColumnSpan="10"/>
+                            <Label Content="operation mode:" Grid.Column="1" Grid.Row="1" />
+                            <ComboBox Name="OpModeBox" Grid.Column="2" Grid.Row="1"/>
+                            <Label Content="cool setpoint:" Grid.Column="1" Grid.Row="2" ToolTip="Range 5.0 ÷ 23.0"/>
+                            <TextBox Name="CoolSP1" Text="{Binding coolSP, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" Grid.Row="2" VerticalAlignment="Center" LostFocus="CoolSP1_LostFocus"/>
+                            <Label Content="heat setpoint:" Grid.Column="1" Grid.Row="3" ToolTip="Range 25.0 ÷ 55.0"/>
+                            <TextBox Name="HeatSP1" Text="{Binding heatSP, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" Grid.Row="3" VerticalAlignment="Center" LostFocus="HeatSP1_LostFocus"/>
+                            <Label Content="DHW setpoint:" Grid.Column="1" Grid.Row="4" ToolTip="Range 25.0 ÷ 55.0"/>
+                            <TextBox Name="DHWSP" Text="{Binding DHWSP, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" Grid.Row="4" VerticalAlignment="Center" LostFocus="DHWSP_LostFocus"/>
+                            <Label Content="Second cool setpoint:" Grid.Column="1" Grid.Row="5" ToolTip="Range 5.0 ÷ 23.0"/>
+                            <TextBox Name="CoolSP2" Text="{Binding coolSP2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" Grid.Row="5" VerticalAlignment="Center" LostFocus="CoolSP2_LostFocus"/>
+                            <Label Content="Second heat setpoint:" Grid.Column="1" Grid.Row="6" ToolTip="Range 25.0 ÷ 55.0"/>
+                            <TextBox Name="HeatSP2" Text="{Binding heatSP2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" Grid.Row="6" VerticalAlignment="Center" LostFocus="HeatSP2_LostFocus"/>
+                            <Label Content="DHW preparer setpoint:" Grid.Column="1" Grid.Row="7" ToolTip="Range 0.0 ÷ 80.0"/>
+                            <TextBox Name="DHWPrepSP" Text="{Binding DHWPreparerSP, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" Grid.Row="7" VerticalAlignment="Center" LostFocus="DHWPrepSP_LostFocus"/>
+                            <Label Content="Actual thermoregulation setpoint:" Grid.Column="1" Grid.Row="8" />
+                            <Label  Content="{Binding actualThermoragulationSP, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" Grid.Row="8" VerticalAlignment="Center" />
+                            <Label Content="Actual reference temp for thermoregulation:" Grid.Column="1" Grid.Row="9" />
+                            <Label  Content="{Binding actualRefTemp4ThermoragulationSP, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" Grid.Row="9" VerticalAlignment="Center" />
+                            <Button Name="ApplySetpoints" Content="send new settings" Grid.Row="10" Grid.Column="2" Click="ApplySetpoints_Click"/>
+                        </Grid> <!-- setpoints and operation mode settings grid -->
 
-            <Grid Grid.Row="1" >
-                <Border BorderBrush="Gray" BorderThickness="1" Grid.RowSpan="20" Grid.ColumnSpan="10"/>
-                <StackPanel Name="MessagePanel">
-                    <Label Content="Messages" HorizontalAlignment="Center" ></Label>
-                </StackPanel>
-            </Grid>
-            <!-- communication settings grid -->
-            <Grid Grid.Row="10">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto" />
-                    <RowDefinition Height="auto" />
-                    <RowDefinition Height="auto" />
-                    <RowDefinition Height="auto" />
-                    <RowDefinition Height="auto" />
-                    <RowDefinition Height="auto" />
-                    <RowDefinition Height="auto" />
-                    <RowDefinition Height="auto" />
-                    <RowDefinition Height="10" />
-                </Grid.RowDefinitions>
-                <Border BorderBrush="Gray" BorderThickness="1" Grid.RowSpan="20" Grid.ColumnSpan="10"/>
-                <Label Name="CommunicationSettingLabel" Content="Communication settings" Grid.Row="0" Grid.ColumnSpan="3" HorizontalAlignment="Center"/>
-                <Label Content="Com port:" Grid.Column="0" Grid.Row="1"/>
-                <ComboBox Name="ComBox" Grid.Column="1" Grid.Row="1" Margin="2" ItemStringFormat="{Binding comPortString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></ComboBox>
-                <Label Content="Machine ID:" Grid.Column="0" Grid.Row="2"/>
-                <ComboBox Name="MachineIDBox" Grid.Column="1" Grid.Row="2" Margin="2" ></ComboBox>
-                <Label Content="Baud rate:" Grid.Column="0" Grid.Row="3"/>
-                <ComboBox Name="baudRateBox" Grid.Column="1" Grid.Row="3" Margin="2"></ComboBox>
-                <Label Content="Parity:" Grid.Column="0" Grid.Row="4"/>
-                <ComboBox Name="ParityBox" Grid.Column="1" Grid.Row="4" Margin="2"></ComboBox>
-                <Label Content="Stop bit:" Grid.Column="0" Grid.Row="5"/>
-                <ComboBox Name="StopBitBox" Grid.Column="1" Grid.Row="5" Margin="2"></ComboBox>
+                        <Grid Grid.Row="1" >
+                            <Border BorderBrush="Gray" BorderThickness="1" Grid.RowSpan="20" Grid.ColumnSpan="10"/>
+                            <StackPanel Name="MessagePanel">
+                                <Label Content="Messages" HorizontalAlignment="Center" ></Label>
+                            </StackPanel>
+                        </Grid>
+                        <!-- communication settings grid -->
+                        <Grid Grid.Row="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="10" />
+                            </Grid.RowDefinitions>
+                            <Border BorderBrush="Gray" BorderThickness="1" Grid.RowSpan="20" Grid.ColumnSpan="10"/>
+                            <Label Name="CommunicationSettingLabel" Content="Communication settings" Grid.Row="0" Grid.ColumnSpan="3" HorizontalAlignment="Center"/>
+                            <Label Content="Com port:" Grid.Column="0" Grid.Row="1"/>
+                            <ComboBox Name="ComBox" Grid.Column="1" Grid.Row="1" Margin="2" ItemStringFormat="{Binding comPortString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></ComboBox>
+                            <Label Content="Machine ID:" Grid.Column="0" Grid.Row="2"/>
+                            <ComboBox Name="MachineIDBox" Grid.Column="1" Grid.Row="2" Margin="2" ></ComboBox>
+                            <Label Content="Baud rate:" Grid.Column="0" Grid.Row="3"/>
+                            <ComboBox Name="baudRateBox" Grid.Column="1" Grid.Row="3" Margin="2"></ComboBox>
+                            <Label Content="Parity:" Grid.Column="0" Grid.Row="4"/>
+                            <ComboBox Name="ParityBox" Grid.Column="1" Grid.Row="4" Margin="2"></ComboBox>
+                            <Label Content="Stop bit:" Grid.Column="0" Grid.Row="5"/>
+                            <ComboBox Name="StopBitBox" Grid.Column="1" Grid.Row="5" Margin="2"></ComboBox>
 
-                <Label Content="record path:" Grid.Column="0" Grid.Row="6"/>
-                <Button Name="PathSelectionButton" Content="set path" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="6" Margin="2" Click="PathSelectionButton_Click"/>
+                            <Label Content="record path:" Grid.Column="0" Grid.Row="6"/>
+                            <Button Name="PathSelectionButton" Content="set path" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="6" Margin="2" Click="PathSelectionButton_Click"/>
 
-                <Button Name="ConnectButton" Content="Connect" HorizontalAlignment="Center" Grid.Row="7" Grid.Column="0" Click="OnClick_ConnectButton"/>
-                <Button Name="StartRecordingButton" Content="Start recording" HorizontalAlignment="Center" Grid.Row="7" Grid.Column="1" Click="StartRecordingButton_Click"/>
-                <Button Name="ResetButton" Content="Reset" HorizontalAlignment="Center" IsEnabled="False" Grid.Row="7" Grid.Column="2"/>
+                            <Button Name="ConnectButton" Content="Connect" HorizontalAlignment="Center" Grid.Row="7" Grid.Column="0" Click="OnClick_ConnectButton"/>
+                            <Button Name="StartRecordingButton" Content="Start recording" HorizontalAlignment="Center" Grid.Row="7" Grid.Column="1" Click="StartRecordingButton_Click"/>
+                            <Button Name="ResetButton" Content="Reset" HorizontalAlignment="Center" IsEnabled="False" Grid.Row="7" Grid.Column="2"/>
 
-            </Grid> <!-- communication settings grid -->
-        </Grid>
+                        </Grid> <!-- communication settings grid -->
+                    </Grid>
 
-        <!-- Error code section grid -->
-        <Grid Grid.RowSpan="10" Grid.Column="2"> 
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="auto"/>
-            </Grid.RowDefinitions>
-            <Border BorderBrush="Gray" BorderThickness="1" Grid.ColumnSpan="2">
-                <Label Content="Error status" HorizontalAlignment="Center"/>
-            </Border>
+                    <!-- Error code section grid -->
+                    <Grid Grid.RowSpan="10" Grid.Column="2"> 
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <Border BorderBrush="Gray" BorderThickness="1" Grid.ColumnSpan="2">
+                            <Label Content="Error status" HorizontalAlignment="Center"/>
+                        </Border>
 
-            <!-- Error code left section StackPanel -->
-            <Border BorderBrush="Gray" BorderThickness="1" Grid.Row="1">
-                <StackPanel Height="auto">
+                        <!-- Error code left section StackPanel -->
+                        <Border BorderBrush="Gray" BorderThickness="1" Grid.Row="1">
+                            <StackPanel Height="auto">
                     
-                    <!-- electric system errors -->
-                    <Border BorderBrush="Gray" BorderThickness="1">
-                        <StackPanel Height="auto">  
-                            <Label Content="Electric system"/>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="1*"/>
-                                </Grid.ColumnDefinitions>
-                                <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E000, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
-                                <Label Content="E000" Grid.Column="1" ToolTip="Communication error"/>
-                            </Grid>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="1*"/>
-                                </Grid.ColumnDefinitions>
-                                <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E008, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
-                                <Label Content="E008" Grid.Column="1" ToolTip="Compressor drive limitation alarm"/>
-                            </Grid>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="1*"/>
-                                </Grid.ColumnDefinitions>
-                                <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E009, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
-                                <Label Content="E009" Grid.Column="1" ToolTip="Discharge High temperature alarm"/>
-                            </Grid>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="1*"/>
-                                </Grid.ColumnDefinitions>
-                                <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E010, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
-                                <Label Content="E010" Grid.Column="1" ToolTip="Solar Collector high tempeature alarm"/>
-                            </Grid>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="1*"/>
-                                </Grid.ColumnDefinitions>
-                                <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E018, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
-                                <Label Content="E018" Grid.Column="1" ToolTip="Cooling high temperature alarm"/>
-                            </Grid>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="1*"/>
-                                </Grid.ColumnDefinitions>
-                                <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E041, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
-                                <Label Content="E041" Grid.Column="1" ToolTip="Inconsistent temperature alarm "/>
-                            </Grid>
-                            <!--<Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="1*"/>
-                                </Grid.ColumnDefinitions>
-                                <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E101, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
-                                <Label Content="E101" Grid.Column="1" ToolTip="Communication timeout with slave 1"/>
-                            </Grid> -->
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="1*"/>
-                                </Grid.ColumnDefinitions>
-                                <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E651, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
-                                <Label Content="E651" Grid.Column="1" ToolTip="Outdoor air probe failure "/>
-                            </Grid>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="1*"/>
-                                </Grid.ColumnDefinitions>
-                                <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E711, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
-                                <Label Content="E711" Grid.Column="1" ToolTip="0-10 DC live input failure"/>
-                            </Grid>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="1*"/>
-                                </Grid.ColumnDefinitions>
-                                <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E961, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
-                                <Label Content="E961" Grid.Column="1" ToolTip="Abnormal condition"/>
-                            </Grid>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="1*"/>
-                                </Grid.ColumnDefinitions>
-                                <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E971, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
-                                <Label Content="E971" Grid.Column="1" ToolTip="EEPROM not initilazed"/>
-                            </Grid>
-                        </StackPanel>
-                    </Border>  <!-- electric system errors -->
+                                <!-- electric system errors -->
+                                <Border BorderBrush="Gray" BorderThickness="1">
+                                    <StackPanel Height="auto">  
+                                        <Label Content="Electric system"/>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="1*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E000, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
+                                            <Label Content="E000" Grid.Column="1" ToolTip="Communication error"/>
+                                        </Grid>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="1*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E008, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
+                                            <Label Content="E008" Grid.Column="1" ToolTip="Compressor drive limitation alarm"/>
+                                        </Grid>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="1*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E009, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
+                                            <Label Content="E009" Grid.Column="1" ToolTip="Discharge High temperature alarm"/>
+                                        </Grid>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="1*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E010, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
+                                            <Label Content="E010" Grid.Column="1" ToolTip="Solar Collector high tempeature alarm"/>
+                                        </Grid>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="1*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E018, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
+                                            <Label Content="E018" Grid.Column="1" ToolTip="Cooling high temperature alarm"/>
+                                        </Grid>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="1*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E041, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
+                                            <Label Content="E041" Grid.Column="1" ToolTip="Inconsistent temperature alarm "/>
+                                        </Grid>
+                                        <!--<Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="1*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E101, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
+                                            <Label Content="E101" Grid.Column="1" ToolTip="Communication timeout with slave 1"/>
+                                        </Grid> -->
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="1*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E651, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
+                                            <Label Content="E651" Grid.Column="1" ToolTip="Outdoor air probe failure "/>
+                                        </Grid>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="1*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E711, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
+                                            <Label Content="E711" Grid.Column="1" ToolTip="0-10 DC live input failure"/>
+                                        </Grid>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="1*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E961, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
+                                            <Label Content="E961" Grid.Column="1" ToolTip="Abnormal condition"/>
+                                        </Grid>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="1*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E971, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
+                                            <Label Content="E971" Grid.Column="1" ToolTip="EEPROM not initilazed"/>
+                                        </Grid>
+                                    </StackPanel>
+                                </Border>  <!-- electric system errors -->
 
-                    <!-- refrigiration system errors -->
-                    <Border BorderBrush="Gray" BorderThickness="1" Height="auto">
-                        <StackPanel Height="auto" Grid.Column="1">
-                            <Label Content="Refrigiration system"/>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="1*"/>
-                                </Grid.ColumnDefinitions>
-                                <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E001, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
-                                <Label Content="E001" Grid.Column="1" ToolTip="High pressure alarm"/>
-                            </Grid>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="1*"/>
-                                </Grid.ColumnDefinitions>
-                                <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E002, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
-                                <Label Content="E002" Grid.Column="1" ToolTip="Low pressure alarm"/>
-                            </Grid>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="1*"/>
-                                </Grid.ColumnDefinitions>
-                                <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E003, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
-                                <Label Content="E003" Grid.Column="1" ToolTip="Digital block compressor 1"/>
-                            </Grid>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="1*"/>
-                                </Grid.ColumnDefinitions>
-                                <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E004, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
-                                <Label Content="E004" Grid.Column="1" ToolTip="Thermal fan"/>
-                            </Grid>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="1*"/>
-                                </Grid.ColumnDefinitions>
-                                <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E005, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
-                                <Label Content="E005" Grid.Column="1" ToolTip="Antifeeze alarm"/>
-                            </Grid>
-                            <!--<Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="1*"/>
-                                </Grid.ColumnDefinitions>
-                                <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E014, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
-                                <Label Content="E014" Grid.Column="1" ToolTip="Thermal fan2"/>
-                            </Grid> -->
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="1*"/>
-                                </Grid.ColumnDefinitions>
-                                <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E020, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
-                                <Label Content="E020" Grid.Column="1" ToolTip="Inverted pressures"/>
-                            </Grid>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="1*"/>
-                                </Grid.ColumnDefinitions>
-                                <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E631, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
-                                <Label Content="E631" Grid.Column="1" ToolTip="Compressor intake probe failure"/>
-                            </Grid>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="1*"/>
-                                </Grid.ColumnDefinitions>
-                                <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E641, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
-                                <Label Content="E641" Grid.Column="1" ToolTip="Compressor discharge probe fault / High pressure switch"/>
-                            </Grid>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="1*"/>
-                                </Grid.ColumnDefinitions>
-                                <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E691, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
-                                <Label Content="E691" Grid.Column="1" ToolTip="Low pressure transducer failure"/>
-                            </Grid>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="1*"/>
-                                </Grid.ColumnDefinitions>
-                                <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E701, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
-                                <Label Content="E701" Grid.Column="1" ToolTip="High pressure probe failure"/>
-                            </Grid>
-                        </StackPanel>
-                    </Border> <!-- refrigiration system errors -->
-                </StackPanel>
-            </Border>
+                                <!-- refrigiration system errors -->
+                                <Border BorderBrush="Gray" BorderThickness="1" Height="auto">
+                                    <StackPanel Height="auto" Grid.Column="1">
+                                        <Label Content="Refrigiration system"/>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="1*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E001, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
+                                            <Label Content="E001" Grid.Column="1" ToolTip="High pressure alarm"/>
+                                        </Grid>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="1*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E002, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
+                                            <Label Content="E002" Grid.Column="1" ToolTip="Low pressure alarm"/>
+                                        </Grid>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="1*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E003, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
+                                            <Label Content="E003" Grid.Column="1" ToolTip="Digital block compressor 1"/>
+                                        </Grid>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="1*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E004, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
+                                            <Label Content="E004" Grid.Column="1" ToolTip="Thermal fan"/>
+                                        </Grid>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="1*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E005, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
+                                            <Label Content="E005" Grid.Column="1" ToolTip="Antifeeze alarm"/>
+                                        </Grid>
+                                        <!--<Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="1*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E014, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
+                                            <Label Content="E014" Grid.Column="1" ToolTip="Thermal fan2"/>
+                                        </Grid> -->
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="1*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E020, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
+                                            <Label Content="E020" Grid.Column="1" ToolTip="Inverted pressures"/>
+                                        </Grid>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="1*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E631, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
+                                            <Label Content="E631" Grid.Column="1" ToolTip="Compressor intake probe failure"/>
+                                        </Grid>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="1*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E641, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
+                                            <Label Content="E641" Grid.Column="1" ToolTip="Compressor discharge probe fault / High pressure switch"/>
+                                        </Grid>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="1*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E691, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
+                                            <Label Content="E691" Grid.Column="1" ToolTip="Low pressure transducer failure"/>
+                                        </Grid>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="1*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E701, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
+                                            <Label Content="E701" Grid.Column="1" ToolTip="High pressure probe failure"/>
+                                        </Grid>
+                                    </StackPanel>
+                                </Border> <!-- refrigiration system errors -->
+                            </StackPanel>
+                        </Border>
 
-            <!-- Error code right section StackPanel -->
-            <Border BorderBrush="Gray" BorderThickness="1" Height="auto" Grid.Column="1" Grid.Row="1">
-                <StackPanel Grid.Column="1">
+                        <!-- Error code right section StackPanel -->
+                        <Border BorderBrush="Gray" BorderThickness="1" Height="auto" Grid.Column="1" Grid.Row="1">
+                            <StackPanel Grid.Column="1">
 
-                    <!-- water system errors -->
-                    <Border BorderBrush="Gray" BorderThickness="1" Height="auto">
-                        <StackPanel Height="auto">
-                            <Label Content="Water system"/>
+                                <!-- water system errors -->
+                                <Border BorderBrush="Gray" BorderThickness="1" Height="auto">
+                                    <StackPanel Height="auto">
+                                        <Label Content="Water system"/>
                             
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="1*"/>
-                                </Grid.ColumnDefinitions>
-                                <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E006, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
-                                <Label Content="E006" Grid.Column="1" ToolTip="Flow alarm"/>
-                            </Grid>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="1*"/>
-                                </Grid.ColumnDefinitions>
-                                <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E007, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
-                                <Label Content="E007" Grid.Column="1" ToolTip="Low temperature DHW preparer"/>
-                            </Grid>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="1*"/>
-                                </Grid.ColumnDefinitions>
-                                <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E016, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
-                                <Label Content="E016" Grid.Column="1" ToolTip="Thermal pump"/>
-                            </Grid>
-                            <!--<Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="1*"/>
-                                </Grid.ColumnDefinitions>
-                                <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E042, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
-                                <Label Content="E042" Grid.Column="1" ToolTip="Insufficient thermal exchange alarm"/>
-                            </Grid> -->
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="1*"/>
-                                </Grid.ColumnDefinitions>
-                                <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E050, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
-                                <Label Content="E050" Grid.Column="1" ToolTip="DHW storage tank high temperature alarm "/>
-                            </Grid>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="1*"/>
-                                </Grid.ColumnDefinitions>
-                                <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E060, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
-                                <Label Content="E060" Grid.Column="1" ToolTip="Anti-Legionella done"/>
-                            </Grid>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="1*"/>
-                                </Grid.ColumnDefinitions>
-                                <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E061, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
-                                <Label Content="E061" Grid.Column="1" ToolTip="Anti-Legionella failure"/>
-                            </Grid>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="1*"/>
-                                </Grid.ColumnDefinitions>
-                                <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E611, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
-                                <Label Content="E611" Grid.Column="1" ToolTip="Water inlet probe failure "/>
-                            </Grid>
-                            <!--<Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="1*"/>
-                                </Grid.ColumnDefinitions>
-                                <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E612, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
-                                <Label Content="E612" Grid.Column="1" ToolTip="Water outlet probe failure "/>
-                            </Grid> -->
-                            <!--<Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="1*"/>
-                                </Grid.ColumnDefinitions>
-                                <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E652, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
-                                <Label Content="E652" Grid.Column="1" ToolTip="Mixer probe failure "/>
-                            </Grid> -->
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="1*"/>
-                                </Grid.ColumnDefinitions>
-                                <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E661, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
-                                <Label Content="E661" Grid.Column="1" ToolTip="DHW  probe failure "/>
-                            </Grid>
-                            <!--<Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="1*"/>
-                                </Grid.ColumnDefinitions>
-                                <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E662, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
-                                <Label Content="E662" Grid.Column="1" ToolTip="Solar storage tank probe failure "/>
-                            </Grid> -->
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="1*"/>
-                                </Grid.ColumnDefinitions>
-                                <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E671, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
-                                <Label Content="E671" Grid.Column="1" ToolTip="Plant remote probe failure "/>
-                            </Grid>
-                           <!-- <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="1*"/>
-                                </Grid.ColumnDefinitions>
-                                <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E672, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
-                                <Label Content="E672" Grid.Column="1" ToolTip="Solar Collector probe failure "/>
-                            </Grid> -->
-                        </StackPanel>
-                    </Border> <!-- water system errors -->
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="1*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E006, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
+                                            <Label Content="E006" Grid.Column="1" ToolTip="Flow alarm"/>
+                                        </Grid>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="1*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E007, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
+                                            <Label Content="E007" Grid.Column="1" ToolTip="Low temperature DHW preparer"/>
+                                        </Grid>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="1*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E016, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
+                                            <Label Content="E016" Grid.Column="1" ToolTip="Thermal pump"/>
+                                        </Grid>
+                                        <!--<Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="1*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E042, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
+                                            <Label Content="E042" Grid.Column="1" ToolTip="Insufficient thermal exchange alarm"/>
+                                        </Grid> -->
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="1*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E050, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
+                                            <Label Content="E050" Grid.Column="1" ToolTip="DHW storage tank high temperature alarm "/>
+                                        </Grid>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="1*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E060, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
+                                            <Label Content="E060" Grid.Column="1" ToolTip="Anti-Legionella done"/>
+                                        </Grid>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="1*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E061, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
+                                            <Label Content="E061" Grid.Column="1" ToolTip="Anti-Legionella failure"/>
+                                        </Grid>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="1*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E611, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
+                                            <Label Content="E611" Grid.Column="1" ToolTip="Water inlet probe failure "/>
+                                        </Grid>
+                                        <!--<Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="1*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E612, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
+                                            <Label Content="E612" Grid.Column="1" ToolTip="Water outlet probe failure "/>
+                                        </Grid> -->
+                                        <!--<Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="1*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E652, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
+                                            <Label Content="E652" Grid.Column="1" ToolTip="Mixer probe failure "/>
+                                        </Grid> -->
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="1*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E661, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
+                                            <Label Content="E661" Grid.Column="1" ToolTip="DHW  probe failure "/>
+                                        </Grid>
+                                        <!--<Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="1*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E662, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
+                                            <Label Content="E662" Grid.Column="1" ToolTip="Solar storage tank probe failure "/>
+                                        </Grid> -->
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="1*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E671, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
+                                            <Label Content="E671" Grid.Column="1" ToolTip="Plant remote probe failure "/>
+                                        </Grid>
+                                       <!-- <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="1*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E672, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
+                                            <Label Content="E672" Grid.Column="1" ToolTip="Solar Collector probe failure "/>
+                                        </Grid> -->
+                                    </StackPanel>
+                                </Border> <!-- water system errors -->
 
-                    <!-- VFD system errors -->
-                    <Border BorderBrush="Gray" BorderThickness="1" Height="auto">
-                        <StackPanel Height="auto">
-                            <Label Content="VFD system"/>  
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="1*"/>
-                                </Grid.ColumnDefinitions>
-                                <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E801, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
-                                <Label Content="E801" Grid.Column="1" ToolTip="Pressure inverter timeout"/>
-                            </Grid>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="1*"/>
-                                </Grid.ColumnDefinitions>
-                                <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E851, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
-                                <Label Content="E851" Grid.Column="1" ToolTip="Inverter hardware problem"/>
-                            </Grid>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="1*"/>
-                                </Grid.ColumnDefinitions>
-                                <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E861, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
-                                <Label Content="E861" Grid.Column="1" ToolTip="Motor current to high"/>
-                            </Grid>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="1*"/>
-                                </Grid.ColumnDefinitions>
-                                <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E871, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
-                                <Label Content="E871" Grid.Column="1" ToolTip="Heat sink over heat protection"/>
-                            </Grid>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="1*"/>
-                                </Grid.ColumnDefinitions>
-                                <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E881, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
-                                <Label Content="E881" Grid.Column="1" ToolTip="Supply voltage out of limit (DC bus error)"/>
-                            </Grid>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="1*"/>
-                                </Grid.ColumnDefinitions>
-                                <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E891, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
-                                <Label Content="E891" Grid.Column="1" ToolTip="Driver protection output phase loss" />
-                            </Grid>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="1*"/>
-                                </Grid.ColumnDefinitions>
-                                <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E901, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
-                                <Label Content="E901" Grid.Column="1" ToolTip="Compressor driver and model missmatch" />
-                            </Grid>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="1*"/>
-                                </Grid.ColumnDefinitions>
-                                <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E911, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
-                                <Label Content="E911" Grid.Column="1" ToolTip="Overload protection " />
-                            </Grid>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="1*"/>
-                                </Grid.ColumnDefinitions>
-                                <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E921, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
-                                <Label Content="E921" Grid.Column="1" ToolTip="PFC POE over current " />
-                            </Grid>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="1*"/>
-                                </Grid.ColumnDefinitions>
-                                <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E931, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
-                                <Label Content="E931" Grid.Column="1" ToolTip="Communication error with main controler " />
-                            </Grid>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="1*"/>
-                                </Grid.ColumnDefinitions>
-                                <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E941, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
-                                <Label Content="E941" Grid.Column="1" ToolTip="PFC converter fault " />
-                            </Grid>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="1*"/>
-                                </Grid.ColumnDefinitions>
-                                <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E951, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
-                                <Label Content="E951" Grid.Column="1" ToolTip="Heatsink and/or ambient temperature sensor error " />
-                            </Grid>
-                        </StackPanel>
-                    </Border>  <!-- VFD system errors -->
-                </StackPanel>
-            </Border>
+                                <!-- VFD system errors -->
+                                <Border BorderBrush="Gray" BorderThickness="1" Height="auto">
+                                    <StackPanel Height="auto">
+                                        <Label Content="VFD system"/>  
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="1*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E801, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
+                                            <Label Content="E801" Grid.Column="1" ToolTip="Pressure inverter timeout"/>
+                                        </Grid>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="1*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E851, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
+                                            <Label Content="E851" Grid.Column="1" ToolTip="Inverter hardware problem"/>
+                                        </Grid>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="1*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E861, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
+                                            <Label Content="E861" Grid.Column="1" ToolTip="Motor current to high"/>
+                                        </Grid>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="1*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E871, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
+                                            <Label Content="E871" Grid.Column="1" ToolTip="Heat sink over heat protection"/>
+                                        </Grid>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="1*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E881, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
+                                            <Label Content="E881" Grid.Column="1" ToolTip="Supply voltage out of limit (DC bus error)"/>
+                                        </Grid>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="1*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E891, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
+                                            <Label Content="E891" Grid.Column="1" ToolTip="Driver protection output phase loss" />
+                                        </Grid>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="1*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E901, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
+                                            <Label Content="E901" Grid.Column="1" ToolTip="Compressor driver and model missmatch" />
+                                        </Grid>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="1*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E911, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
+                                            <Label Content="E911" Grid.Column="1" ToolTip="Overload protection " />
+                                        </Grid>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="1*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E921, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
+                                            <Label Content="E921" Grid.Column="1" ToolTip="PFC POE over current " />
+                                        </Grid>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="1*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E931, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
+                                            <Label Content="E931" Grid.Column="1" ToolTip="Communication error with main controler " />
+                                        </Grid>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="1*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E941, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
+                                            <Label Content="E941" Grid.Column="1" ToolTip="PFC converter fault " />
+                                        </Grid>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="1*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Ellipse Stroke="Black" Width="10" Height="10" Fill="{Binding E951, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Margin="5,0,0,0"/>
+                                            <Label Content="E951" Grid.Column="1" ToolTip="Heatsink and/or ambient temperature sensor error " />
+                                        </Grid>
+                                    </StackPanel>
+                                </Border>  <!-- VFD system errors -->
+                            </StackPanel>
+                        </Border>
 
-            <Button Name="ResetErrorsButton" Content="Reset active errors" IsEnabled="False" Grid.ColumnSpan="2" Grid.Row="2" Padding="10" Click="ResetErrorsButton_Click"/>
+                        <Button Name="ResetErrorsButton" Content="Reset active errors" IsEnabled="False" Grid.ColumnSpan="2" Grid.Row="2" Padding="10" Click="ResetErrorsButton_Click"/>
 
-        </Grid>
+                    </Grid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="charts">
+                <Grid>
+                    <lvc:CartesianChart Series="{Binding SeriesCollection}" LegendLocation="Right" >
+                        <lvc:CartesianChart.AxisY>
+                            <lvc:Axis Title="Sales" LabelFormatter="{Binding YFormatter}"></lvc:Axis>
+                        </lvc:CartesianChart.AxisY>
+                        <lvc:CartesianChart.AxisX>
+                            <lvc:Axis Title="Month" Labels="{Binding Labels}"></lvc:Axis>
+                        </lvc:CartesianChart.AxisX>
+                    </lvc:CartesianChart>
+                </Grid>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>
