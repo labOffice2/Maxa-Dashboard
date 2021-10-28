@@ -325,6 +325,8 @@ namespace Maxa_Dash
                         notifier.E000 = DataConverter.GetAlarmColor(true);
                         messagesPanel.AddMessage("Communication error", 0.1f, Brushes.Red);
                         ConnectButton.IsEnabled = true;
+                        isConnected = false;
+                        modbusClient.Disconnect();
                     }
                 }
             }
