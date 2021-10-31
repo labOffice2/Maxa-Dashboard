@@ -17,6 +17,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using EasyModbus;
+using LiveCharts.Defaults;
 using Microsoft.Win32;
 using Microsoft.WindowsAPICodePack.Dialogs;
 
@@ -32,6 +33,8 @@ namespace Maxa_Dash
         ModbusClient modbusClient;
 
         NotifyNewData notifier = new NotifyNewData();
+
+        Charts charts = new Charts();
 
         FileWriter FileWriter;
 
@@ -66,6 +69,8 @@ namespace Maxa_Dash
             SetComboBoxes();
 
             this.DataContext = notifier;
+            charts = new Charts(notifier);
+
             timer = new Timer
             {
                 AutoReset = true,
@@ -74,6 +79,9 @@ namespace Maxa_Dash
             timer.Elapsed += Elapsed;
 
             messagesPanel = new UserMessages(MessagePanel);
+
+            charts.AddSeriesToChart(notifier, "Water output Temp");
+            notifier.PropertyChanged += NewDataAddedToSeries;
         }
 
         /* moved to UserMessages class
@@ -586,6 +594,31 @@ namespace Maxa_Dash
                         break;
                 }
             }
+        }
+
+        private void NewDataAddedToSeries(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(notifier.waterInTemp))
+            {
+                if (charts != null)
+                {
+                    DateTimePoint datetimePoint = new DateTimePoint(DateTime.Now, notifier.waterInTemp);
+                    charts.AddTempDataPoint(notifier, datetimePoint);
+                }
+            }
+        }
+
+        // this button is used for development, please remove before release
+        private void TestButton_Click(object sender, RoutedEventArgs e)
+        {
+            if(charts!= null)
+            {
+                Random r = new Random();
+                DateTimePoint datetimePoint = new DateTimePoint(DateTime.Now,r.Next(0,30));
+                charts.AddTempDataPoint(notifier, datetimePoint);
+            }
+            else
+                MessageBox.Show("Charts is null");
         }
     }
 }

@@ -1,4 +1,7 @@
-﻿using System;
+﻿using LiveCharts;
+using LiveCharts.Defaults;
+using LiveCharts.Wpf;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -1348,5 +1351,69 @@ namespace Maxa_Dash
             DEACTIVATING,
             ACTIVE,
         }
+
+
+
+        private SeriesCollection _Temps = new SeriesCollection();
+        public SeriesCollection Temps
+        {
+            get { return _Temps; }
+            set
+            {
+                if (_Temps != value)
+                {
+                    _Temps = value;
+                    INotifyPropertyChanged(nameof(Temps));
+                }
+            }
+        }
+
+        private Func<double, string> _YFormatter = Value => Value.ToString();
+        public Func<double, string> YFormatter { get { return _YFormatter; } set {
+                if (_YFormatter != value)
+                {
+                    _YFormatter = value;
+                    INotifyPropertyChanged(nameof(YFormatter));
+                }
+            } }
+
+        private Func<double, string> _DatesFormatter = Value => new DateTime((long)Value).ToString("HH:mm:ss");
+        public Func<double, string> DatesFormatter { get { return _DatesFormatter; } set {
+                if (_DatesFormatter != value)
+                {
+                    _DatesFormatter = value;
+                    INotifyPropertyChanged(nameof(DatesFormatter));
+                }
+            } }
+
+        private DateTime[] _dateTimes = new DateTime[0];
+        public DateTime[] dateTimes
+        {
+            get { return _dateTimes; }
+            set
+            {
+                if (_dateTimes != value)
+                {
+                    _dateTimes = value;
+                    INotifyPropertyChanged(nameof(dateTimes));
+                }
+            }
+        }
+
+        private string[] _stringTime = new string[0];
+        public string[] stringTime
+        {
+            get { return _stringTime; }
+            set
+            {
+                if (_stringTime != value)
+                {
+                    _stringTime = value;
+                    INotifyPropertyChanged(nameof(stringTime));
+                }
+            }
+        }
+
+
     }
 }
