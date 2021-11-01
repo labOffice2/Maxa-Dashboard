@@ -80,28 +80,8 @@ namespace Maxa_Dash
 
             messagesPanel = new UserMessages(MessagePanel);
 
-            charts.AddSeriesToChart(notifier, "Water output Temp");
-            notifier.PropertyChanged += NewDataAddedToSeries;
+            charts.AddSeriesToChart(notifier, "External air Temp");
         }
-
-        /* moved to UserMessages class
-        private void RemoveOldMessages()
-        {
-            foreach(var item in messageLabelsList.ToArray())
-            {
-                if (item == null) break;
-                TimeSpan displayDuration = DateTime.Now - item.startTime;
-                if(displayDuration > item.duration)
-                {
-                    if(MessagePanel.Children.Contains(item.Label))
-                    {
-                        MessagePanel.Children.Remove(item.Label);
-                    }
-                    messageLabelsList.Remove(item);
-                }
-            }
-        }
-        */
 
         /// <summary>
         /// This function fills the ComboBoxes in the UI with optios (ComboBoxItems).
@@ -196,6 +176,7 @@ namespace Maxa_Dash
                 UpdateValues();
                 //RemoveOldMessages();
                 messagesPanel.RemoveOldMessages();
+                UpdateCharts();
             });
             
         }
@@ -596,16 +577,16 @@ namespace Maxa_Dash
             }
         }
 
-        private void NewDataAddedToSeries(object sender, PropertyChangedEventArgs e)
+        private void UpdateCharts()
         {
-            if (e.PropertyName == nameof(notifier.waterInTemp))
-            {
+         //   if (e.PropertyName == nameof(notifier.waterInTemp))
+        //    {
                 if (charts != null)
                 {
-                    DateTimePoint datetimePoint = new DateTimePoint(DateTime.Now, notifier.waterInTemp);
+                    DateTimePoint datetimePoint = new DateTimePoint(DateTime.Now, notifier.externalAirTemp);
                     charts.AddTempDataPoint(notifier, datetimePoint);
                 }
-            }
+        //    }
         }
 
         // this button is used for development, please remove before release
