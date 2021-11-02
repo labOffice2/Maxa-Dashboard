@@ -1352,8 +1352,6 @@ namespace Maxa_Dash
             ACTIVE,
         }
 
-
-
         private SeriesCollection _Temps = new SeriesCollection();
         public SeriesCollection Temps
         {
@@ -1386,34 +1384,41 @@ namespace Maxa_Dash
                 }
             } }
 
-        private DateTime[] _dateTimes = new DateTime[0];
-        public DateTime[] dateTimes
+        private double _axisMax = DateTime.Now.Ticks + TimeSpan.FromSeconds(20).Ticks;
+        public double AxisMax
         {
-            get { return _dateTimes; }
+            get { return _axisMax; }
             set
             {
-                if (_dateTimes != value)
-                {
-                    _dateTimes = value;
-                    INotifyPropertyChanged(nameof(dateTimes));
-                }
+                _axisMax = value;
+                INotifyPropertyChanged(nameof(AxisMax));
             }
         }
 
-        private string[] _stringTime = new string[0];
-        public string[] stringTime
+        private double _axisMin = DateTime.Now.Ticks;
+        public double AxisMin
         {
-            get { return _stringTime; }
+            get { return _axisMin; }
             set
             {
-                if (_stringTime != value)
-                {
-                    _stringTime = value;
-                    INotifyPropertyChanged(nameof(stringTime));
-                }
+                _axisMin = value;
+                INotifyPropertyChanged(nameof(AxisMin));
             }
         }
 
+        private int _chartTimeSpan = 5;
+        public int chartTimeSpan
+        {
+            get { return _chartTimeSpan; }
+            set
+            {
+                if(value > 0)
+                {
+                    _chartTimeSpan = value;
+                    INotifyPropertyChanged(nameof(chartTimeSpan));
+                }
+            }
+        }
 
     }
 }

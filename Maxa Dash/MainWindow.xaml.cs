@@ -278,7 +278,10 @@ namespace Maxa_Dash
                     if(plantVentingflag || notifier.plantVentingState == NotifyNewData.PlantVentingState.DEACTIVATING)
                     {
                         if (plantVentingflag)
+                        {
                             Maxa.ForcePlantVenting(modbusClient, true); // activate plant venting
+                            plantVentingflag = false;
+                        }
                         else
                             Maxa.ForcePlantVenting(modbusClient, false); // deactivate plant venting
                     }
@@ -563,7 +566,8 @@ namespace Maxa_Dash
                 {
                     case NotifyNewData.PlantVentingState.NA:
                     case NotifyNewData.PlantVentingState.INACTIVE:
-                        PlantVentingButton.IsEnabled = false;
+                        //PlantVentingButton.IsEnabled = false;
+                        PlantVentingButton.Content = "Stop plant venting";
                         plantVentingflag = true;
                         messagesPanel.AddMessage("Activating plant venting", 0.2f);
                         break;
@@ -571,6 +575,7 @@ namespace Maxa_Dash
                     case NotifyNewData.PlantVentingState.ACTIVE:
                         plantVentingflag = false;
                         notifier.plantVentingState = NotifyNewData.PlantVentingState.DEACTIVATING;
+                        PlantVentingButton.Content = "Activate plant venting";
                         messagesPanel.AddMessage("Deactivating plant venting", 0.2f);
                         break;
                 }
@@ -601,5 +606,6 @@ namespace Maxa_Dash
             else
                 MessageBox.Show("Charts is null");
         }
+
     }
 }
