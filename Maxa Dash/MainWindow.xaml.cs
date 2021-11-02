@@ -1,25 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using EasyModbus;
+using LiveCharts.Defaults;
+using Microsoft.WindowsAPICodePack.Dialogs;
+using System;
 using System.ComponentModel;
 using System.IO.Ports;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Timers;
 using System.Windows;
-
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using EasyModbus;
-using LiveCharts.Defaults;
-using Microsoft.Win32;
-using Microsoft.WindowsAPICodePack.Dialogs;
 
 
 namespace Maxa_Dash
@@ -592,19 +580,6 @@ namespace Maxa_Dash
                     charts.AddTempDataPoint(notifier, datetimePoint);
                 }
         //    }
-        }
-
-        // this button is used for development, please remove before release
-        private void TestButton_Click(object sender, RoutedEventArgs e)
-        {
-            if(charts!= null)
-            {
-                Random r = new Random();
-                DateTimePoint datetimePoint = new DateTimePoint(DateTime.Now,r.Next(0,30));
-                charts.AddTempDataPoint(notifier, datetimePoint);
-            }
-            else
-                MessageBox.Show("Charts is null");
         }
 
     }

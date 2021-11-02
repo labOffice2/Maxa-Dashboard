@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using LiveCharts;
 using LiveCharts.Wpf;
 using LiveCharts.Defaults;
+using System.Windows.Media;
 
 namespace Maxa_Dash
 {
@@ -35,15 +36,17 @@ namespace Maxa_Dash
             notifier.AxisMin = now.Ticks - TimeSpan.FromMinutes(notifier.chartTimeSpan).Ticks; // and 8 seconds behind
         }
 
-        public void AddSeriesToChart(NotifyNewData notifier, string seriesName)
+        public void AddSeriesToChart(NotifyNewData notifier, string seriesName, Brush seriesColor = null)
         {
-
+            seriesColor = seriesColor == null ? Brushes.LightBlue : seriesColor;
             notifier.Temps.Add(
 
                 new LineSeries
                 {
                     Title = seriesName,
-                    Values = new ChartValues<DateTimePoint>()
+                    Values = new ChartValues<DateTimePoint>(),
+                    Fill = Brushes.Transparent,
+                    Stroke = seriesColor,
                 }
             );
         }
