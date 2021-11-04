@@ -23,6 +23,9 @@ namespace Maxa_Dash
         NotifyNewData notifier = new NotifyNewData();
 
         Charts charts = new Charts();
+        int outdoorTempIndex;
+        int highPressureIndex;
+        int lowPressureIndex;
 
         FileWriter FileWriter;
 
@@ -57,7 +60,7 @@ namespace Maxa_Dash
             SetComboBoxes();
 
             this.DataContext = notifier;
-            charts = new Charts(notifier);
+            //charts = new Charts(notifier);
 
             timer = new Timer
             {
@@ -68,7 +71,7 @@ namespace Maxa_Dash
 
             messagesPanel = new UserMessages(MessagePanel);
 
-            charts.AddSeriesToChart(notifier, "External air Temp");
+            InitializeCharts();
         }
 
         /// <summary>
@@ -149,6 +152,15 @@ namespace Maxa_Dash
             OpModeBox.Items.Add(modeCoolNSanitary);
             OpModeBox.Items.Add(modeHeatNSanitary);
 
+        }
+
+        private void InitializeCharts()
+        {
+            charts = new Charts(notifier);
+            outdoorTempIndex = charts.AddSeriesToTempChart(notifier, "outdoor", Brushes.LightBlue);
+
+            highPressureIndex = charts.AddSeriesToPressureChart(notifier, "high", Brushes.LightBlue);
+            lowPressureIndex = charts.AddSeriesToPressureChart(notifier, "low", Brushes.Red);
         }
 
         /// <summary>
@@ -572,14 +584,19 @@ namespace Maxa_Dash
 
         private void UpdateCharts()
         {
-         //   if (e.PropertyName == nameof(notifier.waterInTemp))
-        //    {
-                if (charts != null)
-                {
-                    DateTimePoint datetimePoint = new DateTimePoint(DateTime.Now, notifier.externalAirTemp);
-                    charts.AddTempDataPoint(notifier, datetimePoint);
-                }
-        //    }
+            if (notifier.Temps.Count > 0)
+            {
+                DateTimePoint datetimePoint = new DateTimePoint(DateTime.Now, notifier.externalAirTemp);
+                charts.AddDataPointTempChart(notifier, datetimePoint, outdoorTempIndex);
+            }
+
+            if (notifier.Pressures.Count > 0)
+            {
+                DateTimePoint datetimePoint = new DateTimePoint(DateTime.Now, notifier.highPressure);
+                charts.AddDataPointPressureChart(notifier, datetimePoint, highPressureIndex);
+                datetimePoint = new DateTimePoint(DateTime.Now, notifier.lowPressure);
+                charts.AddDataPointPressureChart(notifier, datetimePoint, lowPressureIndex);
+            }
         }
 
     }

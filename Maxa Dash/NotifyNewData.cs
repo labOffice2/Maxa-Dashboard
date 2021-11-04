@@ -1293,9 +1293,10 @@ namespace Maxa_Dash
             }
         }
 
-        
+
         #endregion
 
+        #region enums
 
         // This enum is used to display machine state (operation mode)
         public enum MachinelState
@@ -1351,6 +1352,39 @@ namespace Maxa_Dash
             DEACTIVATING,
             ACTIVE,
         }
+        #endregion
+
+        #region Charts parameters
+
+        private Func<double, string> _YFormatter = Value => Value.ToString();
+        public Func<double, string> YFormatter
+        {
+            get { return _YFormatter; }
+            set
+            {
+                if (_YFormatter != value)
+                {
+                    _YFormatter = value;
+                    INotifyPropertyChanged(nameof(YFormatter));
+                }
+            }
+        }
+
+        private Func<double, string> _DatesFormatter = Value => new DateTime((long)Value).ToString("HH:mm:ss");
+        public Func<double, string> DatesFormatter
+        {
+            get { return _DatesFormatter; }
+            set
+            {
+                if (_DatesFormatter != value)
+                {
+                    _DatesFormatter = value;
+                    INotifyPropertyChanged(nameof(DatesFormatter));
+                }
+            }
+        }
+
+        #region temperatures chart
 
         private SeriesCollection _Temps = new SeriesCollection();
         public SeriesCollection Temps
@@ -1366,59 +1400,99 @@ namespace Maxa_Dash
             }
         }
 
-        private Func<double, string> _YFormatter = Value => Value.ToString();
-        public Func<double, string> YFormatter { get { return _YFormatter; } set {
-                if (_YFormatter != value)
-                {
-                    _YFormatter = value;
-                    INotifyPropertyChanged(nameof(YFormatter));
-                }
-            } }
+        
 
-        private Func<double, string> _DatesFormatter = Value => new DateTime((long)Value).ToString("HH:mm:ss");
-        public Func<double, string> DatesFormatter { get { return _DatesFormatter; } set {
-                if (_DatesFormatter != value)
-                {
-                    _DatesFormatter = value;
-                    INotifyPropertyChanged(nameof(DatesFormatter));
-                }
-            } }
-
-        private double _axisMax = DateTime.Now.Ticks + TimeSpan.FromSeconds(20).Ticks;
-        public double AxisMax
+        private double _tempAxisMax = DateTime.Now.Ticks + TimeSpan.FromSeconds(20).Ticks;
+        public double TempAxisMax
         {
-            get { return _axisMax; }
+            get { return _tempAxisMax; }
             set
             {
-                _axisMax = value;
-                INotifyPropertyChanged(nameof(AxisMax));
+                _tempAxisMax = value;
+                INotifyPropertyChanged(nameof(TempAxisMax));
             }
         }
 
-        private double _axisMin = DateTime.Now.Ticks;
-        public double AxisMin
+        private double _tempAxisMin = DateTime.Now.Ticks;
+        public double TempAxisMin
         {
-            get { return _axisMin; }
+            get { return _tempAxisMin; }
             set
             {
-                _axisMin = value;
-                INotifyPropertyChanged(nameof(AxisMin));
+                _tempAxisMin = value;
+                INotifyPropertyChanged(nameof(TempAxisMin));
             }
         }
 
-        private int _chartTimeSpan = 5;
-        public int chartTimeSpan
+        private int _tempChartTimeSpan = 5;
+        public int tempChartTimeSpan
         {
-            get { return _chartTimeSpan; }
+            get { return _tempChartTimeSpan; }
             set
             {
                 if(value > 0)
                 {
-                    _chartTimeSpan = value;
-                    INotifyPropertyChanged(nameof(chartTimeSpan));
+                    _tempChartTimeSpan = value;
+                    INotifyPropertyChanged(nameof(tempChartTimeSpan));
                 }
             }
         }
+        #endregion
+
+        #region Pressures chart
+
+        private SeriesCollection _Pressures = new SeriesCollection();
+        public SeriesCollection Pressures
+        {
+            get { return _Pressures; }
+            set
+            {
+                if (_Pressures != value)
+                {
+                    _Pressures = value;
+                    INotifyPropertyChanged(nameof(Pressures));
+                }
+            }
+        }
+
+        private double _PressureAxisMax = DateTime.Now.Ticks + TimeSpan.FromSeconds(20).Ticks;
+        public double PressureAxisMax
+        {
+            get { return _PressureAxisMax; }
+            set
+            {
+                _PressureAxisMax = value;
+                INotifyPropertyChanged(nameof(PressureAxisMax));
+            }
+        }
+
+        private double _PressureAxisMin = DateTime.Now.Ticks;
+        public double PressureAxisMin
+        {
+            get { return _PressureAxisMin; }
+            set
+            {
+                _PressureAxisMin = value;
+                INotifyPropertyChanged(nameof(PressureAxisMin));
+            }
+        }
+
+        private int _PressureChartTimeSpan = 5;
+        public int PressureChartTimeSpan
+        {
+            get { return _PressureChartTimeSpan; }
+            set
+            {
+                if (value > 0)
+                {
+                    _PressureChartTimeSpan = value;
+                    INotifyPropertyChanged(nameof(PressureChartTimeSpan));
+                }
+            }
+        }
+        #endregion
+
+        #endregion
 
     }
 }

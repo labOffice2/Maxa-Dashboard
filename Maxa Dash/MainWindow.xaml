@@ -886,7 +886,7 @@
                     </Grid>
                 </Grid>
             </TabItem>
-            <TabItem Header="charts">
+            <TabItem Header="Temperatures pragh">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"/>
@@ -898,7 +898,7 @@
                             <ColumnDefinition Width="1*"/>
                         </Grid.ColumnDefinitions>
                         <Label Content="Set time span of the graph (minutes) :" Grid.Column="0"/>
-                        <TextBox Name="ChartTimeSpan" Text="{Binding chartTimeSpan, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" VerticalAlignment="Center"/>
+                        <TextBox Name="TempChartTimeSpan" Text="{Binding tempChartTimeSpan, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" VerticalAlignment="Center"/>
                     </Grid>
                     <Grid Grid.Row="1">
                         <lvc:CartesianChart Series="{Binding Temps}" LegendLocation="Right" >
@@ -907,12 +907,40 @@
                             </lvc:CartesianChart.AxisY>
                             <lvc:CartesianChart.AxisX>
                                 <lvc:Axis Title="Time" LabelFormatter="{Binding DatesFormatter}" 
-                                    MaxValue="{Binding AxisMax}" 
-                                    MinValue="{Binding AxisMin}"></lvc:Axis>
+                                    MaxValue="{Binding TempAxisMax}" 
+                                    MinValue="{Binding TempAxisMin}"></lvc:Axis>
                             </lvc:CartesianChart.AxisX>
                         </lvc:CartesianChart>
                     </Grid>
                 </Grid>
+            </TabItem>
+            <TabItem Header="Pressures graph">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Set time span of the graph (minutes) :" Grid.Column="0"/>
+                        <TextBox Name="PressureChartTimeSpan" Text="{Binding PressureChartTimeSpan, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" VerticalAlignment="Center"/>
+                    </Grid>
+                    <Grid Grid.Row="1">
+                        <lvc:CartesianChart Series="{Binding Pressures}" LegendLocation="Right" >
+                            <lvc:CartesianChart.AxisY>
+                                <lvc:Axis Title="Pressure (Bar)" LabelFormatter="{Binding YFormatter}"></lvc:Axis>
+                            </lvc:CartesianChart.AxisY>
+                            <lvc:CartesianChart.AxisX>
+                                <lvc:Axis Title="Time" LabelFormatter="{Binding DatesFormatter}" 
+                                    MaxValue="{Binding PressureAxisMax}" 
+                                    MinValue="{Binding PressureAxisMin}"></lvc:Axis>
+                            </lvc:CartesianChart.AxisX>
+                        </lvc:CartesianChart>
+                    </Grid>
+                </Grid>                
             </TabItem>
         </TabControl>
     </Grid>
