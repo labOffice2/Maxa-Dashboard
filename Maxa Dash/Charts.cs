@@ -48,10 +48,17 @@ namespace Maxa_Dash
                     Values = new ChartValues<DateTimePoint>(),
                     Fill = Brushes.Transparent,
                     Stroke = seriesColor,
+                    Visibility = System.Windows.Visibility.Visible,
                 }
             );
 
             return notifier.Temps.Count - 1;
+        }
+
+        public void SetSeriesVisibilityTempChart(NotifyNewData notifier, int index, System.Windows.Visibility visibility)
+        {
+            LineSeries series = (LineSeries)notifier.Temps[index];
+            series.Visibility = visibility;
         }
 
         public void AddDataPointPressureChart(NotifyNewData notifier, DateTimePoint newData, int seriesIdex = 0)
@@ -82,6 +89,12 @@ namespace Maxa_Dash
             );
 
             return notifier.Pressures.Count - 1;
+        }
+
+        public void SetSeriesVisibilityPressureChart(NotifyNewData notifier, int index, System.Windows.Visibility visibility)
+        {
+            LineSeries series = (LineSeries)notifier.Pressures[index];
+            series.Visibility = visibility;
         }
 
         /*

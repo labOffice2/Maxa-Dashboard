@@ -24,6 +24,12 @@ namespace Maxa_Dash
 
         Charts charts = new Charts();
         int outdoorTempIndex;
+        private int waterReturnIndex;
+        private int waterSupplyIndex;
+        private int evaporasionIndex;
+        private int condensationIndex;
+        private int suctionIndex;
+        private int dischargeIndex;
         int highPressureIndex;
         int lowPressureIndex;
 
@@ -157,7 +163,13 @@ namespace Maxa_Dash
         private void InitializeCharts()
         {
             charts = new Charts(notifier);
-            outdoorTempIndex = charts.AddSeriesToTempChart(notifier, "outdoor", Brushes.LightBlue);
+            outdoorTempIndex    = charts.AddSeriesToTempChart(notifier, "outdoor", Brushes.LightBlue);
+            waterReturnIndex    = charts.AddSeriesToTempChart(notifier, "water return", Brushes.BlueViolet);
+            waterSupplyIndex    = charts.AddSeriesToTempChart(notifier, "water supply", Brushes.OrangeRed);
+            evaporasionIndex    = charts.AddSeriesToTempChart(notifier, "evaporation", Brushes.Gray);
+            condensationIndex   = charts.AddSeriesToTempChart(notifier, "condesation", Brushes.Blue);
+            suctionIndex        = charts.AddSeriesToTempChart(notifier, "suction", Brushes.HotPink);
+            dischargeIndex      = charts.AddSeriesToTempChart(notifier, "discharge", Brushes.Red);
 
             highPressureIndex = charts.AddSeriesToPressureChart(notifier, "high", Brushes.LightBlue);
             lowPressureIndex = charts.AddSeriesToPressureChart(notifier, "low", Brushes.Red);
@@ -588,6 +600,19 @@ namespace Maxa_Dash
             {
                 DateTimePoint datetimePoint = new DateTimePoint(DateTime.Now, notifier.externalAirTemp);
                 charts.AddDataPointTempChart(notifier, datetimePoint, outdoorTempIndex);
+
+                datetimePoint = new DateTimePoint(DateTime.Now, notifier.waterInTemp);
+                charts.AddDataPointPressureChart(notifier, datetimePoint, waterReturnIndex);
+                datetimePoint = new DateTimePoint(DateTime.Now, notifier.waterOutTemp);
+                charts.AddDataPointPressureChart(notifier, datetimePoint, waterSupplyIndex);
+                datetimePoint = new DateTimePoint(DateTime.Now, notifier.evaporationTemp);
+                charts.AddDataPointPressureChart(notifier, datetimePoint, evaporasionIndex);
+                datetimePoint = new DateTimePoint(DateTime.Now, notifier.condendsationTemp);
+                charts.AddDataPointPressureChart(notifier, datetimePoint, condensationIndex);
+                datetimePoint = new DateTimePoint(DateTime.Now, notifier.comp1SucTemp);
+                charts.AddDataPointPressureChart(notifier, datetimePoint, suctionIndex);
+                datetimePoint = new DateTimePoint(DateTime.Now, notifier.comp1DisTemp);
+                charts.AddDataPointPressureChart(notifier, datetimePoint, dischargeIndex);
             }
 
             if (notifier.Pressures.Count > 0)
@@ -599,5 +624,55 @@ namespace Maxa_Dash
             }
         }
 
+        #region temperature chart check boxes handling
+        private void OurdoorCB_Click(object sender, RoutedEventArgs e)
+        {
+            ChangeSeriesVisability(OutdoorCB, outdoorTempIndex, true);
+        }
+
+        private void WaterReturnCB_Click(object sender, RoutedEventArgs e)
+        {
+            ChangeSeriesVisability(WaterReturnCB, waterReturnIndex, true);
+        }
+
+        private void WaterSupplyCB_Click(object sender, RoutedEventArgs e)
+        {
+            ChangeSeriesVisability(WaterSupplyCB, waterSupplyIndex, true);
+        }
+
+        private void EvaporationCB_Click(object sender, RoutedEventArgs e)
+        {
+            ChangeSeriesVisability(EvaporationCB, evaporasionIndex, true);
+        }
+
+        private void CondensationCB_Click(object sender, RoutedEventArgs e)
+        {
+            ChangeSeriesVisability(CondensationCB, condensationIndex, true);
+        }
+
+        private void SuctionCB_Click(object sender, RoutedEventArgs e)
+        {
+            ChangeSeriesVisability(SuctionCB, suctionIndex, true);
+        }
+
+        private void DischargeCB_Click(object sender, RoutedEventArgs e)
+        {
+            ChangeSeriesVisability(DischargeCB, dischargeIndex, true);
+        }
+
+        private void ChangeSeriesVisability(CheckBox CB, int index, bool isTempChart)
+        {
+            if (isTempChart && notifier.Temps.Count <= 0) return;
+            else if (notifier.Pressures.Count <= 0) return;
+
+            if(isTempChart)
+                charts.SetSeriesVisibilityTempChart(notifier, index, (bool)CB.IsChecked? Visibility.Visible : Visibility.Hidden);
+
+            else
+                charts.SetSeriesVisibilityPressureChart(notifier, index, (bool)CB.IsChecked ? Visibility.Visible : Visibility.Hidden);
+
+        }
+
+        #endregion
     }
 }

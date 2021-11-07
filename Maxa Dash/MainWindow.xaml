@@ -892,6 +892,10 @@
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="1*"/>
                     </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
                     <Grid Grid.Row="0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto"/>
@@ -911,6 +915,17 @@
                                     MinValue="{Binding TempAxisMin}"></lvc:Axis>
                             </lvc:CartesianChart.AxisX>
                         </lvc:CartesianChart>
+                    </Grid>
+                    <Grid Grid.Column="1" Grid.RowSpan="3" Margin="10">
+                        <StackPanel VerticalAlignment="Center">
+                            <CheckBox Name="OutdoorCB" Content="water supply" Margin="2" IsChecked="True" Click="OurdoorCB_Click"/>
+                            <CheckBox Name="WaterReturnCB" Content="water return" Margin="2" IsChecked="True" Click="WaterReturnCB_Click"/>
+                            <CheckBox Name="WaterSupplyCB" Content="water supply" Margin="2" IsChecked="True" Click="WaterSupplyCB_Click" />
+                            <CheckBox Name="EvaporationCB" Content="evaporation" Margin="2" IsChecked="True" Click="EvaporationCB_Click"/>
+                            <CheckBox Name="CondensationCB" Content="condensation" Margin="2" IsChecked="True" Click="CondensationCB_Click"/>
+                            <CheckBox Name="SuctionCB" Content="suction" Margin="2" IsChecked="True" Click="SuctionCB_Click"/>
+                            <CheckBox Name="DischargeCB" Content="discharge" Margin="2" IsChecked="True" Click="DischargeCB_Click"/>
+                        </StackPanel>                        
                     </Grid>
                 </Grid>
             </TabItem>
