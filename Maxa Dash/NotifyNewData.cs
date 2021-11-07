@@ -353,7 +353,7 @@ namespace Maxa_Dash
 
         #endregion
 
-        // Read-only setpoints
+        #region Read-only setpoints
 
         private float _actualThermoragulationSP = 0f;
         public float actualThermoragulationSP
@@ -383,8 +383,9 @@ namespace Maxa_Dash
             }
         }
 
+        #endregion
 
-        // analog outputs
+        #region analog outputs
         private float _fanAnalogOut;
         public float fanAnalogOut
         {
@@ -427,7 +428,9 @@ namespace Maxa_Dash
             }
         }
 
-        // pressures
+        #endregion
+
+        #region pressures
         private float _highPressure;
         public float highPressure
         {
@@ -484,7 +487,10 @@ namespace Maxa_Dash
             }
         }
 
-        // machine mode
+        #endregion
+
+        #region machine mode
+
         private MachinelState _generalState = MachinelState.NA;
         public MachinelState generalState
         {
@@ -541,6 +547,7 @@ namespace Maxa_Dash
             }
         }
 
+        #endregion
 
         /* from older version of register mapping - irrelevant
         private PlantMode _plantMode = PlantMode.NA;
@@ -600,7 +607,7 @@ namespace Maxa_Dash
         }
         */
 
-        // manufacturing data
+        #region manufacturing data
         private string _firmwareVersion = "no data";
         public string firmwareVersion
         {
@@ -643,6 +650,7 @@ namespace Maxa_Dash
             }
         }
 
+        #endregion
 
         // error colors
         #region Error codes colors

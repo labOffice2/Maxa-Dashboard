@@ -594,13 +594,18 @@ namespace Maxa_Dash
             }
         }
 
+
+        /// <summary>
+        /// This function is called once every time the timer elapces
+        /// It updates all the series for the charts
+        /// then is sets new axis limits to each chart
+        /// </summary>
         private void UpdateCharts()
         {
-            if (notifier.Temps.Count > 0)
+            if (notifier.Temps.Count > 0)   // verify the seriesCollection is initialized
             {
                 DateTimePoint datetimePoint = new DateTimePoint(DateTime.Now, notifier.externalAirTemp);
                 charts.AddDataPointTempChart(notifier, datetimePoint, outdoorTempIndex);
-
                 datetimePoint = new DateTimePoint(DateTime.Now, notifier.waterInTemp);
                 charts.AddDataPointPressureChart(notifier, datetimePoint, waterReturnIndex);
                 datetimePoint = new DateTimePoint(DateTime.Now, notifier.waterOutTemp);
@@ -613,14 +618,18 @@ namespace Maxa_Dash
                 charts.AddDataPointPressureChart(notifier, datetimePoint, suctionIndex);
                 datetimePoint = new DateTimePoint(DateTime.Now, notifier.comp1DisTemp);
                 charts.AddDataPointPressureChart(notifier, datetimePoint, dischargeIndex);
+
+                charts.SetAxisLimitsTempChart(notifier, DateTime.Now);
             }
 
-            if (notifier.Pressures.Count > 0)
+            if (notifier.Pressures.Count > 0)   // verify the seriesCollection is initialized
             {
                 DateTimePoint datetimePoint = new DateTimePoint(DateTime.Now, notifier.highPressure);
                 charts.AddDataPointPressureChart(notifier, datetimePoint, highPressureIndex);
                 datetimePoint = new DateTimePoint(DateTime.Now, notifier.lowPressure);
                 charts.AddDataPointPressureChart(notifier, datetimePoint, lowPressureIndex);
+
+                charts.SetAxisLimitsPressureChart(notifier, DateTime.Now);
             }
         }
 
@@ -660,16 +669,16 @@ namespace Maxa_Dash
             ChangeSeriesVisability(DischargeCB, dischargeIndex, true);
         }
 
-        private void ChangeSeriesVisability(CheckBox CB, int index, bool isTempChart)
+        private void ChangeSeriesVisability(CheckBox CB, int seriesIndex, bool isTempChart)
         {
             if (isTempChart && notifier.Temps.Count <= 0) return;
             else if (notifier.Pressures.Count <= 0) return;
 
             if(isTempChart)
-                charts.SetSeriesVisibilityTempChart(notifier, index, (bool)CB.IsChecked? Visibility.Visible : Visibility.Hidden);
+                charts.SetSeriesVisibilityTempChart(notifier, seriesIndex, (bool)CB.IsChecked? Visibility.Visible : Visibility.Hidden);
 
             else
-                charts.SetSeriesVisibilityPressureChart(notifier, index, (bool)CB.IsChecked ? Visibility.Visible : Visibility.Hidden);
+                charts.SetSeriesVisibilityPressureChart(notifier, seriesIndex, (bool)CB.IsChecked ? Visibility.Visible : Visibility.Hidden);
 
         }
 
