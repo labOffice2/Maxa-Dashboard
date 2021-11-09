@@ -905,7 +905,7 @@
                         <TextBox Name="TempChartTimeSpan" Text="{Binding tempChartTimeSpan, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" VerticalAlignment="Center"/>
                     </Grid>
                     <Grid Grid.Row="1">
-                        <lvc:CartesianChart Series="{Binding Temps}" LegendLocation="Right" >
+                        <lvc:CartesianChart Series="{Binding Temps}" LegendLocation="Right" DisableAnimations="True" >
                             <lvc:CartesianChart.AxisY>
                                 <lvc:Axis Title="temperature" LabelFormatter="{Binding YFormatter}"></lvc:Axis>
                             </lvc:CartesianChart.AxisY>
@@ -918,7 +918,7 @@
                     </Grid>
                     <Grid Grid.Column="1" Grid.RowSpan="3" Margin="10">
                         <StackPanel VerticalAlignment="Center">
-                            <CheckBox Name="OutdoorCB" Content="water supply" Margin="2" IsChecked="True" Click="OurdoorCB_Click"/>
+                            <CheckBox Name="OutdoorCB" Content="outdoor" Margin="2" IsChecked="True" Click="OurdoorCB_Click"/>
                             <CheckBox Name="WaterReturnCB" Content="water return" Margin="2" IsChecked="True" Click="WaterReturnCB_Click"/>
                             <CheckBox Name="WaterSupplyCB" Content="water supply" Margin="2" IsChecked="True" Click="WaterSupplyCB_Click" />
                             <CheckBox Name="EvaporationCB" Content="evaporation" Margin="2" IsChecked="True" Click="EvaporationCB_Click"/>
@@ -944,7 +944,7 @@
                         <TextBox Name="PressureChartTimeSpan" Text="{Binding PressureChartTimeSpan, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" VerticalAlignment="Center"/>
                     </Grid>
                     <Grid Grid.Row="1">
-                        <lvc:CartesianChart Series="{Binding Pressures}" LegendLocation="Right" >
+                        <lvc:CartesianChart Series="{Binding Pressures}" LegendLocation="Right" DisableAnimations="True">
                             <lvc:CartesianChart.AxisY>
                                 <lvc:Axis Title="Pressure (Bar)" LabelFormatter="{Binding YFormatter}"></lvc:Axis>
                             </lvc:CartesianChart.AxisY>

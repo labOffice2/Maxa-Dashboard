@@ -8,7 +8,7 @@ using LiveCharts;
 using LiveCharts.Wpf;
 using LiveCharts.Defaults;
 using System.Windows.Media;
-
+using LiveCharts.Definitions.Charts;
 
 /// <summary>
 /// This class manages the charts in the program
@@ -18,16 +18,76 @@ namespace Maxa_Dash
 {
     public class Charts
     {
-        private int maxDataPoints = 100;
+        private int maxDataPoints = 150;
+        private TimeSpan maxTimeSpan = TimeSpan.FromMinutes(60);
+
         public Charts()
         {
         }
 
         public Charts(NotifyNewData notifier)
         {
-            //notifier.YFormatter = Value => Value.ToString();
-            //notifier.DatesFormatter = Value => Value.TimeOfDay.ToString();
+
         }
+
+
+        private bool RemoveRedandency(IChartValues chartValues)
+        {
+            /*
+            try
+            {
+                int lastIndex = chartValues.Count - 1;
+                DateTimePoint[] lastdata = { (DateTimePoint)chartValues[lastIndex], (DateTimePoint)chartValues[lastIndex - 1], (DateTimePoint)chartValues[lastIndex - 2] };
+                if(lastdata[0].Value == lastdata[1].Value && lastdata[1].Value == lastdata[2].Value)
+                return true;
+            }
+            catch(Exception ex)
+            {
+
+            }
+            return false;
+            */
+
+            try
+            {
+                int lastIndex = chartValues.Count - 1;
+                DateTimePoint[] lastdata = { (DateTimePoint)chartValues[lastIndex], (DateTimePoint)chartValues[lastIndex - 1], (DateTimePoint)chartValues[lastIndex - 2] };
+                if (lastdata[2].Value == lastdata[1].Value)
+                    return true;
+            }
+            catch{}
+
+            return false;
+
+        }
+
+
+        private Series GetStepLineSeries(string seriesName, Brush seriesColor = null)
+        {
+            return new StepLineSeries
+            {
+                Title = seriesName,
+                Values = new ChartValues<DateTimePoint>(),
+                Fill = Brushes.Transparent,
+                Stroke = seriesColor,
+                //AlternativeStroke = seriesColor,
+                Visibility = System.Windows.Visibility.Visible,
+                DataLabels = false,
+                PointGeometry = null,
+            };
+        }
+
+        //private StepLineSeries RemoveOldData(StepLineSeries series)
+        //{
+        //    foreach(DateTimePoint point in series.Values)
+        //    {
+        //        if(DateTime.Now - point.DateTime > maxTimeSpan)
+        //        {
+        //            series.Values.Remove(point);
+        //        }
+        //    }
+        //    return series;
+        //}
 
         /// <summary>
         /// This function adds new data to an exiting series in the temperatures charts
@@ -41,9 +101,10 @@ namespace Maxa_Dash
 
             if (RemoveRedandency(notifier.Temps[seriesIdex].Values))
                 notifier.Temps[seriesIdex].Values.RemoveAt(notifier.Temps[seriesIdex].Values.Count - 2);
-
+            
             if (notifier.Temps[seriesIdex].Values.Count > maxDataPoints)
                 notifier.Temps[seriesIdex].Values.RemoveAt(0);
+            
         }
 
         /// <summary>
@@ -67,20 +128,11 @@ namespace Maxa_Dash
         public int AddSeriesToTempChart(NotifyNewData notifier, string seriesName, Brush seriesColor = null)
         {
             seriesColor = seriesColor == null ? Brushes.LightBlue : seriesColor;
-            notifier.Temps.Add(
-
-                new LineSeries
-                {
-                    Title = seriesName,
-                    Values = new ChartValues<DateTimePoint>(),
-                    Fill = Brushes.Transparent,
-                    Stroke = seriesColor,
-                    Visibility = System.Windows.Visibility.Visible,
-                }
-            );
+            notifier.Temps.Add( GetStepLineSeries(seriesName, seriesColor) );
 
             return notifier.Temps.Count - 1;
         }
+
 
         /// <summary>
         /// This function is used to control the visibility of the series in the temperature chart
@@ -90,7 +142,7 @@ namespace Maxa_Dash
         /// <param name="visibility">the vixibility to set to said series</param>
         public void SetSeriesVisibilityTempChart(NotifyNewData notifier, int index, System.Windows.Visibility visibility)
         {
-            LineSeries series = (LineSeries)notifier.Temps[index];
+            Series series = (Series)notifier.Temps[index];
             series.Visibility = visibility;
         }
 
@@ -112,21 +164,6 @@ namespace Maxa_Dash
                 notifier.Pressures[seriesIdex].Values.RemoveAt(0);
         }
 
-        private bool RemoveRedandency(IChartValues chartValues)
-        {
-            try
-            {
-                int lastIndex = chartValues.Count - 1;
-                DateTimePoint[] lastdata = { (DateTimePoint)chartValues[lastIndex], (DateTimePoint)chartValues[lastIndex - 1], (DateTimePoint)chartValues[lastIndex - 2] };
-                if(lastdata[0].Value == lastdata[1].Value && lastdata[1].Value == lastdata[2].Value)
-                return true;
-            }
-            catch(Exception ex)
-            {
-
-            }
-            return false;
-        }
 
         /// <summary>
         /// This function updates the time axis of the pressures chart according to the time span set by user
@@ -149,16 +186,7 @@ namespace Maxa_Dash
         public int AddSeriesToPressureChart(NotifyNewData notifier, string seriesName, Brush seriesColor = null)
         {
             seriesColor = seriesColor == null ? Brushes.LightBlue : seriesColor;
-            notifier.Pressures.Add(
-
-                new LineSeries
-                {
-                    Title = seriesName,
-                    Values = new ChartValues<DateTimePoint>(),
-                    Fill = Brushes.Transparent,
-                    Stroke = seriesColor,
-                }
-            );
+            notifier.Pressures.Add(GetStepLineSeries(seriesName, seriesColor));
 
             return notifier.Pressures.Count - 1;
         }
@@ -171,7 +199,7 @@ namespace Maxa_Dash
         /// <param name="visibility">the vixibility to set to said series</param>
         public void SetSeriesVisibilityPressureChart(NotifyNewData notifier, int index, System.Windows.Visibility visibility)
         {
-            LineSeries series = (LineSeries)notifier.Pressures[index];
+            Series series = (Series)notifier.Pressures[index];
             series.Visibility = visibility;
         }
 
@@ -204,7 +232,7 @@ namespace Maxa_Dash
                 seriesColor = seriesColor == null ? Brushes.LightBlue : seriesColor;
                 collection.Add(
 
-                    new LineSeries
+                    new StepLineSeries
                     {
                         Title = seriesName,
                         Values = new ChartValues<DateTimePoint>(),
