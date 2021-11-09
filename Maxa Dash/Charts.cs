@@ -18,7 +18,7 @@ namespace Maxa_Dash
 {
     public class Charts
     {
-
+        private int maxDataPoints = 100;
         public Charts()
         {
         }
@@ -39,7 +39,11 @@ namespace Maxa_Dash
         {
             notifier.Temps[seriesIdex].Values.Add(newData);
 
-            //SetAxisLimitsTempChart(notifier, DateTime.Now);  - moved to the mainwindow to UpdateCharts(), should be called only once every time the series are being updated
+            if (RemoveRedandency(notifier.Temps[seriesIdex].Values))
+                notifier.Temps[seriesIdex].Values.RemoveAt(notifier.Temps[seriesIdex].Values.Count - 2);
+
+            if (notifier.Temps[seriesIdex].Values.Count > maxDataPoints)
+                notifier.Temps[seriesIdex].Values.RemoveAt(0);
         }
 
         /// <summary>
@@ -101,7 +105,27 @@ namespace Maxa_Dash
         {
             notifier.Pressures[seriesIdex].Values.Add(newData);
 
-            //SetAxisLimitsPressureChart(notifier, DateTime.Now);       - moved to the mainwindow to UpdateCharts(), should be called only once every time the series are being updated
+            if(RemoveRedandency(notifier.Pressures[seriesIdex].Values))
+                notifier.Pressures[seriesIdex].Values.RemoveAt(notifier.Pressures[seriesIdex].Values.Count -2);
+
+            if (notifier.Pressures[seriesIdex].Values.Count > maxDataPoints)
+                notifier.Pressures[seriesIdex].Values.RemoveAt(0);
+        }
+
+        private bool RemoveRedandency(IChartValues chartValues)
+        {
+            try
+            {
+                int lastIndex = chartValues.Count - 1;
+                DateTimePoint[] lastdata = { (DateTimePoint)chartValues[lastIndex], (DateTimePoint)chartValues[lastIndex - 1], (DateTimePoint)chartValues[lastIndex - 2] };
+                if(lastdata[0].Value == lastdata[1].Value && lastdata[1].Value == lastdata[2].Value)
+                return true;
+            }
+            catch(Exception ex)
+            {
+
+            }
+            return false;
         }
 
         /// <summary>
