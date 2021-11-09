@@ -702,7 +702,7 @@ namespace Maxa_Dash
                 int[] data = modbusClient.ReadHoldingRegisters(Registers.CoolSPReg, 6);
                 if (data[0] != DataConverter.GetSetPointFromGui(notifier.coolSP)) return false;
                 //data = modbusClient.ReadHoldingRegisters(Registers.HeatSPReg, 1);
-                if (data[1] != DataConverter.GetSetPointFromGui(notifier.heatSP2)) return false;
+                if (data[1] != DataConverter.GetSetPointFromGui(notifier.heatSP)) return false;
                 //data = modbusClient.ReadHoldingRegisters(Registers.SanitarySPReg, 1);
                 if (data[2] != DataConverter.GetSetPointFromGui(notifier.DHWSP)) return false;
                 //data = modbusClient.ReadHoldingRegisters(Registers.SecondCoolSPReg, 1);
