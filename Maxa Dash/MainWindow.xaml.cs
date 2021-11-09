@@ -615,17 +615,17 @@ namespace Maxa_Dash
                 DateTimePoint datetimePoint = new DateTimePoint(DateTime.Now, notifier.externalAirTemp);
                 charts.AddDataPointTempChart(notifier, datetimePoint, outdoorTempIndex);
                 datetimePoint = new DateTimePoint(DateTime.Now, notifier.waterInTemp);
-                charts.AddDataPointPressureChart(notifier, datetimePoint, waterReturnIndex);
+                charts.AddDataPointTempChart(notifier, datetimePoint, waterReturnIndex);
                 datetimePoint = new DateTimePoint(DateTime.Now, notifier.waterOutTemp);
-                charts.AddDataPointPressureChart(notifier, datetimePoint, waterSupplyIndex);
+                charts.AddDataPointTempChart(notifier, datetimePoint, waterSupplyIndex);
                 datetimePoint = new DateTimePoint(DateTime.Now, notifier.evaporationTemp);
-                charts.AddDataPointPressureChart(notifier, datetimePoint, evaporasionIndex);
+                charts.AddDataPointTempChart(notifier, datetimePoint, evaporasionIndex);
                 datetimePoint = new DateTimePoint(DateTime.Now, notifier.condendsationTemp);
-                charts.AddDataPointPressureChart(notifier, datetimePoint, condensationIndex);
+                charts.AddDataPointTempChart(notifier, datetimePoint, condensationIndex);
                 datetimePoint = new DateTimePoint(DateTime.Now, notifier.comp1SucTemp);
-                charts.AddDataPointPressureChart(notifier, datetimePoint, suctionIndex);
+                charts.AddDataPointTempChart(notifier, datetimePoint, suctionIndex);
                 datetimePoint = new DateTimePoint(DateTime.Now, notifier.comp1DisTemp);
-                charts.AddDataPointPressureChart(notifier, datetimePoint, dischargeIndex);
+                charts.AddDataPointTempChart(notifier, datetimePoint, dischargeIndex);
 
                 charts.SetAxisLimitsTempChart(notifier, DateTime.Now);
             }
