@@ -293,14 +293,14 @@ namespace Maxa_Dash
         /// <param name="notifier">Object holding all variables for data biniding</param>
         /// <param name="modbusClient">Modbus client object currently connected to a Maxa unit</param>
         /// <returns>Returns an array of register's addresses that contain active errors</returns>
-        public static int[] ReadErrors(NotifyNewData notifier, ModbusClient modbusClient)
+        public static int[] ReadErrors(NotifyNewData notifier, ModbusClient modbusClient, bool isResetErrors)
         {
             // get errors from registers 950
             List<int> ErrorContainingRegistorsList = new List<int>();
             try
             {
                 int[] data = modbusClient.ReadHoldingRegisters(Registers.Alarm01_16Reg, 7);
-                if (data[0] != 0)
+                if (data[0] != 0 || isResetErrors)
                 {
                     notifier.E001 = DataConverter.GetAlarmColor((data[0] & ErrorCodes.HighPressure.bitMask) > 0);
                     notifier.E002 = DataConverter.GetAlarmColor((data[0] & ErrorCodes.lowPressure.bitMask) > 0);
@@ -321,7 +321,7 @@ namespace Maxa_Dash
             // get errors from registers 951
             
                 //int[] data = modbusClient.ReadHoldingRegisters(Registers.Alarm18_101Reg, 1);
-                if (data[1] != 0)
+                if (data[1] != 0 || isResetErrors)
                 {
                     notifier.E018 = DataConverter.GetAlarmColor((data[1] & ErrorCodes.HighTemp.bitMask) > 0);
                     //notifier.E019 = GuiDataConverter.GetAlarmColor((data[1] & ErrorCodes..bitMask) > 0);
@@ -343,7 +343,7 @@ namespace Maxa_Dash
             // get errors from registers 952
             
                 //int[] data = modbusClient.ReadHoldingRegisters(Registers.Alarm611_652Reg, 1);
-                if (data[2] != 0)
+                if (data[2] != 0 || isResetErrors)
                 {
                     notifier.E611 = DataConverter.GetAlarmColor((data[2] & ErrorCodes.InputWaterProbe.bitMask) > 0);
                     //notifier.E621 = GuiDataConverter.GetAlarmColor((data[2] & ErrorCodes.OutputWaterProbe.bitMask) > 0);
@@ -363,27 +363,27 @@ namespace Maxa_Dash
                     //notifier.E652 = GuiDataConverter.GetAlarmColor((data[2] & ErrorCodes.ModulGiProbe5.bitMask) > 0);
                     ErrorContainingRegistorsList.Add(Registers.Alarm611_652Reg);
                 }
-            
 
-            // get errors from registers 953
-            
+
+                // get errors from registers 953
+
                 //int[] data = modbusClient.ReadHoldingRegisters(Registers.Alarm662_712Reg, 1);
-                //if (data[3] != 0)
+                //if (data[3] != 0 || isResetErrors)
                 //{
-                    //notifier.E662 = GuiDataConverter.GetAlarmColor((data[3] & ErrorCodes.ModulGiProbe6.bitMask) > 0);
-                    //notifier.E672 = GuiDataConverter.GetAlarmColor((data[3] & ErrorCodes.ModulGiProbe7.bitMask) > 0);
-                    //notifier.E682 = GuiDataConverter.GetAlarmColor((data[3] & ErrorCodes.ModulGiProbe8.bitMask) > 0);
-                    //notifier.E692 = GuiDataConverter.GetAlarmColor((data[3] & ErrorCodes.ModulGiProbe9.bitMask) > 0);
-                    //notifier.E702 = GuiDataConverter.GetAlarmColor((data[3] & ErrorCodes.ModulGiProbe10.bitMask) > 0);
-                    //notifier.E712 = GuiDataConverter.GetAlarmColor((data[3] & ErrorCodes.ModulGiProbe11.bitMask) > 0);
-                    //ErrorContainingRegistorsList.Add(Registers.Alarm662_712Reg);
+                //notifier.E662 = GuiDataConverter.GetAlarmColor((data[3] & ErrorCodes.ModulGiProbe6.bitMask) > 0);
+                //notifier.E672 = GuiDataConverter.GetAlarmColor((data[3] & ErrorCodes.ModulGiProbe7.bitMask) > 0);
+                //notifier.E682 = GuiDataConverter.GetAlarmColor((data[3] & ErrorCodes.ModulGiProbe8.bitMask) > 0);
+                //notifier.E692 = GuiDataConverter.GetAlarmColor((data[3] & ErrorCodes.ModulGiProbe9.bitMask) > 0);
+                //notifier.E702 = GuiDataConverter.GetAlarmColor((data[3] & ErrorCodes.ModulGiProbe10.bitMask) > 0);
+                //notifier.E712 = GuiDataConverter.GetAlarmColor((data[3] & ErrorCodes.ModulGiProbe11.bitMask) > 0);
+                //ErrorContainingRegistorsList.Add(Registers.Alarm662_712Reg);
                 //}
-            
 
-            // get errors from registers 954
-            
+
+                // get errors from registers 954
+
                 //int[] data = modbusClient.ReadHoldingRegisters(Registers.Alarm801_882Reg, 1);
-                if (data[4] != 0)
+                if (data[4] != 0 || isResetErrors)
                 {
                     notifier.E801 = DataConverter.GetAlarmColor((data[4] & ErrorCodes.LinkInverter1.bitMask) > 0);
                     //notifier.E802 = GuiDataConverter.GetAlarmColor((data[4] & ErrorCodes.LinkInverter2.bitMask) > 0);
@@ -402,7 +402,7 @@ namespace Maxa_Dash
             // get errors from registers 955
             
                 //int[] data = modbusClient.ReadHoldingRegisters(Registers.Alarm891_941Reg, 1);
-                if (data[5] != 0)
+                if (data[5] != 0 || isResetErrors)
                 {
                     notifier.E891 = DataConverter.GetAlarmColor((data[5] & ErrorCodes.PhSequenceInverter1.bitMask) > 0);
                     //notifier.E892 = GuiDataConverter.GetAlarmColor((data[5] & ErrorCodes.PhSequenceInverter2.bitMask) > 0);
@@ -422,7 +422,7 @@ namespace Maxa_Dash
             // get errors from registers 956
             
                 //int[] data = modbusClient.ReadHoldingRegisters(Registers.Alarm942_972Reg, 1);
-                if (data[6] != 0)
+                if (data[6] != 0 || isResetErrors)
                 {
                     //notifier.E942 = GuiDataConverter.GetAlarmColor((data[6] & ErrorCodes.FaultPFCInverter2.bitMask) > 0);
                     notifier.E951 = DataConverter.GetAlarmColor((data[6] & ErrorCodes.ProbeErrInverter1.bitMask) > 0);
@@ -452,14 +452,14 @@ namespace Maxa_Dash
         /// <param name="modbusClient">Modbus client object currently connected to a Maxa unit</param>
         /// <param name="fileWriter">FileWriter object to add values to its dictionary for later to be written to csv file</param>
         /// <returns>Returns an array of register's addresses that contain active errors</returns>
-        public static int[] ReadErrors(NotifyNewData notifier, ModbusClient modbusClient, FileWriter fileWriter)
+        public static int[] ReadErrors(NotifyNewData notifier, ModbusClient modbusClient, FileWriter fileWriter, bool isResetErrors)
         {
             // get errors from registers 950
             List<int> ErrorContainingRegistorsList = new List<int>();
             try
             {
                 int[] data = modbusClient.ReadHoldingRegisters(Registers.Alarm01_16Reg, 7);
-                if (data[0] != 0)
+                if (data[0] != 0 || isResetErrors)
                 {
                     fileWriter.dataDictionary["alarm register 950"] = data[0].ToString();
                     notifier.E001 = DataConverter.GetAlarmColor((data[0] & ErrorCodes.HighPressure.bitMask) > 0);
@@ -483,7 +483,7 @@ namespace Maxa_Dash
                 // get errors from registers 951
 
                 //int[] data = modbusClient.ReadHoldingRegisters(Registers.Alarm18_101Reg, 1);
-                if (data[1] != 0)
+                if (data[1] != 0 || isResetErrors)
                 {
                     fileWriter.dataDictionary["alarm register 951"] = data[1].ToString();
                     notifier.E018 = DataConverter.GetAlarmColor((data[1] & ErrorCodes.HighTemp.bitMask) > 0);
@@ -508,7 +508,7 @@ namespace Maxa_Dash
                 // get errors from registers 952
 
                 //int[] data = modbusClient.ReadHoldingRegisters(Registers.Alarm611_652Reg, 1);
-                if (data[2] != 0)
+                if (data[2] != 0 || isResetErrors)
                 {
                     fileWriter.dataDictionary["alarm register 952"] = data[2].ToString();
                     notifier.E611 = DataConverter.GetAlarmColor((data[2] & ErrorCodes.InputWaterProbe.bitMask) > 0);
@@ -536,7 +536,7 @@ namespace Maxa_Dash
                 // get errors from registers 953
 
                 //int[] data = modbusClient.ReadHoldingRegisters(Registers.Alarm662_712Reg, 1);
-                //if (data[3] != 0)
+                //if (data[3] != 0 || isResetErrors)
                 //{
                 //notifier.E662 = GuiDataConverter.GetAlarmColor((data[3] & ErrorCodes.ModulGiProbe6.bitMask) > 0);
                 //notifier.E672 = GuiDataConverter.GetAlarmColor((data[3] & ErrorCodes.ModulGiProbe7.bitMask) > 0);
@@ -551,7 +551,7 @@ namespace Maxa_Dash
                 // get errors from registers 954
 
                 //int[] data = modbusClient.ReadHoldingRegisters(Registers.Alarm801_882Reg, 1);
-                if (data[4] != 0)
+                if (data[4] != 0 || isResetErrors)
                 {
                     fileWriter.dataDictionary["alarm register 954"] = data[2].ToString();
                     notifier.E801 = DataConverter.GetAlarmColor((data[4] & ErrorCodes.LinkInverter1.bitMask) > 0);
@@ -573,7 +573,7 @@ namespace Maxa_Dash
                 // get errors from registers 955
 
                 //int[] data = modbusClient.ReadHoldingRegisters(Registers.Alarm891_941Reg, 1);
-                if (data[5] != 0)
+                if (data[5] != 0 || isResetErrors)
                 {
                     fileWriter.dataDictionary["alarm register 955"] = data[2].ToString();
                     notifier.E891 = DataConverter.GetAlarmColor((data[5] & ErrorCodes.PhSequenceInverter1.bitMask) > 0);
@@ -596,7 +596,7 @@ namespace Maxa_Dash
                 // get errors from registers 956
 
                 //int[] data = modbusClient.ReadHoldingRegisters(Registers.Alarm942_972Reg, 1);
-                if (data[6] != 0)
+                if (data[6] != 0 || isResetErrors)
                 {
                     fileWriter.dataDictionary["alarm register 956"] = data[2].ToString();
                     //notifier.E942 = GuiDataConverter.GetAlarmColor((data[6] & ErrorCodes.FaultPFCInverter2.bitMask) > 0);

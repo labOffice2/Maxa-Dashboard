@@ -305,7 +305,7 @@ namespace Maxa_Dash
                         Maxa.UpdateWaterSystemParameters(notifier, modbusClient, FileWriter);
                         Maxa.UpdateRefrigirationSystemParameters(notifier, modbusClient, FileWriter);
                         Maxa.UpdateReadOnlySetpoints(notifier, modbusClient, FileWriter);
-                        activeErrors = Maxa.ReadErrors(notifier, modbusClient, FileWriter);
+                        activeErrors = Maxa.ReadErrors(notifier, modbusClient, FileWriter, isResetErrors);
                         FileWriter.WriteToFile();
                     }
                     else
@@ -314,10 +314,18 @@ namespace Maxa_Dash
                         Maxa.UpdateWaterSystemParameters(notifier, modbusClient);
                         Maxa.UpdateRefrigirationSystemParameters(notifier, modbusClient);
                         Maxa.UpdateReadOnlySetpoints(notifier, modbusClient);
-                        activeErrors = Maxa.ReadErrors(notifier, modbusClient);
+                        activeErrors = Maxa.ReadErrors(notifier, modbusClient, isResetErrors);
                     }
 
-                    ResetErrorsButton.IsEnabled = (activeErrors.Length > 0) ? true : false;
+                    if(activeErrors.Length > 0)
+                    {
+                        ResetErrorsButton.IsEnabled = true;
+                    }
+                    else
+                    {
+                        ResetErrorsButton.IsEnabled = false;
+                        isResetErrors = false;
+                    }
 
                     lastSuccesfullCommunication = DateTime.Now;
                     notifier.E000 = DataConverter.GetAlarmColor(false);
