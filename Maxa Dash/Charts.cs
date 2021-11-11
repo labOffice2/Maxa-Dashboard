@@ -70,7 +70,7 @@ namespace Maxa_Dash
                 Values = new ChartValues<DateTimePoint>(),
                 Fill = Brushes.Transparent,
                 Stroke = seriesColor,
-                //AlternativeStroke = seriesColor,
+                AlternativeStroke = seriesColor,
                 Visibility = System.Windows.Visibility.Visible,
                 DataLabels = false,
                 PointGeometry = null,

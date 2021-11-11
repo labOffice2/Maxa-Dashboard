@@ -6,7 +6,7 @@
     <RootNamespace>Maxa_Dash</RootNamespace>
     <UseWPF>true</UseWPF>
     <ApplicationIcon>solaredge icon.ico</ApplicationIcon>
-    <Version>2.1.6</Version>
+    <Version>2.1.7</Version>
     <Authors>Eyal Srugo</Authors>
     <Company>Solaredge</Company>
     <Product>Maxa Dashboard</Product>
