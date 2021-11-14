@@ -77,6 +77,7 @@ namespace Maxa_Dash
 
             messagesPanel = new UserMessages(MessagePanel);
 
+            InitializeSetpointsLabels();
             InitializeCharts();
         }
 
@@ -423,6 +424,18 @@ namespace Maxa_Dash
 
         // Handling setpoint settings ranges - auto fix
         #region setpoint range handling and auto fixing
+
+        private void InitializeSetpointsLabels()
+        {
+
+            CoolSP1.Text = "20";
+            HeatSP1.Text = "50";
+            DHWSP.Text = "50";
+            CoolSP2.Text = "20";
+            HeatSP2.Text = "50";
+            DHWPrepSP.Text = "40";
+            
+        }
         private void CoolSP1_LostFocus(object sender, RoutedEventArgs e)
         {
             VerifySetpoint(CoolSP1, true);
