@@ -171,8 +171,8 @@ namespace Maxa_Dash
             suctionIndex        = charts.AddSeriesToTempChart(notifier, "suction", Brushes.HotPink);
             dischargeIndex      = charts.AddSeriesToTempChart(notifier, "discharge", Brushes.Red);
 
-            highPressureIndex = charts.AddSeriesToPressureChart(notifier, "high", Brushes.LightBlue);
-            lowPressureIndex = charts.AddSeriesToPressureChart(notifier, "low", Brushes.Red);
+            highPressureIndex = charts.AddSeriesToPressureChart(notifier, "high", Brushes.Red);
+            lowPressureIndex = charts.AddSeriesToPressureChart(notifier, "low", Brushes.Blue);
         }
 
         /// <summary>

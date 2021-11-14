@@ -177,11 +177,26 @@ namespace Maxa_Dash
                 if (_waterOutTemp != (((float)value) / 10) )
                 {
                     _waterOutTemp = (((float)value) / 10);
-                    //_waterOutTemp = value.ToString()+"°";
                     INotifyPropertyChanged(nameof(waterOutTemp));
                 }
             }
         }
+
+        private decimal _waterTempDelta;
+        public decimal waterTempDelta
+        {
+            get { return _waterTempDelta; }
+            set
+            {
+                if (_waterTempDelta != (decimal)value)
+                {
+                    _waterTempDelta = decimal.Round((decimal)value, 2);
+
+                    INotifyPropertyChanged(nameof(waterTempDelta));
+                }
+            }
+        }
+        
 
         private float _externalAirTemp;
         public float externalAirTemp

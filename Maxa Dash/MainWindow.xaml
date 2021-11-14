@@ -84,6 +84,15 @@
                                     <ColumnDefinition Width="AUTO"/>
                                     <ColumnDefinition Width="1*"/>
                                 </Grid.ColumnDefinitions>
+                                <Label Content="∆T:" Grid.Column="1" />
+                                <Label Content="{Binding waterTempDelta, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" RenderTransformOrigin="-0.222,0.106"/>
+                            </Grid>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="10"/>
+                                    <ColumnDefinition Width="AUTO"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
                                 <Label Content="DHW temperature:" Grid.Column="1" />
                                 <Label Content="{Binding DHWTemp, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" RenderTransformOrigin="-0.222,0.106"/>
                             </Grid>

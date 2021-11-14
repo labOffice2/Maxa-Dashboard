@@ -39,6 +39,7 @@ namespace Maxa_Dash
                 notifier.RadiantPanelMixerTemp = data[0];
                 data = modbusClient.ReadHoldingRegisters(Registers.DHWPreparerRecirculationTempReg, 1);
                 notifier.DHWPrePRecirculationTemp = data[0];
+                notifier.waterTempDelta = (decimal)(notifier.waterOutTemp - notifier.waterInTemp);
             }
             catch
             {
@@ -64,6 +65,8 @@ namespace Maxa_Dash
                 data = modbusClient.ReadHoldingRegisters(Registers.InputWaterTempReg, 1);
                 notifier.waterInTemp = data[0];
                 fileWriter.dataDictionary["water input temp (°C)"] = notifier.waterInTemp.ToString();
+                notifier.waterTempDelta = (decimal)(notifier.waterOutTemp - notifier.waterInTemp);
+                fileWriter.dataDictionary["Water ∆T (°C)"] = notifier.waterTempDelta.ToString();
                 data = modbusClient.ReadHoldingRegisters(Registers.DHWTempReg, 1);
                 notifier.DHWTemp = data[0];
                 fileWriter.dataDictionary["DHW temp (°C)"] = notifier.DHWTemp.ToString();
@@ -82,6 +85,7 @@ namespace Maxa_Dash
                 data = modbusClient.ReadHoldingRegisters(Registers.DHWPreparerRecirculationTempReg, 1);
                 notifier.DHWPrePRecirculationTemp = data[0];
                 fileWriter.dataDictionary["DHW preparer recirculation temp (°C)"] = notifier.RadiantPanelMixerTemp.ToString();
+                
             }
             catch
             {
@@ -744,7 +748,7 @@ namespace Maxa_Dash
 
                 if (data[0] != DataConverter.GetSetPointFromGui(notifier.coolSP)) return false;
                 //data = modbusClient.ReadHoldingRegisters(Registers.HeatSPReg, 1);
-                if (data[1] != DataConverter.GetSetPointFromGui(notifier.heatSP2)) return false;
+                if (data[1] != DataConverter.GetSetPointFromGui(notifier.heatSP)) return false;
                 //data = modbusClient.ReadHoldingRegisters(Registers.SanitarySPReg, 1);
                 if (data[2] != DataConverter.GetSetPointFromGui(notifier.DHWSP)) return false;
                 //data = modbusClient.ReadHoldingRegisters(Registers.SecondCoolSPReg, 1);
