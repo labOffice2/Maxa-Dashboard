@@ -257,8 +257,8 @@ namespace Maxa_Dash
         /// </summary>
         private void UpdateValues()
         {
-            if (isUpdating) return;
-            isUpdating = true;
+            if (isUpdating) return;     // verify no active communication cycle
+            isUpdating = true;          // falg that there is an active communication cycle
             if (isConnected)
             {
                 try
@@ -349,7 +349,7 @@ namespace Maxa_Dash
                 //ConnectButton.IsEnabled = true;
                 SetModbus();
             }
-            isUpdating = false;
+            isUpdating = false;     // release active communication flag
 
         }
 
