@@ -642,7 +642,7 @@ namespace Maxa_Dash
         {
             try
             {
-                modbusClient.WriteSingleRegister(Registers.EnableWritingBitMaskReg, Registers.EnableSPWriting);
+                modbusClient.WriteSingleRegister(Registers.EnableWritingBitMaskReg, Registers.EnableSP_N_MechineStateWriting);
 
                 int[] setpointValues = {    DataConverter.GetSetPointFromGui(notifier.coolSP), DataConverter.GetSetPointFromGui(notifier.heatSP), DataConverter.GetSetPointFromGui(notifier.DHWSP),
                                             DataConverter.GetSetPointFromGui(notifier.coolSP2), DataConverter.GetSetPointFromGui(notifier.heatSP2), DataConverter.GetSetPointFromGui(notifier.DHWPreparerSP) };
@@ -758,7 +758,7 @@ namespace Maxa_Dash
         {
             try
             {
-                modbusClient.WriteSingleRegister(Registers.EnableWritingBitMaskReg, Registers.EnableMachineStateWriting);
+                modbusClient.WriteSingleRegister(Registers.EnableWritingBitMaskReg, Registers.EnableSP_N_MechineStateWriting);
 
                 modbusClient.WriteSingleRegister(Registers.MachineStateWriteReg, opMode);
             }
