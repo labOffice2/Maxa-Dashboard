@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 /// <summary>
 /// This static class is responsible for the communication with the Maxa machine - reading and writing.
-/// It updates the UI variables in NotifyNewData, and the data to be writen in the csv file if relevant.
+/// It updates the UI variables in NotifyNewData, and the data to be writen in the csv file if relevant using the fileWriter.dataDictionary.
 /// </summary>
 namespace Maxa_Dash
 {

@@ -10,7 +10,7 @@ using System.Windows.Media;
 
 /// <summary>
 /// This class handles the display of messages to the user.
-/// It gets a stackPanel on initilization to display messages on.
+/// It gets a stackPanel on initialization to display messages on.
 /// It handles the adding of new and removal of old messages.
 /// </summary>
 namespace Maxa_Dash

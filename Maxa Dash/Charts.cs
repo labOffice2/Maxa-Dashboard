@@ -30,10 +30,14 @@ namespace Maxa_Dash
 
         }
 
-
-        private bool RemoveRedandency(IChartValues chartValues)
+        /// <summary>
+        /// This function check if there are redundant datapoints in the series and returns true if there are
+        /// </summary>
+        /// <param name="chartValues">the values of the series to be checked for redundancy</param>
+        /// <returns>True if there are redundant data points</returns>
+        private bool RemoveRedandancy(IChartValues chartValues)
         {
-            /*
+            /* can be used if you want to switch to LineSeries instead of StepLineSeries
             try
             {
                 int lastIndex = chartValues.Count - 1;
@@ -61,7 +65,12 @@ namespace Maxa_Dash
 
         }
 
-
+        /// <summary>
+        /// this function generates a StepLineSeries and returns it as a generic Series variable
+        /// </summary>
+        /// <param name="seriesName">the name of the newly generated series</param>
+        /// <param name="seriesColor">the color of the series to display on the chart</param>
+        /// <returns>The generated series</returns>
         private Series GetStepLineSeries(string seriesName, Brush seriesColor = null)
         {
             return new StepLineSeries
@@ -99,7 +108,7 @@ namespace Maxa_Dash
         {
             notifier.Temps[seriesIdex].Values.Add(newData);
 
-            if (RemoveRedandency(notifier.Temps[seriesIdex].Values))
+            if (RemoveRedandancy(notifier.Temps[seriesIdex].Values))
                 notifier.Temps[seriesIdex].Values.RemoveAt(notifier.Temps[seriesIdex].Values.Count - 2);
             
             if (notifier.Temps[seriesIdex].Values.Count > maxDataPoints)
@@ -157,7 +166,7 @@ namespace Maxa_Dash
         {
             notifier.Pressures[seriesIdex].Values.Add(newData);
 
-            if(RemoveRedandency(notifier.Pressures[seriesIdex].Values))
+            if(RemoveRedandancy(notifier.Pressures[seriesIdex].Values))
                 notifier.Pressures[seriesIdex].Values.RemoveAt(notifier.Pressures[seriesIdex].Values.Count -2);
 
             if (notifier.Pressures[seriesIdex].Values.Count > maxDataPoints)
