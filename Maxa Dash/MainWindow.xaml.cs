@@ -48,6 +48,8 @@ namespace Maxa_Dash
         private bool forceDefrostFlag;
         private bool antiLegionellaFlag;
         private bool plantVentingflag;
+        private bool forceAmbientCallFlag;
+        private bool isAmbientCallChanged;
 
         private float setpointMaxCool = 23.0f;
         private float setpointMinCool = 5.0f;
@@ -297,6 +299,12 @@ namespace Maxa_Dash
                         }
                         else
                             Maxa.ForcePlantVenting(modbusClient, false); // deactivate plant venting
+                    }
+
+                    if(isAmbientCallChanged)
+                    {
+                        Maxa.ForceAmbientCall(modbusClient, forceAmbientCallFlag);
+                        isAmbientCallChanged = false;
                     }
 
                     if (isRecord)
@@ -615,6 +623,12 @@ namespace Maxa_Dash
             }
         }
 
+        private void ForceAmbientButton_Click(object sender, RoutedEventArgs e)
+        {
+            forceAmbientCallFlag = !forceAmbientCallFlag;
+            isAmbientCallChanged = true;
+            ForceAmbientButton.Content = forceAmbientCallFlag ? "Stop ambient call" : "Force ambient call";
+        }
 
         /// <summary>
         /// This function is called once every time the timer elapces
@@ -704,5 +718,7 @@ namespace Maxa_Dash
         }
 
         #endregion
+
+
     }
 }

@@ -94,8 +94,8 @@ namespace Maxa_Dash
         // Bit masks for register 7201
         public const int EnableMachineStateWriting = 0b00000001;
         public const int EnableSP_N_MechineStateWriting = 0b00000011;
-        public const int EnablePassagetoSecondSP = 0b00000100;
-        public const int EnableRemoteAmbientCall = 0b00001000;
+        public const int EnablePassagetoSecondSP = 0b00000111;
+        public const int EnableRemoteAmbientCall = 0b00001011;
         public const int EnableRemoteDHWCall = 0b00010000;
         public const int EnableAntiLegionellaCycle = 0b00100000;
 
