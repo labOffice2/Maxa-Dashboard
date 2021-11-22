@@ -203,6 +203,7 @@ namespace Maxa_Dash
                 notifier.generalState = DataConverter.GetMachineState(data[0]);
                 data = modbusClient.ReadHoldingRegisters(Registers.ForcingBitMaskReg, 1);
                 notifier.plantVentingState = DataConverter.GetPlantVentingState(data[0]);
+                notifier.ambientCallState = DataConverter.GetAmbientCallState(data[0]);
             }
             catch
             {
@@ -232,6 +233,7 @@ namespace Maxa_Dash
                 fileWriter.dataDictionary["Defrost state"] = notifier.defrostState.ToString();
                 fileWriter.dataDictionary["Anti-legionella state"] = notifier.antiLegionellaState.ToString();
                 fileWriter.dataDictionary["Plant venting state"] = notifier.plantVentingState.ToString();
+                fileWriter.dataDictionary["Ambient call state"] = notifier.ambientCallState.ToString();
             }
             catch
             {
@@ -829,6 +831,65 @@ namespace Maxa_Dash
                 throw;
             }
         }
+
+        /// <summary>
+        /// Force ambient call
+        /// </summary>
+        /// <param name="modbusClient">Modbus client object currently connected to a Maxa unit</param>
+        /// <param name="activate">true to activate, false to stop ambient call</param>
+        /// <returns>no return value</returns>
+        public static void ForceAmbientCall(ModbusClient modbusClient, bool activate)
+        {
+            try
+            {
+                if (activate)
+                {
+                    modbusClient.WriteSingleRegister(Registers.EnableWritingBitMaskReg, Registers.EnableRemoteAmbientCall);
+                    modbusClient.WriteSingleRegister(Registers.ForcingBitMaskReg, Registers.ForceRemoteAmbientCall);
+                }
+
+                else
+                {
+                    modbusClient.WriteSingleRegister(Registers.EnableWritingBitMaskReg, Registers.EnableSP_N_MechineStateWriting);
+                    modbusClient.WriteSingleRegister(Registers.ForcingBitMaskReg, 0);
+                }
+            }
+            catch
+            {
+                // indicate problem in communication
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Enable Max Hz function for all modes
+        /// </summary>
+        /// <param name="modbusClient">Modbus client object currently connected to a Maxa unit</param>
+        /// <param name="activate">true to activate, false to stop Max Hz function</param>
+        /// <returns>no return value</returns>
+        public static void EnableMaxHz(ModbusClient modbusClient, bool activate)
+        {
+            try
+            {
+                if (activate)
+                {
+                    modbusClient.WriteSingleRegister(Registers.EnableMaxHzReg, 1);
+                    modbusClient.WriteSingleRegister(Registers.MaxHzModeReg, (int)Registers.MaxHzMode.ALWAYS_ACTIVE);
+                }
+
+                else
+                {
+                    modbusClient.WriteSingleRegister(Registers.EnableMaxHzReg, 0);
+                    modbusClient.WriteSingleRegister(Registers.ForcingBitMaskReg, (int)Registers.MaxHzMode.NOT_ACTIVE);
+                }
+            }
+            catch
+            {
+                // indicate problem in communication
+                throw;
+            }
+        }
+
 
         /// <summary>
         /// Attempts to reset active arrors by wrting '0' to the appropriate registers

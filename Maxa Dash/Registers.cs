@@ -25,6 +25,8 @@ namespace Maxa_Dash
         public const int MachineStateReadReg = 200;
         public const int DefrostState = 7214;
         public const int AntiLegionellaState = 7216;
+        public const int EnableMaxHzReg = 1611;     // parameter L02
+        public const int MaxHzModeReg = 1612;       // parameter L03
 
         // Temperatures
         public const int InputWaterTempReg = 400;
@@ -115,5 +117,18 @@ namespace Maxa_Dash
         // Bit masks for register 7216 (anti-legionella status)
         public const int AntilegionellaInProgress = 0b00100000;
         public const int AntilegionellaFailed = 0b01000000;
+
+        // Enum for max hz mode, register 1612
+        public enum MaxHzMode
+        {
+            NOT_ACTIVE = 0,
+            ONLY_COOLING = 1,
+            ONLY_HEATING = 2,
+            ONLY_DHW = 3,
+            COOLING_n_DHW = 4,
+            HEATING_n_DHW = 5,
+            COOLING_n_HEATING = 6,
+            ALWAYS_ACTIVE = 7
+        }
     }
 }

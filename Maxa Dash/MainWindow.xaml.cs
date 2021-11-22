@@ -50,6 +50,8 @@ namespace Maxa_Dash
         private bool plantVentingflag;
         private bool forceAmbientCallFlag;
         private bool isAmbientCallChanged;
+        private bool EnableMaxHzFlag;
+        private bool isMaxHzFlagChanged;
 
         private float setpointMaxCool = 23.0f;
         private float setpointMinCool = 5.0f;
@@ -305,6 +307,12 @@ namespace Maxa_Dash
                     {
                         Maxa.ForceAmbientCall(modbusClient, forceAmbientCallFlag);
                         isAmbientCallChanged = false;
+                    }
+
+                    if (isMaxHzFlagChanged)
+                    {
+                        Maxa.EnableMaxHz(modbusClient, EnableMaxHzFlag);
+                        isMaxHzFlagChanged = false;
                     }
 
                     if (isRecord)
@@ -630,6 +638,13 @@ namespace Maxa_Dash
             ForceAmbientButton.Content = forceAmbientCallFlag ? "Stop ambient call" : "Force ambient call";
         }
 
+        private void MaxHzButton_Click(object sender, RoutedEventArgs e)
+        {
+            EnableMaxHzFlag = !EnableMaxHzFlag;
+            isMaxHzFlagChanged = true;
+            MaxHzButton.Content = EnableMaxHzFlag ? "Disable max Hz" : "Enable max Hz";
+        }
+
         /// <summary>
         /// This function is called once every time the timer elapces
         /// It updates all the series for the charts
@@ -717,8 +732,9 @@ namespace Maxa_Dash
 
         }
 
+
         #endregion
 
-
+        
     }
 }

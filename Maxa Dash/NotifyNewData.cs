@@ -562,6 +562,20 @@ namespace Maxa_Dash
             }
         }
 
+        private AmbientCallState _ambientCallState = AmbientCallState.NA;
+        public AmbientCallState ambientCallState
+        {
+            get { return _ambientCallState; }
+            set
+            {
+                if (_ambientCallState != value)
+                {
+                    _ambientCallState = value;
+                    INotifyPropertyChanged(nameof(ambientCallState));
+                }
+            }
+        }
+
         #endregion
 
         /* from older version of register mapping - irrelevant
@@ -1373,6 +1387,13 @@ namespace Maxa_Dash
             NA,
             INACTIVE,
             DEACTIVATING,
+            ACTIVE,
+        }
+
+        public enum AmbientCallState
+        {
+            NA,
+            INACTIVE,
             ACTIVE,
         }
         #endregion

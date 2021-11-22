@@ -53,6 +53,11 @@ namespace Maxa_Dash
             return data;
         }
 
+        /// <summary>
+        /// This function converts the data to a DefrostState
+        /// </summary>
+        /// <param name="regiterData">The data to convert</param>
+        /// <returns>a DefrostState</returns>
         public static NotifyNewData.DefrostState GetDefrostState(int registerData)
         {
             NotifyNewData.DefrostState state = NotifyNewData.DefrostState.INACTIVE;
@@ -61,6 +66,11 @@ namespace Maxa_Dash
             return state;
         }
 
+        /// <summary>
+        /// This function converts the data to an AntilegionellaState
+        /// </summary>
+        /// <param name="regiterData">The data to convert</param>
+        /// <returns>An AntilegionellaState according the data received</returns>
         public static NotifyNewData.AntilegionellaState GetAntiLegionellaState(int registerData, int alarmRegister)
         {
             NotifyNewData.AntilegionellaState state = NotifyNewData.AntilegionellaState.INACTIVE;
@@ -71,9 +81,24 @@ namespace Maxa_Dash
             return state;
         }
 
+        /// <summary>
+        /// This function converts the data to a PlantVentingState
+        /// </summary>
+        /// <param name="regiterData">The data to convert</param>
+        /// <returns>A PlantVentingState, active or inactive</returns>
         public static NotifyNewData.PlantVentingState GetPlantVentingState(int regiterData)
         {
             return (regiterData & Registers.ForcePlantVenting) > 0 ? NotifyNewData.PlantVentingState.ACTIVE : NotifyNewData.PlantVentingState.INACTIVE;
+        }
+
+        /// <summary>
+        /// This function converts the data to an AmbientCallState
+        /// </summary>
+        /// <param name="regiterData">The data to convert</param>
+        /// <returns>An AmbinetCallState, active or inactive</returns>
+        public static NotifyNewData.AmbientCallState GetAmbientCallState(int regiterData)
+        {
+            return (regiterData & Registers.ForceRemoteAmbientCall) == Registers.ForceRemoteAmbientCall ? NotifyNewData.AmbientCallState.ACTIVE : NotifyNewData.AmbientCallState.INACTIVE;
         }
 
     }

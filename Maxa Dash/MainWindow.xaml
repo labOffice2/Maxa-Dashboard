@@ -354,6 +354,7 @@
                         </StackPanel>
                         <StackPanel Grid.Row="1" Grid.Column="2">
                             <Button Name="ForceAmbientButton" Content="Force ambient call" Margin="5" Click="ForceAmbientButton_Click"/>
+                            <Button Name="MaxHzButton" Content="Enable max Hz" Margin="5" Click="MaxHzButton_Click"/>
                         </StackPanel>
 
                     </Grid>
