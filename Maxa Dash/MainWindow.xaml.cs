@@ -382,62 +382,6 @@ namespace Maxa_Dash
             timer.Start();
         }
 
-        /// <summary>
-        /// This function is triggered when the "set path" button is pressed.
-        /// It opens a file browser to select a folder for CSV output file.
-        /// It generates a FileWriter object with the path set by the user.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void PathSelectionButton_Click(object sender, RoutedEventArgs e)
-        {
-            CommonOpenFileDialog commonFileDialog = new CommonOpenFileDialog();
-            commonFileDialog.IsFolderPicker = false;
-            
-            if(commonFileDialog.ShowDialog() == CommonFileDialogResult.Ok)
-            {
-                string path = commonFileDialog.FileName;
-                PathSelectionButton.Content = path;
-                FileWriter = new FileWriter(path);
-            }
-        }
-
-        /// <summary>
-        /// This function is triggered when the used presses the "start recording" button
-        /// It verifies that the user set a path for the file, if not - it notifies the user to do so.
-        /// Otherwise it sets the isRecord flag to true to signal the program to start recording.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void StartRecordingButton_Click(object sender, RoutedEventArgs e)
-        {
-            
-            if(!isConnected)
-            {
-                messagesPanel.AddMessage("First connect to the Maxa", 0.1f);
-                return;
-            }
-
-            else if(FileWriter != null)
-            {
-                if(isRecord)
-                {
-                    isRecord = false;
-                    StartRecordingButton.Content = "Start Recording";
-                }
-                else
-                {
-                    isRecord = true;
-                    StartRecordingButton.Content = "Stop Recording";
-                }
-            }
-            else
-            {
-                messagesPanel.AddMessage("Select folder for scv file", 0.1f);
-                MessageBox.Show("Please select a folder");
-            }
-        }
-
         // Handling setpoint settings ranges - auto fix
         #region setpoint range handling and auto fixing
 
@@ -450,7 +394,7 @@ namespace Maxa_Dash
             CoolSP2.Text = "20";
             HeatSP2.Text = "50";
             DHWPrepSP.Text = "40";
-            
+
         }
         private void CoolSP1_LostFocus(object sender, RoutedEventArgs e)
         {
@@ -492,13 +436,13 @@ namespace Maxa_Dash
         /// </summary>
         /// <param name="textBox">The TextBox that needs to be checked</param>
         /// <param name="isCoolSP">This flag is used to signal if the TextBox contains a cooling or heating setpoint (true for cool setpoint)</param>
-        private void VerifySetpoint(TextBox textBox,bool isCoolSP)
+        private void VerifySetpoint(TextBox textBox, bool isCoolSP)
         {
             float maxSP;
             float minSP;
             try
             {
-                if(isCoolSP)
+                if (isCoolSP)
                 {
                     maxSP = setpointMaxCool;
                     minSP = setpointMinCool;
@@ -508,8 +452,8 @@ namespace Maxa_Dash
                     maxSP = setpointMaxHeat;
                     minSP = setpointMinHeat;
                 }
-                if(float.Parse(textBox.Text) > maxSP) textBox.Text = maxSP.ToString();
-                else if(float.Parse(textBox.Text) < minSP) textBox.Text = minSP.ToString();
+                if (float.Parse(textBox.Text) > maxSP) textBox.Text = maxSP.ToString();
+                else if (float.Parse(textBox.Text) < minSP) textBox.Text = minSP.ToString();
             }
             catch
             { }
@@ -517,6 +461,66 @@ namespace Maxa_Dash
 
 
         #endregion
+
+
+        /// <summary>
+        /// This function is triggered when the "set path" button is pressed.
+        /// It opens a file browser to select a folder for CSV output file.
+        /// It generates a FileWriter object with the path set by the user.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void PathSelectionButton_Click(object sender, RoutedEventArgs e)
+        {
+            CommonOpenFileDialog commonFileDialog = new CommonOpenFileDialog();
+            commonFileDialog.IsFolderPicker = false;
+            
+            if(commonFileDialog.ShowDialog() == CommonFileDialogResult.Ok)
+            {
+                string path = commonFileDialog.FileName;
+                PathSelectionButton.Content = path;
+                FileWriter = new FileWriter(path);
+            }
+        }
+
+        /// <summary>
+        /// This function is triggered when the used presses the "start recording" button
+        /// It verifies that the user set a path for the file, if not - it notifies the user to do so.
+        /// Otherwise it sets the isRecord flag to true to signal the program to start recording.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void StartRecordingButton_Click(object sender, RoutedEventArgs e)
+        {
+
+            if (!isConnected)
+            {
+                messagesPanel.AddMessage("First connect to the Maxa", 0.1f);
+                return;
+            }
+
+            else if(FileWriter != null)
+            {
+                if(isRecord)
+                {
+                    isRecord = false;
+                    StartRecordingButton.Content = "Start Recording";
+                }
+                else
+                {
+                    isRecord = true;
+                    StartRecordingButton.Content = "Stop Recording";
+                }
+            }
+            else
+            {
+                messagesPanel.AddMessage("Select folder for scv file", 0.1f);
+                PathSelectionButton_Click(sender, e);
+                //MessageBox.Show("Please select a folder");
+            }
+        }
+
+        
 
         /// <summary>
         /// This function is called when the user presses the "send new settings" button
@@ -555,6 +559,16 @@ namespace Maxa_Dash
             }
         }
 
+
+        #region special function buttons OnClick handlers
+
+        /// <summary>
+        /// This function verifies that operation mode is heating
+        /// Then it disables the button and rises the forceDefrostFlag
+        /// Is also signs DefrostEnded to the Property changed event
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ForceDefrost_Click(object sender, RoutedEventArgs e)
         {
             if(opMode == 2 || opMode == 6) // must be on heating mode to activate defrost 
@@ -568,6 +582,14 @@ namespace Maxa_Dash
 
         }
 
+
+        /// <summary>
+        /// This function it triggered when NotifyNewData.PropertyChanged event is triggered.
+        /// It is only relevant if the user pressed the force defrost button
+        /// It's purpose is to re-enable the force defrost button and disable the forceDefrostFlag when the commaned was received
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DefrostEnded(object sender, PropertyChangedEventArgs e)
         {
             if(e.PropertyName == nameof(notifier.defrostState))
@@ -631,6 +653,11 @@ namespace Maxa_Dash
             }
         }
 
+        /// <summary>
+        /// This function flags to enable and disable the ambient call function of the Maxa
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ForceAmbientButton_Click(object sender, RoutedEventArgs e)
         {
             forceAmbientCallFlag = !forceAmbientCallFlag;
@@ -638,12 +665,19 @@ namespace Maxa_Dash
             ForceAmbientButton.Content = forceAmbientCallFlag ? "Stop ambient call" : "Force ambient call";
         }
 
+        /// <summary>
+        /// This function flags to enable and disable the max Hz function of the Maxa
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MaxHzButton_Click(object sender, RoutedEventArgs e)
         {
             EnableMaxHzFlag = !EnableMaxHzFlag;
             isMaxHzFlagChanged = true;
             MaxHzButton.Content = EnableMaxHzFlag ? "Disable max Hz" : "Enable max Hz";
         }
+
+        #endregion
 
         /// <summary>
         /// This function is called once every time the timer elapces
