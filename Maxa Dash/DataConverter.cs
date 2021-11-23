@@ -101,5 +101,19 @@ namespace Maxa_Dash
             return (regiterData & Registers.ForceRemoteAmbientCall) == Registers.ForceRemoteAmbientCall ? NotifyNewData.AmbientCallState.ACTIVE : NotifyNewData.AmbientCallState.INACTIVE;
         }
 
+        /// <summary>
+        /// This function converts the data to a MaxHzState
+        /// </summary>
+        /// <param name="regiterData">The data to convert</param>
+        /// <returns>A MaxHzState, ENABLED or DISABLED</returns>
+        public static NotifyNewData.MaxHzState GetMaxHzState(int regiterL02, int registerL03)
+        {
+            if (regiterL02 == 1 && registerL03 != 0)
+                return NotifyNewData.MaxHzState.ENABLED;
+
+            else
+                return NotifyNewData.MaxHzState.DISABLED;
+        }
+
     }
 }

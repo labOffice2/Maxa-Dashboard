@@ -204,6 +204,10 @@ namespace Maxa_Dash
                 data = modbusClient.ReadHoldingRegisters(Registers.ForcingBitMaskReg, 1);
                 notifier.plantVentingState = DataConverter.GetPlantVentingState(data[0]);
                 notifier.ambientCallState = DataConverter.GetAmbientCallState(data[0]);
+
+                int[] dataL02 = modbusClient.ReadHoldingRegisters(Registers.EnableMaxHzReg, 1);
+                int[] dataL03 = modbusClient.ReadHoldingRegisters(Registers.MaxHzModeReg, 1);
+                notifier.maxHzState = DataConverter.GetMaxHzState(dataL02[0],dataL03[0]);
             }
             catch
             {
@@ -234,6 +238,7 @@ namespace Maxa_Dash
                 fileWriter.dataDictionary["Anti-legionella state"] = notifier.antiLegionellaState.ToString();
                 fileWriter.dataDictionary["Plant venting state"] = notifier.plantVentingState.ToString();
                 fileWriter.dataDictionary["Ambient call state"] = notifier.ambientCallState.ToString();
+                fileWriter.dataDictionary["Max Hz state"] = notifier.maxHzState.ToString();
             }
             catch
             {

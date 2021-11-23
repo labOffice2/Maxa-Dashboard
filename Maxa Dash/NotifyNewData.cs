@@ -576,6 +576,20 @@ namespace Maxa_Dash
             }
         }
 
+        private MaxHzState _maxHzState = MaxHzState.NA;
+        public MaxHzState maxHzState
+        {
+            get { return _maxHzState; }
+            set
+            {
+                if (_maxHzState != value)
+                {
+                    _maxHzState = value;
+                    INotifyPropertyChanged(nameof(maxHzState));
+                }
+            }
+        }
+
         #endregion
 
         /* from older version of register mapping - irrelevant
@@ -1395,6 +1409,13 @@ namespace Maxa_Dash
             NA,
             INACTIVE,
             ACTIVE,
+        }
+
+        public enum MaxHzState
+        {
+            NA,
+            ENABLED,
+            DISABLED,
         }
         #endregion
 
